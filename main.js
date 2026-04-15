@@ -24,6 +24,7 @@ if (form && statusMessage) {
     const formData = new FormData(form);
     const honeypotValue = String(formData.get("bot-field") ?? "").trim();
     if (honeypotValue) {
+      setStatus("Merci ! Votre inscription à la bêta est bien enregistrée.", "is-success");
       return;
     }
 
@@ -54,7 +55,8 @@ if (form && statusMessage) {
       form.reset();
       setStatus("Merci ! Votre inscription à la bêta est bien enregistrée.", "is-success");
     } catch (error) {
-      console.error(error);
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
+      console.error("Beta signup failed:", errorMessage);
       setStatus("Une erreur est survenue. Merci de réessayer dans un instant.", "is-error");
     } finally {
       form.setAttribute("aria-busy", "false");
