@@ -34,8 +34,10 @@ if (form && statusMessage) {
 
     if (submitButton) {
       submitButton.disabled = true;
+      submitButton.setAttribute("aria-disabled", "true");
       submitButton.textContent = "Inscription...";
     }
+    form.setAttribute("aria-busy", "true");
     setStatus("Envoi en cours...", null);
 
     try {
@@ -46,7 +48,7 @@ if (form && statusMessage) {
       });
 
       if (!response.ok) {
-        throw new Error("Signup failed");
+        throw new Error(`Signup failed with status ${response.status}`);
       }
 
       form.reset();
@@ -54,8 +56,10 @@ if (form && statusMessage) {
     } catch {
       setStatus("Une erreur est survenue. Merci de réessayer dans un instant.", "is-error");
     } finally {
+      form.setAttribute("aria-busy", "false");
       if (submitButton) {
         submitButton.disabled = false;
+        submitButton.setAttribute("aria-disabled", "false");
         submitButton.textContent = defaultButtonText;
       }
     }
