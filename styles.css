@@ -418,8 +418,13 @@ h2 {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * {
-    animation: none !important;
-    transition: none !important;
+  .hero-visual,
+  .phone {
+    animation: none;
+  }
+
+  .card,
+  .btn {
+    transition: none;
   }
 }
