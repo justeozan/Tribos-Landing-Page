@@ -95,8 +95,15 @@
             action="#beta"
           >
             <input type="hidden" name="form-name" value="beta-signup" />
-            <label class="sr-only" for="bot-field">Entreprise</label>
-            <input class="sr-only" id="bot-field" name="bot-field" type="text" />
+            <input
+              id="bot-field"
+              name="bot-field"
+              type="text"
+              tabindex="-1"
+              autocomplete="off"
+              aria-hidden="true"
+              style="position: absolute; left: -10000px"
+            />
             <label class="sr-only" for="email">Adresse e-mail</label>
             <input
               id="email"
