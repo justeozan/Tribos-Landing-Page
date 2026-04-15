@@ -1,12 +1,13 @@
-module.exports = async (req, res) => {
-  const isEmailValid = (email) => {
-    const basicFormat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    const [, domain = ""] = email.split("@");
-    const hasConsecutiveDots = email.includes("..");
-    const tld = domain.split(".").pop() || "";
+const isEmailValid = (email) => {
+  const basicFormat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const [, domain = ""] = email.split("@");
+  const hasConsecutiveDots = email.includes("..");
+  const tld = domain.split(".").pop() || "";
 
-    return basicFormat && !hasConsecutiveDots && tld.length >= 2;
-  };
+  return basicFormat && !hasConsecutiveDots && tld.length >= 2;
+};
+
+module.exports = async (req, res) => {
 
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
@@ -20,16 +21,7 @@ module.exports = async (req, res) => {
     return res.status(500).json({ error: "Missing Resend configuration" });
   }
 
-  let body = {};
-  if (typeof req.body === "string") {
-    try {
-      body = JSON.parse(req.body || "{}");
-    } catch {
-      return res.status(400).json({ error: "Invalid payload" });
-    }
-  } else if (req.body && typeof req.body === "object") {
-    body = req.body;
-  }
+  const body = req.body && typeof req.body === "object" ? req.body : {};
   const email = String(body.email || "").trim().toLowerCase();
   const botField = String(body.botField || "").trim();
 
