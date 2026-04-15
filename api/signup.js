@@ -11,7 +11,16 @@ module.exports = async (req, res) => {
     return res.status(500).json({ error: "Missing Resend configuration" });
   }
 
-  const body = typeof req.body === "string" ? JSON.parse(req.body || "{}") : req.body || {};
+  let body = {};
+  if (typeof req.body === "string") {
+    try {
+      body = JSON.parse(req.body || "{}");
+    } catch {
+      return res.status(400).json({ error: "Invalid payload" });
+    }
+  } else if (req.body && typeof req.body === "object") {
+    body = req.body;
+  }
   const email = String(body.email || "").trim().toLowerCase();
   const botField = String(body.botField || "").trim();
 
