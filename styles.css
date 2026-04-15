@@ -353,6 +353,26 @@ h2 {
   cursor: pointer;
 }
 
+.beta-form button:disabled {
+  cursor: wait;
+  opacity: 0.75;
+}
+
+.form-status {
+  min-height: 1.5rem;
+  margin: 0.7rem 0 0;
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+.form-status.is-success {
+  color: #15803d;
+}
+
+.form-status.is-error {
+  color: #b91c1c;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;

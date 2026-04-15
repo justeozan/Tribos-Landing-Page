@@ -167,6 +167,8 @@
               type="email"
               name="email"
               placeholder="Votre e-mail pro ou perso"
+              autocomplete="email"
+              aria-describedby="signup-status"
               required
             />
             <label class="sr-only" for="bot-field">Laisser ce champ vide</label>
@@ -179,9 +181,11 @@
             />
             <button type="submit">Je veux ma place</button>
           </form>
+          <p id="signup-status" class="form-status" role="status" aria-live="polite"></p>
           <p class="form-note">Inscription rapide. Accès anticipé dès l’ouverture des places.</p>
         </div>
       </section>
     </main>
+    <script src="./main.js" defer></script>
   </body>
 </html>
