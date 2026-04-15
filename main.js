@@ -24,7 +24,6 @@ if (form && statusMessage) {
     const formData = new FormData(form);
     const honeypotValue = String(formData.get("bot-field") ?? "").trim();
     if (honeypotValue) {
-      setStatus("Merci ! Votre inscription à la bêta est bien enregistrée.", "is-success");
       return;
     }
 
@@ -56,7 +55,11 @@ if (form && statusMessage) {
       setStatus("Merci ! Votre inscription à la bêta est bien enregistrée.", "is-success");
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : "Unknown error";
-      console.error("Beta signup failed:", errorMessage);
+      const isLocalhost =
+        window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+      if (isLocalhost) {
+        console.error("Beta signup failed:", errorMessage);
+      }
       setStatus("Une erreur est survenue. Merci de réessayer dans un instant.", "is-error");
     } finally {
       form.setAttribute("aria-busy", "false");

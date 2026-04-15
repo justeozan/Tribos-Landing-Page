@@ -9,6 +9,8 @@
   --cyan: #22d3ee;
   --pink: #fb7185;
   --line: #e5e7eb;
+  --success: #15803d;
+  --error: #b91c1c;
 }
 
 * {
@@ -366,11 +368,11 @@ h2 {
 }
 
 .form-status.is-success {
-  color: #15803d;
+  color: var(--success);
 }
 
 .form-status.is-error {
-  color: #b91c1c;
+  color: var(--error);
 }
 
 .sr-only {
