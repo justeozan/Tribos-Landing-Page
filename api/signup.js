@@ -33,14 +33,19 @@ module.exports = async (req, res) => {
     return res.status(400).json({ error: "Invalid email" });
   }
 
-  const resendResponse = await fetch(`https://api.resend.com/audiences/${audienceId}/contacts`, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ email }),
-  });
+  let resendResponse;
+  try {
+    resendResponse = await fetch(`https://api.resend.com/audiences/${audienceId}/contacts`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    });
+  } catch {
+    return res.status(502).json({ error: "Unable to reach Resend" });
+  }
 
   if (resendResponse.ok) {
     return res.status(200).json({ success: true });

@@ -22,8 +22,8 @@ if (form && statusMessage) {
     }
 
     const formData = new FormData(form);
-    const honeypotValue = String(formData.get("bot-field") ?? "").trim();
-    if (honeypotValue) {
+    const botFieldValue = String(formData.get("bot-field") ?? "").trim();
+    if (botFieldValue) {
       return;
     }
 
@@ -43,7 +43,7 @@ if (form && statusMessage) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email,
-          botField: honeypotValue,
+          botField: botFieldValue,
         }),
       });
 
