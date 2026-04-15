@@ -1,6 +1,6 @@
 const form = document.querySelector(".beta-form");
 const statusMessage = document.querySelector("#signup-status");
-const LOCAL_DEV_HOSTS = new Set(["localhost", "127.0.0.1", "::1", "[::1]"]);
+const LOCAL_DEV_HOSTS = new Set(["localhost", "127.0.0.1", "::1"]);
 
 if (form && statusMessage) {
   const submitButton = form.querySelector('button[type="submit"]');
