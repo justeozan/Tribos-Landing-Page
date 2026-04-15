@@ -27,10 +27,7 @@ if (form && statusMessage) {
       return;
     }
 
-    const payload = new URLSearchParams();
-    for (const [key, value] of formData.entries()) {
-      payload.append(key, String(value));
-    }
+    const email = String(formData.get("email") ?? "").trim();
 
     if (submitButton) {
       submitButton.disabled = true;
@@ -41,10 +38,13 @@ if (form && statusMessage) {
     setStatus("Envoi en cours...", null);
 
     try {
-      const response = await fetch("/", {
+      const response = await fetch("/api/signup", {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: payload.toString(),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          botField: honeypotValue,
+        }),
       });
 
       if (!response.ok) {
@@ -56,7 +56,9 @@ if (form && statusMessage) {
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : "Unknown error";
       const isLocalhost =
-        window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1" ||
+        window.location.hostname === "::1";
       if (isLocalhost) {
         console.error("Beta signup failed:", errorMessage);
       }
