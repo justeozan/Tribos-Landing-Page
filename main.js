@@ -53,7 +53,8 @@ if (form && statusMessage) {
 
       form.reset();
       setStatus("Merci ! Votre inscription à la bêta est bien enregistrée.", "is-success");
-    } catch {
+    } catch (error) {
+      console.error(error);
       setStatus("Une erreur est survenue. Merci de réessayer dans un instant.", "is-error");
     } finally {
       form.setAttribute("aria-busy", "false");
