@@ -49,7 +49,18 @@ if (form && statusMessage) {
       });
 
       if (!response.ok) {
-        throw new Error(`Signup failed with status ${response.status}`);
+        let apiErrorMessage = "";
+        try {
+          const errorBody = await response.json();
+          apiErrorMessage = String(errorBody?.error ?? "").trim();
+        } catch {
+          apiErrorMessage = "";
+        }
+        throw new Error(
+          apiErrorMessage
+            ? `Signup failed with status ${response.status}: ${apiErrorMessage}`
+            : `Signup failed with status ${response.status}`
+        );
       }
 
       form.reset();

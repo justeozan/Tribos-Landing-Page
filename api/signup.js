@@ -43,7 +43,10 @@ module.exports = async (req, res) => {
       },
       body: JSON.stringify({ email }),
     });
-  } catch {
+  } catch (error) {
+    if (process.env.NODE_ENV !== "production") {
+      console.error("Resend request error:", error);
+    }
     return res.status(502).json({ error: "Unable to reach Resend" });
   }
 
