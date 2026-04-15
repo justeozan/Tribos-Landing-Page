@@ -1,5 +1,6 @@
 const form = document.querySelector(".beta-form");
 const statusMessage = document.querySelector("#signup-status");
+const LOCAL_DEV_HOSTS = new Set(["localhost", "127.0.0.1", "::1", "[::1]"]);
 
 if (form && statusMessage) {
   const submitButton = form.querySelector('button[type="submit"]');
@@ -55,11 +56,7 @@ if (form && statusMessage) {
       setStatus("Merci ! Votre inscription à la bêta est bien enregistrée.", "is-success");
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : "Unknown error";
-      const isLocalhost =
-        window.location.hostname === "localhost" ||
-        window.location.hostname === "127.0.0.1" ||
-        window.location.hostname === "::1" ||
-        window.location.hostname === "[::1]";
+      const isLocalhost = LOCAL_DEV_HOSTS.has(window.location.hostname);
       if (isLocalhost) {
         console.error("Beta signup failed:", errorMessage);
       }

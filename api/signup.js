@@ -1,4 +1,13 @@
 module.exports = async (req, res) => {
+  const isEmailValid = (email) => {
+    const basicFormat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    const [, domain = ""] = email.split("@");
+    const hasConsecutiveDots = email.includes("..");
+    const tld = domain.split(".").pop() || "";
+
+    return basicFormat && !hasConsecutiveDots && tld.length >= 2;
+  };
+
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
     return res.status(405).json({ error: "Method not allowed" });
@@ -28,8 +37,7 @@ module.exports = async (req, res) => {
     return res.status(200).json({ success: true });
   }
 
-  const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  if (!isEmailValid) {
+  if (!isEmailValid(email)) {
     return res.status(400).json({ error: "Invalid email" });
   }
 
