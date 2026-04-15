@@ -34,7 +34,7 @@
 
           <div class="hero-actions">
             <a class="btn btn-primary" href="#beta">S’inscrire à la bêta</a>
-            <a class="btn btn-secondary" href="#features">Découvrir les features</a>
+            <a class="btn btn-secondary" href="#fonctionnalites">Découvrir les fonctionnalités</a>
           </div>
         </div>
 
@@ -48,7 +48,7 @@
     </header>
 
     <main>
-      <section id="features" class="section container">
+      <section id="fonctionnalites" class="section container">
         <h2>Ce que Tribos change aujourd’hui</h2>
         <p class="section-subtitle">Des expériences de sport qui rassemblent vraiment.</p>
 
@@ -88,10 +88,15 @@
           <p>Les premières places sont limitées. Prenez la vôtre maintenant.</p>
           <form
             class="beta-form"
-            action="mailto:beta@tribos.app?subject=Inscription%20b%C3%AAta%20Tribos"
+            name="beta-signup"
             method="post"
-            enctype="text/plain"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+            action="#beta"
           >
+            <input type="hidden" name="form-name" value="beta-signup" />
+            <label class="sr-only" for="bot-field">Ne pas remplir ce champ</label>
+            <input class="sr-only" id="bot-field" name="bot-field" type="text" />
             <label class="sr-only" for="email">Adresse e-mail</label>
             <input
               id="email"
@@ -102,7 +107,7 @@
             />
             <button type="submit">Je veux ma place</button>
           </form>
-          <p class="form-note">À l’envoi, votre client e-mail s’ouvre pour valider votre demande bêta.</p>
+          <p class="form-note">Inscription rapide. Accès anticipé dès l’ouverture des places.</p>
         </div>
       </section>
     </main>
