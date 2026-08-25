@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tribos - carte sociale</title>
+    <!--
+      Gabarit de la carte Open Graph (1200x630). Rendu par tools/build-og.mjs
+      dans un Chromium headless, pour réutiliser les vraies polices et les vrais
+      tokens du site plutôt que de recomposer la marque à la main.
+      Régénérer avec : node tools/build-og.mjs
+    -->
+    <link rel="stylesheet" href="../assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="../assets/css/tribos.css" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+      }
+
+      .card {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 420px;
+        align-items: center;
+        gap: 56px;
+        width: 1200px;
+        height: 630px;
+        padding: 0 0 0 88px;
+        background: var(--paper);
+        overflow: hidden;
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        inset: -30% -20% auto auto;
+        width: 780px;
+        height: 780px;
+        background: radial-gradient(
+          circle,
+          color-mix(in srgb, var(--accent) 34%, transparent),
+          transparent 68%
+        );
+      }
+
+      .lockup {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        margin-bottom: 40px;
+      }
+
+      .lockup img {
+        width: 72px;
+        height: 72px;
+        border-radius: 20px;
+      }
+
+      .lockup span {
+        font-family: var(--font-display);
+        font-size: 44px;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        color: var(--ink);
+      }
+
+      .copy {
+        position: relative;
+        z-index: 1;
+      }
+
+      .copy h1 {
+        font-size: 66px;
+        line-height: 1.02;
+        letter-spacing: -0.04em;
+        margin-bottom: 26px;
+      }
+
+      .copy p {
+        font-size: 26px;
+        line-height: 1.4;
+        color: var(--body);
+        max-width: 22ch;
+      }
+
+      .shot {
+        position: relative;
+        z-index: 1;
+        justify-self: center;
+        padding: 11px;
+        border-radius: 46px;
+        background: linear-gradient(160deg, #3a332c, #14100c 55%, #2a241e);
+        box-shadow: var(--shadow-3);
+      }
+
+      .shot img {
+        display: block;
+        width: 330px;
+        height: 560px;
+        object-fit: cover;
+        object-position: top;
+        border-radius: 36px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="copy">
+        <div class="lockup">
+          <img src="../assets/brand/tribos-icon.png" alt="" />
+          <span>Tribos</span>
+        </div>
+        <h1>Le même programme,<br />le même jour, ensemble.</h1>
+        <p>L’app pour s’entraîner en groupe.</p>
+      </div>
+      <div class="shot">
+        <img src="../assets/app/home.png" alt="" />
+      </div>
+    </div>
+  </body>
+</html>
