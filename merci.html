@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Merci - Tribos</title>
+    <meta
+      name="description"
+      content="Ton email est enregistré pour la bêta privée de Tribos. On te prévient dès qu’une place se libère."
+    />
+    <meta name="robots" content="noindex, follow" />
+    <link rel="canonical" href="https://tribos.app/merci.html" />
+    <meta name="theme-color" content="#f3730a" />
+
+    <meta property="og:url" content="https://tribos.app/merci.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="Tribos" />
+    <meta property="og:title" content="Merci - tu es sur la liste Tribos" />
+    <meta
+      property="og:description"
+      content="On t’écrit dès qu’une place se libère, avec les instructions d’installation pour ton téléphone."
+    />
+    <meta property="og:image" content="https://tribos.app/assets/brand/og-card.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Carte Tribos : le logo, la promesse du produit et l’écran d’accueil de l’application" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="assets/brand/favicon-32.png" sizes="32x32" />
+    <link rel="icon" href="assets/brand/favicon-16.png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png" />
+
+    <link rel="preload" as="font" type="font/woff2" href="assets/fonts/bricolage-grotesque-latin.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="assets/fonts/geist-latin.woff2" crossorigin />
+    <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="assets/css/tribos.css" />
+
+    <script>
+      // Runs before first paint. Three jobs:
+      //  1. apply the stored theme so the other mode never flashes;
+      //  2. mark the document as script-enabled, which is what gates the
+      //     scroll-reveal styles;
+      //  3. arm a dead-man switch. The reveal blocks start at opacity 0 and are
+      //     only shown by site.js. If that file is blocked, 404s, or fails to
+      //     parse, nothing would ever reveal them and the page would render
+      //     blank. site.js clears this timer as soon as it runs; if it never
+      //     does, the class is dropped and every block returns to full opacity.
+      document.documentElement.classList.add("js");
+      window.__tribosRevealFallback = setTimeout(function () {
+        document.documentElement.classList.remove("js");
+      }, 2500);
+      try {
+        var t = localStorage.getItem("tribos-theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    </script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
+    <div class="grain" aria-hidden="true"></div>
+    <span data-nav-sentinel aria-hidden="true"></span>
+
+    <header class="nav" data-nav>
+      <div class="wrap nav-inner">
+        <a class="brand" href="./" aria-label="Tribos, accueil">
+          <img src="assets/brand/tribos-icon-64.png" width="30" height="30" alt="" />
+          <span class="brand-name">Tribos</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Navigation principale">
+          <a href="index.html#fonctionnement">Fonctionnement</a>
+          <a href="index.html#groupe">Le groupe</a>
+          <a href="entreprises.html">Entreprises</a>
+        </nav>
+
+        <div class="nav-actions">
+          <button
+            class="theme-toggle"
+            type="button"
+            data-theme-toggle
+            aria-label="Passer en thème sombre"
+          >
+            <svg class="icon icon-sun" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-sun" /></svg>
+            <svg class="icon icon-moon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-moon" /></svg>
+          </button>
+
+          <a class="btn btn-primary btn-sm" href="index.html#beta">Rejoindre la bêta</a>
+
+          <button
+            class="menu-toggle"
+            type="button"
+            data-menu-toggle
+            aria-expanded="false"
+            aria-controls="menu-mobile"
+            aria-label="Ouvrir le menu"
+          >
+            <svg class="icon icon-open" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-list" /></svg>
+            <svg class="icon icon-close" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-x" /></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="menu-panel" id="menu-mobile" data-menu hidden>
+      <a href="index.html#fonctionnement">Fonctionnement</a>
+      <a href="index.html#groupe">Le groupe</a>
+      <a href="entreprises.html">Entreprises</a>
+      <a href="index.html#faq">Questions fréquentes</a>
+      <a class="btn btn-primary" href="index.html#beta">Rejoindre la bêta</a>
+      <p class="menu-theme">
+        Thème
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Passer en thème sombre">
+          <svg class="icon icon-sun" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-sun" /></svg>
+          <svg class="icon icon-moon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-moon" /></svg>
+        </button>
+      </p>
+    </div>
+
+    <main id="contenu">
+      <!-- ================= CONFIRMATION ================= -->
+      <section class="section-tight">
+        <div class="wrap wrap-narrow">
+          <div class="section-head reveal">
+            <p class="eyebrow">Inscription enregistrée</p>
+            <h1 class="h1">C’est bon, tu es sur la liste.</h1>
+            <p class="lede">
+              On t’écrit dès qu’une place se libère, avec les instructions
+              d’installation pour ton téléphone.
+            </p>
+          </div>
+
+          <div class="steps">
+            <div class="step reveal" style="--i: 1">
+              <div class="step-figure">
+                <picture>
+                  <source srcset="assets/illus/fox-weights.webp" type="image/webp" />
+                  <img
+                    src="assets/illus/fox-weights.png"
+                    width="244"
+                    height="250"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Illustration du renard orange de Tribos soulevant un haltère"
+                  />
+                </picture>
+              </div>
+
+              <div class="step-body">
+                <h2 class="h3">Ce qui se passe maintenant</h2>
+                <ul class="feature-list">
+                  <li>
+                    <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-check" /></svg>
+                    <span>On ouvre les accès petit à petit, pour garder un vrai suivi sur chaque groupe.</span>
+                  </li>
+                  <li>
+                    <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-check" /></svg>
+                    <span>Tu recevras un email avec ton lien d’installation et de quoi créer ton premier groupe.</span>
+                  </li>
+                  <li>
+                    <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-check" /></svg>
+                    <span>En attendant, réfléchis à qui tu mets dedans. Tribos est bien plus utile à plusieurs qu’à un.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-actions reveal" style="--i: 2">
+            <a class="btn btn-primary" href="index.html">
+              Retour à l’accueil
+              <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-arrow-right" /></svg>
+            </a>
+            <a class="link-arrow" href="entreprises.html">
+              Tribos pour les équipes
+              <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-arrow-up-right" /></svg>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <a class="brand" href="./">
+              <img src="assets/brand/tribos-icon-64.png" width="30" height="30" alt="" />
+              <span class="brand-name">Tribos</span>
+            </a>
+            <p>
+              Tribos, l’app pour s’entraîner en groupe&#8239;: un programme commun, une
+              séance par jour.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="footer-heading">Produit</h2>
+            <ul class="footer-links">
+              <li><a href="index.html#fonctionnement">Fonctionnement</a></li>
+              <li><a href="index.html#groupe">Le groupe</a></li>
+              <li><a href="index.html#faq">Questions fréquentes</a></li>
+              <li><a href="index.html#beta">Rejoindre la bêta</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="footer-heading">Entreprises</h2>
+            <ul class="footer-links">
+              <li><a href="entreprises.html">Tribos pour les équipes</a></li>
+              <li><a href="entreprises.html#contact">Nous contacter</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="footer-heading">Légal</h2>
+            <ul class="footer-links">
+              <li><a href="confidentialite.html">Politique de confidentialité</a></li>
+              <li><a href="mentions-legales.html">Mentions légales</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© 2026 Tribos. Tous droits réservés.</p>
+          <p>Bêta privée</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="assets/js/site.js" defer></script>
+  </body>
+</html>

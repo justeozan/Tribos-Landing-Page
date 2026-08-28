@@ -1,0 +1,165 @@
+# Tribos landing page - configuration Netlify
+#
+# Site statique pur : aucun bundler, aucune étape de build. Netlify publie la
+# racine du dépôt telle quelle. Ne pas ajouter de « command » ici : il n’y a
+# rien à compiler, et une commande vide ferait échouer le déploiement.
+
+[build]
+  publish = "."
+
+
+# ---------------------------------------------------------------------------
+# Redirections
+# ---------------------------------------------------------------------------
+# /merci vers /merci.html en réécriture 200 (et non en 301).
+#
+# Justification : merci.html est la page de succès du formulaire Netlify. Le 200
+# garde l’URL affichée dans la barre d’adresse et évite toute chaîne de
+# redirection juste après l’envoi du formulaire. Un 301 entrerait en conflit
+# potentiel avec l’option « Pretty URLs » de Netlify, qui redirige /merci.html
+# vers /merci : les deux règles se renverraient la balle. Le risque de contenu
+# dupliqué est nul ici, merci.html porte déjà
+# <meta name="robots" content="noindex, follow"> et /merci est bloqué dans
+# robots.txt.
+[[redirects]]
+  from = "/merci"
+  to = "/merci.html"
+  status = 200
+
+
+# Netlify publie la racine du dépôt telle quelle, donc les fichiers de travail
+# sont servis publiquement. `force = true` est indispensable : sans lui Netlify
+# sert le fichier existant et ignore la règle. robots.txt les écarte déjà de
+# l'index, ceci les rend en plus inatteignables.
+[[redirects]]
+  from = "/README.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/tools/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/netlify.toml"
+  to = "/404.html"
+  status = 404
+  force = true
+
+
+# ---------------------------------------------------------------------------
+# En-têtes de sécurité (toutes les réponses)
+# ---------------------------------------------------------------------------
+# La Content-Security-Policy est calée sur ce que le site charge réellement :
+#
+#   default-src 'self'   toutes les ressources sont locales : CSS, JS, polices,
+#                        images, sprite SVG. Aucun CDN, aucun tracker, aucune
+#                        iframe, aucune police distante.
+#   script-src           'self' pour /assets/js/site.js, plus le hash sha256 du
+#                        seul script inline du site : le sélecteur de thème
+#                        placé dans le <head> de index.html, entreprises.html,
+#                        merci.html, confidentialite.html, mentions-legales.html
+#                        et 404.html. Les six pages partagent un texte de script
+#                        identique octet pour octet, un seul hash suffit donc.
+#                        Il a été calculé avec :
+#                          printf '%s' '<texte exact entre les balises script>' \
+#                            | openssl dgst -sha256 -binary | openssl base64
+#                        Toute modification de ce script, même un espace ou un
+#                        commentaire, invalide le hash : le thème sombre
+#                        clignoterait au premier rendu. Recalculer et remplacer
+#                        la valeur ci-dessous dans ce cas.
+#                        À noter : la présence d’un hash désactive
+#                        'unsafe-inline' pour script-src, ce qui est voulu.
+#   style-src            'unsafe-inline' est nécessaire : les blocs animés
+#                        portent un attribut style="--i: N" et la texture
+#                        .grain est une data: URI SVG posée en background-image.
+#   img-src 'self' data: data: couvre justement cette texture .grain.
+#   font-src 'self'      les woff2 sont auto-hébergés dans /assets/fonts/.
+#   connect-src 'self'   site.js envoie le formulaire bêta en fetch vers la même
+#                        origine (Netlify Forms).
+#   form-action 'self'   le formulaire cible ./merci.html.
+#   frame-ancestors, object-src et base-uri sont sur 'none' : le site n’a ni
+#                        iframe, ni plugin, ni balise <base>.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'sha256-90Cus5d6JPXoXiMwTQ0oJyPP/8HMOlAGSu2sVQcp7Ig='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; base-uri 'none'"
+
+
+# ---------------------------------------------------------------------------
+# Cache
+# ---------------------------------------------------------------------------
+# Les polices ne changent jamais sans changer de nom de fichier : `immutable`
+# pendant un an est sans risque.
+#
+# Les images, elles, portent un nom stable (home.webp, groupe.webp...) sans hash
+# de contenu. Un an d’`immutable` voulait dire qu’une capture corrigée restait
+# invisible pendant un an pour tout visiteur déjà venu, sans aucun moyen de
+# purger. Elles passent donc à une semaine, avec revalidation ensuite : le gain
+# de cache reste réel, la correction devient possible.
+[[headers]]
+  for = "/assets/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/app/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/assets/illus/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/assets/brand/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+
+# CSS, JS et sprite d’icônes changent à chaque retouche et ne sont pas non plus
+# versionnés dans leur nom. Revalidation systématique : Netlify répond 304 tant
+# que le fichier n’a pas bougé, le coût réseau reste minime.
+[[headers]]
+  for = "/assets/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/assets/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/assets/icons/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# HTML et fichiers de découverte : jamais de cache long, sinon un déploiement
+# reste invisible pour les visiteurs déjà venus.
+[[headers]]
+  for = "/"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"

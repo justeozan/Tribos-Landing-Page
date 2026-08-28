@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Politique de confidentialité - Tribos</title>
+    <meta
+      name="description"
+      content="Comment Tribos collecte, utilise et protège tes données personnelles."
+    />
+    <link rel="canonical" href="https://tribos.app/confidentialite.html" />
+    <meta name="theme-color" content="#f3730a" />
+
+    <meta property="og:url" content="https://tribos.app/confidentialite.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="Tribos" />
+    <meta property="og:title" content="Politique de confidentialité - Tribos" />
+    <meta
+      property="og:description"
+      content="Ce que Tribos collecte, pourquoi, et ce que tu peux demander à tout moment."
+    />
+    <meta property="og:image" content="https://tribos.app/assets/brand/og-card.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Carte Tribos : le logo, la promesse du produit et l’écran d’accueil de l’application" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="assets/brand/favicon-32.png" sizes="32x32" />
+    <link rel="icon" href="assets/brand/favicon-16.png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png" />
+
+    <link rel="preload" as="font" type="font/woff2" href="assets/fonts/bricolage-grotesque-latin.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="assets/fonts/geist-latin.woff2" crossorigin />
+    <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="assets/css/tribos.css" />
+
+    <script>
+      // Runs before first paint. Three jobs:
+      //  1. apply the stored theme so the other mode never flashes;
+      //  2. mark the document as script-enabled, which is what gates the
+      //     scroll-reveal styles;
+      //  3. arm a dead-man switch. The reveal blocks start at opacity 0 and are
+      //     only shown by site.js. If that file is blocked, 404s, or fails to
+      //     parse, nothing would ever reveal them and the page would render
+      //     blank. site.js clears this timer as soon as it runs; if it never
+      //     does, the class is dropped and every block returns to full opacity.
+      document.documentElement.classList.add("js");
+      window.__tribosRevealFallback = setTimeout(function () {
+        document.documentElement.classList.remove("js");
+      }, 2500);
+      try {
+        var t = localStorage.getItem("tribos-theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    </script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
+    <div class="grain" aria-hidden="true"></div>
+    <span data-nav-sentinel aria-hidden="true"></span>
+
+    <header class="nav" data-nav>
+      <div class="wrap nav-inner">
+        <a class="brand" href="./" aria-label="Tribos, accueil">
+          <img src="assets/brand/tribos-icon-64.png" width="30" height="30" decoding="async" alt="" aria-hidden="true" />
+          <span class="brand-name">Tribos</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Navigation principale">
+          <a href="index.html#fonctionnement">Fonctionnement</a>
+          <a href="index.html#groupe">Le groupe</a>
+          <a href="entreprises.html">Entreprises</a>
+        </nav>
+
+        <div class="nav-actions">
+          <button
+            class="theme-toggle"
+            type="button"
+            data-theme-toggle
+            aria-label="Passer en thème sombre"
+          >
+            <svg class="icon icon-sun" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-sun" /></svg>
+            <svg class="icon icon-moon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-moon" /></svg>
+          </button>
+
+          <a class="btn btn-primary btn-sm" href="index.html#beta">Rejoindre la bêta</a>
+
+          <button
+            class="menu-toggle"
+            type="button"
+            data-menu-toggle
+            aria-expanded="false"
+            aria-controls="menu-mobile"
+            aria-label="Ouvrir le menu"
+          >
+            <svg class="icon icon-open" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-list" /></svg>
+            <svg class="icon icon-close" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-x" /></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="menu-panel" id="menu-mobile" data-menu hidden>
+      <a href="index.html#fonctionnement">Fonctionnement</a>
+      <a href="index.html#groupe">Le groupe</a>
+      <a href="entreprises.html">Entreprises</a>
+      <a href="index.html#faq">Questions fréquentes</a>
+      <a class="btn btn-primary" href="index.html#beta">Rejoindre la bêta</a>
+      <p class="menu-theme">
+        Thème
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Passer en thème sombre">
+          <svg class="icon icon-sun" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-sun" /></svg>
+          <svg class="icon icon-moon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-moon" /></svg>
+        </button>
+      </p>
+    </div>
+
+    <main id="contenu">
+      <!-- ================= EN-TETE ================= -->
+      <section class="section-tight">
+        <div class="wrap">
+          <div class="reveal">
+            <p class="eyebrow">Légal</p>
+            <h1 class="h1">Politique de confidentialité</h1>
+            <p class="lede">
+              Ce que Tribos collecte, pourquoi, et ce que tu peux demander à tout
+              moment.
+            </p>
+            <p class="doc-meta">Dernière mise à jour&#8239;: {{DATE_MAJ}}</p>
+          </div>
+
+          <!-- ================= CORPS LEGAL ================= -->
+          <article class="doc reveal" style="--i: 1">
+            <!--
+              Placeholders à remplacer avant publication sur cette page :
+              {{DATE_MAJ}}
+              {{RAISON_SOCIALE}}
+              {{ADRESSE_SIEGE}}
+              {{EMAIL_CONTACT}}
+            -->
+            <p>
+              Tribos est en bêta privée. Ce site sert uniquement à présenter le
+              produit et à recueillir les inscriptions à la liste d’attente. Nous
+              collectons donc très peu de données, et nous expliquons ci-dessous
+              exactement lesquelles.
+            </p>
+
+            <h2>Qui est responsable de vos données</h2>
+
+            <p>
+              Le responsable du traitement est {{RAISON_SOCIALE}}, dont le siège
+              social est situé {{ADRESSE_SIEGE}}.
+            </p>
+
+            <p>
+              Contact pour toute question relative à vos données&#8239;:
+              {{EMAIL_CONTACT}}.
+            </p>
+
+            <h2>Quelles données sont collectées</h2>
+
+            <p>
+              Lorsque vous vous inscrivez à la liste d’attente de la bêta, nous
+              collectons&#8239;:
+            </p>
+
+            <ul>
+              <li>
+                <strong>Votre adresse e-mail.</strong> C’est la seule information
+                que nous vous demandons. Le formulaire ne comporte aucun autre
+                champ à remplir.
+              </li>
+              <li>
+                <strong>Des données techniques liées à l’envoi du formulaire.</strong>
+                Notre hébergeur enregistre, au moment de la soumission, la date et
+                l’heure de l’envoi, l’adresse IP depuis laquelle le formulaire a
+                été envoyé et les informations transmises par votre navigateur,
+                ainsi que le résultat du champ piège invisible destiné à bloquer
+                les robots. Ces données servent uniquement à filtrer les envois
+                automatisés et abusifs.
+              </li>
+            </ul>
+
+            <p>
+              Nous ne collectons ni votre nom, ni votre numéro de téléphone, ni
+              votre entreprise, ni aucune donnée de santé ou d’entraînement via ce
+              site. Les données liées à l’usage de l’application mobile Tribos
+              font l’objet d’une information distincte au sein de l’application.
+            </p>
+
+            <h2>Pourquoi nous collectons ces données</h2>
+
+            <p>
+              Votre adresse e-mail sert exclusivement à vous prévenir de
+              l’ouverture de la bêta de Tribos et à vous transmettre les
+              informations pratiques nécessaires pour y accéder, comme une
+              invitation ou un code d’accès.
+            </p>
+
+            <p>
+              Nous pouvons vous envoyer, sur la même base, un nombre limité de
+              messages liés à l’avancement de la bêta.
+            </p>
+
+            <p>
+              Nous n’utilisons pas votre adresse pour de la publicité et nous ne
+              l’utilisons pas pour vous profiler.
+            </p>
+
+            <p>
+              Les données techniques du formulaire servent uniquement à la
+              sécurité et à la lutte contre le spam.
+            </p>
+
+            <h2>Sur quelle base légale</h2>
+
+            <p>
+              Le traitement de votre adresse e-mail repose sur votre consentement,
+              au sens de l’article 6.1.a du règlement général sur la protection
+              des données (RGPD). Ce consentement est donné librement lorsque vous
+              saisissez votre adresse et validez le formulaire.
+            </p>
+
+            <p>
+              Vous pouvez retirer votre consentement à tout moment, sans avoir à
+              vous justifier. Le retrait ne remet pas en cause la validité du
+              traitement effectué avant ce retrait.
+            </p>
+
+            <p>
+              Le traitement des données techniques anti spam repose sur notre
+              intérêt légitime à protéger le formulaire contre les envois
+              automatisés, au sens de l’article 6.1.f du RGPD.
+            </p>
+
+            <h2>Combien de temps nous les conservons</h2>
+
+            <p>
+              Votre adresse e-mail est conservée jusqu’à l’ouverture de la bêta et
+              pendant la durée nécessaire à votre accompagnement en tant que bêta
+              testeur, et au maximum trois ans à compter de notre dernier contact
+              avec vous, conformément à la pratique recommandée par la CNIL en
+              matière de prospection.
+            </p>
+
+            <p>
+              Si vous demandez la suppression de votre adresse ou si vous retirez
+              votre consentement, votre adresse est supprimée de nos
+              enregistrements dans les meilleurs délais, et au plus tard sous
+              trente jours.
+            </p>
+
+            <p>Si le projet de bêta était abandonné, la liste serait supprimée.</p>
+
+            <p>
+              Les données techniques associées aux envois de formulaire sont
+              conservées par notre hébergeur pour la durée nécessaire au filtrage
+              anti spam, puis supprimées avec la soumission correspondante.
+            </p>
+
+            <h2>Qui a accès à vos données</h2>
+
+            <p>
+              Vos données sont accessibles aux seules personnes de
+              {{RAISON_SOCIALE}} chargées de la gestion de la bêta.
+            </p>
+
+            <p>Nous faisons appel à un sous-traitant&#8239;:</p>
+
+            <p>
+              <strong>Netlify, Inc.</strong>, 512 2nd Street, Suite 200, San
+              Francisco, CA 94107, États Unis, qui héberge le site et le service
+              de formulaire (Netlify Forms). À ce titre, Netlify reçoit et stocke
+              les soumissions du formulaire, dont votre adresse e-mail.
+            </p>
+
+            <p>
+              Netlify agit sur nos instructions, dans le cadre d’un accord de sous-traitance conforme à l’article 28 du RGPD.
+            </p>
+
+            <p>
+              En dehors de ce sous-traitant, vos données peuvent être communiquées
+              à une autorité administrative ou judiciaire si la loi nous l’impose.
+            </p>
+
+            <h2>Transferts en dehors de l’Union européenne</h2>
+
+            <p>
+              L’hébergement du site et du formulaire implique un transfert de vos
+              données vers les États Unis, où est établi Netlify, Inc.
+            </p>
+
+            <p>
+              Ce transfert est encadré par les clauses contractuelles types
+              adoptées par la Commission européenne, intégrées à l’accord de sous-traitance conclu avec Netlify, complétées le cas échéant par les
+              mesures supplémentaires prévues par ce même accord.
+            </p>
+
+            <p>
+              Vous pouvez nous écrire à {{EMAIL_CONTACT}} pour obtenir des
+              informations sur les garanties applicables à ce transfert.
+            </p>
+
+            <h2>Nous ne vendons pas vos données</h2>
+
+            <p>
+              Nous ne vendons pas, ne louons pas et n’échangeons pas votre adresse
+              e-mail.
+            </p>
+
+            <p>
+              Nous ne la transmettons à aucun courtier en données, à aucune régie
+              publicitaire et à aucun partenaire commercial.
+            </p>
+
+            <p>Elle sert uniquement à la finalité décrite plus haut.</p>
+
+            <h2>Vos droits</h2>
+
+            <p>
+              Conformément au RGPD et à la loi Informatique et Libertés, vous
+              disposez des droits suivants sur vos données&#8239;:
+            </p>
+
+            <ul>
+              <li>
+                <strong>Droit d’accès.</strong> Savoir si nous détenons des
+                données vous concernant et en obtenir une copie.
+              </li>
+              <li>
+                <strong>Droit de rectification.</strong> Faire corriger une
+                adresse e-mail inexacte.
+              </li>
+              <li>
+                <strong>Droit à l’effacement.</strong> Demander la suppression de
+                votre adresse de la liste d’attente.
+              </li>
+              <li>
+                <strong>Droit d’opposition.</strong> Vous opposer au traitement de
+                vos données, notamment aux envois liés à la bêta.
+              </li>
+              <li>
+                <strong>Droit à la limitation du traitement.</strong> Demander le
+                gel temporaire de l’utilisation de vos données.
+              </li>
+              <li>
+                <strong>Droit à la portabilité.</strong> Recevoir les données que
+                vous nous avez fournies dans un format structuré et couramment
+                utilisé.
+              </li>
+              <li>
+                <strong>Droit de retirer votre consentement.</strong> À tout
+                moment, sans justification, ce qui entraîne votre retrait de la
+                liste d’attente.
+              </li>
+            </ul>
+
+            <h2>Comment exercer vos droits</h2>
+
+            <p>
+              Écrivez à {{EMAIL_CONTACT}} en précisant votre demande, depuis
+              l’adresse e-mail utilisée lors de l’inscription si possible.
+            </p>
+
+            <p>
+              Nous répondons dans un délai d’un mois à compter de la réception de
+              la demande. Ce délai peut être prolongé de deux mois si la demande
+              est complexe, auquel cas nous vous en informons.
+            </p>
+
+            <p>
+              Nous pouvons vous demander un justificatif d’identité uniquement en
+              cas de doute raisonnable sur l’identité du demandeur.
+            </p>
+
+            <p>
+              Vous pouvez également nous écrire par courrier à {{RAISON_SOCIALE}},
+              {{ADRESSE_SIEGE}}.
+            </p>
+
+            <h2>Réclamation auprès de la CNIL</h2>
+
+            <p>
+              Si vous estimez, après nous avoir contactés, que vos droits ne sont
+              pas respectés, vous pouvez introduire une réclamation auprès de la
+              Commission nationale de l’informatique et des libertés&#8239;:
+            </p>
+
+            <p>CNIL, 3 place de Fontenoy, TSA 80715, 75334 Paris Cedex 07.</p>
+
+            <p>
+              Site web&#8239;:
+              <a href="https://www.cnil.fr" rel="noopener">https://www.cnil.fr</a>
+            </p>
+
+            <h2>Cookies et traceurs</h2>
+
+            <p>
+              Ce site ne dépose aucun cookie de mesure d’audience, aucun cookie
+              publicitaire et aucun traceur à des fins de profilage.
+            </p>
+
+            <p>
+              Notre hébergeur peut utiliser des cookies strictement nécessaires au
+              bon fonctionnement du service, notamment pour la répartition de
+              charge et la protection contre les abus. Ces cookies ne servent pas
+              à vous suivre d’un site à l’autre et ne nécessitent pas votre
+              consentement préalable.
+            </p>
+
+            <p>
+              Aucune bannière de consentement n’est donc affichée. Si un outil
+              d’analyse d’audience, un service de publicité ou tout autre traceur
+              non essentiel était ajouté au site, cette section serait mise à jour
+              et votre consentement vous serait demandé avant tout dépôt.
+            </p>
+
+            <h2>Délégué à la protection des données</h2>
+
+            <p>
+              Nous n’avons pas désigné de délégué à la protection des données. La
+              désignation d’un délégué n’est pas obligatoire dans notre situation,
+              car nous ne sommes pas un organisme public, notre activité
+              principale ne consiste pas en un suivi régulier et systématique à
+              grande échelle de personnes, et nous ne traitons pas à grande
+              échelle de données sensibles au sens de l’article 9 du RGPD.
+            </p>
+
+            <p>
+              Vos demandes relatives à vos données sont traitées directement à
+              l’adresse {{EMAIL_CONTACT}}.
+            </p>
+
+            <h2>Sécurité des données</h2>
+
+            <p>
+              Nous limitons l’accès aux soumissions du formulaire aux personnes
+              qui en ont besoin, et nous protégeons les comptes concernés.
+            </p>
+
+            <p>
+              Les échanges entre votre navigateur et le site sont chiffrés en
+              HTTPS.
+            </p>
+
+            <h2>Modification de cette politique</h2>
+
+            <p>
+              Cette politique peut évoluer, notamment lors de l’ouverture publique
+              de Tribos ou en cas de changement d’hébergeur ou d’outil.
+            </p>
+
+            <p>
+              La version en vigueur est celle publiée sur cette page, avec sa date
+              de mise à jour. En cas de changement important concernant vos
+              données, nous vous en informerons par e-mail.
+            </p>
+            <!--
+              Note interne, à ne pas publier telle quelle :
+              Document type à faire relire avant publication ; il ne constitue pas un conseil juridique.
+            -->
+          </article>
+
+          <div class="doc-actions reveal" style="--i: 2">
+            <a class="btn btn-ghost" href="index.html">Retour à l’accueil</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <a class="brand" href="./">
+              <img src="assets/brand/tribos-icon-64.png" width="30" height="30" loading="lazy" decoding="async" alt="" aria-hidden="true" />
+              <span class="brand-name">Tribos</span>
+            </a>
+            <p>
+              Tribos, l’app pour s’entraîner en groupe&#8239;: un programme commun, une
+              séance par jour.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="footer-heading">Produit</h2>
+            <ul class="footer-links">
+              <li><a href="index.html#fonctionnement">Fonctionnement</a></li>
+              <li><a href="index.html#groupe">Le groupe</a></li>
+              <li><a href="index.html#faq">Questions fréquentes</a></li>
+              <li><a href="index.html#beta">Rejoindre la bêta</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="footer-heading">Entreprises</h2>
+            <ul class="footer-links">
+              <li><a href="entreprises.html">Tribos pour les équipes</a></li>
+              <li><a href="entreprises.html#contact">Nous contacter</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="footer-heading">Légal</h2>
+            <ul class="footer-links">
+              <li><a href="confidentialite.html" aria-current="page">Politique de confidentialité</a></li>
+              <li><a href="mentions-legales.html">Mentions légales</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© 2026 Tribos. Tous droits réservés.</p>
+          <p>Bêta privée</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="assets/js/site.js" defer></script>
+  </body>
+</html>

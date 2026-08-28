@@ -2,186 +2,706 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tribos — Bougez ensemble</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tribos - S’entraîner en groupe, tous les jours</title>
     <meta
       name="description"
-      content="Tribos réinvente le sport en groupe : programmes communs, défis collaboratifs et bêta privée à rejoindre dès maintenant."
+      content="Tribos réunit ton groupe autour d’un programme commun, d’une séance par jour et d’un classement partagé. Application mobile en bêta privée."
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
+    <link rel="canonical" href="https://tribos.app/" />
+    <meta name="theme-color" content="#f3730a" />
+
+    <meta property="og:url" content="https://tribos.app/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="Tribos" />
+    <meta property="og:title" content="Tribos - Le même programme, le même jour, ensemble" />
+    <meta
+      property="og:description"
+      content="Un programme commun, une séance par jour, un classement de groupe. Laisse ton email pour rejoindre la bêta privée."
     />
-    <link rel="stylesheet" href="./styles.css" />
+    <meta property="og:image" content="https://tribos.app/assets/brand/og-card.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Carte Tribos : le logo, la promesse du produit et l’écran d’accueil de l’application" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="assets/brand/favicon-32.png" sizes="32x32" />
+    <link rel="icon" href="assets/brand/favicon-16.png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png" />
+
+    <link rel="preload" as="font" type="font/woff2" href="assets/fonts/bricolage-grotesque-latin.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="assets/fonts/geist-latin.woff2" crossorigin />
+    <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="assets/css/tribos.css" />
+
+    <script>
+      // Runs before first paint. Three jobs:
+      //  1. apply the stored theme so the other mode never flashes;
+      //  2. mark the document as script-enabled, which is what gates the
+      //     scroll-reveal styles;
+      //  3. arm a dead-man switch. The reveal blocks start at opacity 0 and are
+      //     only shown by site.js. If that file is blocked, 404s, or fails to
+      //     parse, nothing would ever reveal them and the page would render
+      //     blank. site.js clears this timer as soon as it runs; if it never
+      //     does, the class is dropped and every block returns to full opacity.
+      document.documentElement.classList.add("js");
+      window.__tribosRevealFallback = setTimeout(function () {
+        document.documentElement.classList.remove("js");
+      }, 2500);
+      try {
+        var t = localStorage.getItem("tribos-theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    </script>
   </head>
+
   <body>
-    <header class="hero">
-      <div class="hero-glow hero-glow-left"></div>
-      <div class="hero-glow hero-glow-right"></div>
-      <nav class="nav container">
-        <div class="logo">
-          <img
-            src="https://github.com/user-attachments/assets/92a59f5b-a72d-4b91-a21b-4bcd4cfe6372"
-            alt="Logo Tribos"
-          />
-          Tribos
-        </div>
-        <a class="nav-cta" href="#beta">Rejoindre la bêta</a>
-      </nav>
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
+    <div class="grain" aria-hidden="true"></div>
+    <span data-nav-sentinel aria-hidden="true"></span>
 
-      <div class="hero-content container">
-        <div class="hero-text">
-          <p class="eyebrow">Sport social nouvelle génération</p>
-          <h1>Bougez mieux. Ensemble.</h1>
-          <p>
-            Tribos transforme vos entraînements en énergie collective.
-            Plus simple. Plus motivant. Plus humain.
-          </p>
-          <div class="mascot-pill">
-            <img src="./assets/mascotte-tribos.svg" alt="" aria-hidden="true" />
-            <span>La mascotte Tribos vous suit partout dans l’app</span>
-          </div>
+    <header class="nav" data-nav>
+      <div class="wrap nav-inner">
+        <a class="brand" href="./" aria-label="Tribos, accueil">
+          <img src="assets/brand/tribos-icon-64.png" width="30" height="30" alt="" />
+          <span class="brand-name">Tribos</span>
+        </a>
 
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#beta">S’inscrire à la bêta</a>
-            <a class="btn btn-secondary" href="#fonctionnalites">Découvrir les fonctionnalités</a>
-          </div>
-        </div>
+        <nav class="nav-links" aria-label="Navigation principale">
+          <a href="#fonctionnement">Fonctionnement</a>
+          <a href="#groupe">Le groupe</a>
+          <a href="entreprises.html">Entreprises</a>
+        </nav>
 
-        <div class="hero-visual">
-          <img
-            src="https://github.com/user-attachments/assets/da16cf09-427b-45ef-a18a-9d0d2cecfc20"
-            alt="Mockups complets de l'application Tribos"
-          />
+        <div class="nav-actions">
+          <button
+            class="theme-toggle"
+            type="button"
+            data-theme-toggle
+            aria-label="Passer en thème sombre"
+          >
+            <svg class="icon icon-sun" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-sun" /></svg>
+            <svg class="icon icon-moon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-moon" /></svg>
+          </button>
+
+          <a class="btn btn-primary btn-sm" href="#beta">Rejoindre la bêta</a>
+
+          <button
+            class="menu-toggle"
+            type="button"
+            data-menu-toggle
+            aria-expanded="false"
+            aria-controls="menu-mobile"
+            aria-label="Ouvrir le menu"
+          >
+            <svg class="icon icon-open" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-list" /></svg>
+            <svg class="icon icon-close" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-x" /></svg>
+          </button>
         </div>
       </div>
     </header>
 
-    <main>
-      <section id="fonctionnalites" class="section container">
-        <h2>Ce que Tribos change aujourd’hui</h2>
-        <p class="section-subtitle">Des expériences de sport qui rassemblent vraiment.</p>
+    <div class="menu-panel" id="menu-mobile" data-menu hidden>
+      <a href="#fonctionnement">Fonctionnement</a>
+      <a href="#groupe">Le groupe</a>
+      <a href="entreprises.html">Entreprises</a>
+      <a href="#faq">Questions fréquentes</a>
+      <a class="btn btn-primary" href="#beta">Rejoindre la bêta</a>
+      <p class="menu-theme">
+        Thème
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Passer en thème sombre">
+          <svg class="icon icon-sun" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-sun" /></svg>
+          <svg class="icon icon-moon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-moon" /></svg>
+        </button>
+      </p>
+    </div>
 
-        <div class="grid">
-          <article class="card">
-            <div class="card-visual">
-              <svg viewBox="0 0 128 96" aria-hidden="true">
-                <rect x="4" y="8" width="120" height="80" rx="16" fill="#fff3e0" />
-                <circle cx="38" cy="42" r="10" fill="#f97316" />
-                <circle cx="64" cy="35" r="10" fill="#fb7185" />
-                <circle cx="90" cy="47" r="10" fill="#60a5fa" />
-                <path d="M26 62c9-12 21-12 30 0M52 55c9-12 21-12 30 0M78 62c8-10 16-10 24 0" stroke="#7c3aed" stroke-width="5" stroke-linecap="round" />
-              </svg>
-            </div>
-            <h3>Sport collaboratif</h3>
-            <p>Entraînez-vous en groupe. Gardez le rythme ensemble. Restez motivés plus longtemps.</p>
-          </article>
-          <article class="card">
-            <div class="card-visual">
-              <svg viewBox="0 0 128 96" aria-hidden="true">
-                <rect x="6" y="8" width="116" height="80" rx="16" fill="#e0f2fe" />
-                <rect x="24" y="30" width="80" height="10" rx="5" fill="#2563eb" />
-                <rect x="24" y="46" width="64" height="10" rx="5" fill="#3b82f6" />
-                <rect x="24" y="62" width="48" height="10" rx="5" fill="#60a5fa" />
-                <circle cx="98" cy="66" r="10" fill="#22c55e" />
-                <path d="M94 66l3 3 6-7" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </div>
-            <h3>Programme commun</h3>
-            <p>Un seul cadre pour tous. Une progression alignée. Une dynamique de team immédiate.</p>
-          </article>
-          <article class="card">
-            <div class="card-visual">
-              <svg viewBox="0 0 128 96" aria-hidden="true">
-                <rect x="8" y="12" width="112" height="72" rx="16" fill="#ede9fe" />
-                <rect x="22" y="24" width="84" height="48" rx="10" fill="#fff" />
-                <rect x="30" y="34" width="18" height="30" rx="6" fill="#c4b5fd" />
-                <rect x="55" y="28" width="18" height="36" rx="6" fill="#8b5cf6" />
-                <rect x="80" y="40" width="18" height="24" rx="6" fill="#a78bfa" />
-              </svg>
-            </div>
-            <h3>Groupes d’entreprise</h3>
-            <p>Créez des équipes sportives internes. Renforcez la cohésion avec un objectif partagé.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section container app-gallery">
-        <div class="gallery-head">
-          <p class="eyebrow">Visuels de l’app</p>
-          <h2>L’expérience Tribos en action</h2>
-        </div>
-        <div class="phones">
-          <figure class="phone">
-            <img src="./assets/app-feed.svg" alt="Vue de l'app Tribos avec progression collective" />
-            <figcaption>Feed d’équipe</figcaption>
-          </figure>
-          <figure class="phone">
-            <img src="./assets/app-defi.svg" alt="Vue de l'app Tribos avec défis collaboratifs" />
-            <figcaption>Défi collaboratif</figcaption>
-          </figure>
-          <figure class="phone">
-            <img src="./assets/app-programme.svg" alt="Vue de l'app Tribos avec programme personnalisé" />
-            <figcaption>Programme ajusté</figcaption>
-          </figure>
-        </div>
-      </section>
-
-      <section class="section section-alt">
-        <div class="container split">
-          <div>
-            <p class="eyebrow">Ce qui arrive bientôt</p>
-            <h2>L’IA au service du collectif</h2>
-            <div class="mascot-pill mascot-pill-light">
-              <img src="./assets/mascotte-tribos.svg" alt="" aria-hidden="true" />
-              <span>La mascotte Tribos accompagne chaque séance</span>
+    <main id="contenu">
+      <!-- ================= HERO ================= -->
+      <section class="hero">
+        <div class="hero-field" aria-hidden="true"></div>
+        <div class="wrap hero-grid">
+          <div class="hero-copy reveal">
+            <p class="eyebrow">Bêta privée</p>
+            <h1>Le même programme,
+              <br />le même jour, ensemble.</h1>
+            <p class="lede">
+              Tribos garde ton groupe sur le même programme, jour après jour.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary btn-lg" href="#beta">
+                Rejoindre la bêta
+                <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-arrow-right" /></svg>
+              </a>
+              <a class="btn btn-ghost btn-lg" href="#app">Voir l’app</a>
             </div>
           </div>
-          <div class="future-list">
-            <p>Organisation automatique des sessions dans les agendas.</p>
-            <p>Programme commun, mais séances ajustées à chaque profil.</p>
-            <p>Une personnalisation intelligente, sans casser la dynamique de groupe.</p>
+
+          <div class="hero-visual reveal" style="--i: 1">
+            <img
+              class="hero-watermark"
+              src="assets/brand/tribos-mark-orange.png"
+              width="512"
+              height="512"
+              alt=""
+              aria-hidden="true"
+            />
+            <div class="phone phone-lg">
+              <picture>
+                  <source
+                    type="image/webp"
+                    srcset="assets/app/home-sm.webp 450w, assets/app/home.webp 900w"
+                    sizes="(max-width: 640px) 80vw, 360px"
+                  />
+                  <img
+                    srcset="assets/app/home-sm.png 450w, assets/app/home.png 900w"
+                    sizes="(max-width: 640px) 80vw, 360px"
+                  src="assets/app/home.png"
+                  width="900"
+                  height="1824"
+                  fetchpriority="high"
+                  decoding="async"
+                  alt="Écran d’accueil de Tribos avec la séance du jour, la série de jours en cours et le début du classement du groupe"
+                />
+                </picture>
+            </div>
           </div>
         </div>
       </section>
 
-      <section id="beta" class="section container">
-        <div class="cta-box">
-          <img class="mascot-inline" src="./assets/mascotte-tribos.svg" alt="Mascotte Tribos" />
-          <h2>Entrez dans la bêta Tribos</h2>
-          <p>Les premières places sont limitées. Prenez la vôtre maintenant.</p>
-          <form
-            class="beta-form"
-            name="beta-signup"
-            method="post"
-            data-netlify="true"
-            netlify-honeypot="bot-field"
-            action="#beta"
-          >
-            <input type="hidden" name="form-name" value="beta-signup" />
-            <label class="sr-only" for="email">Adresse e-mail</label>
-            <input
-              id="email"
-              type="email"
-              name="email"
-              placeholder="Votre e-mail pro ou perso"
-              required
+      <!-- ================= STATEMENT ================= -->
+      <section class="section-tight statement">
+        <div class="wrap statement-inner">
+          <blockquote class="reveal">
+            Tu ne manques pas de motivation. Tu t’entraînes juste tout seul.
+          </blockquote>
+          <div class="statement-support reveal" style="--i: 1">
+            <p>
+              Une appli de sport de plus ne change rien si personne ne remarque
+              que tu as sauté ta séance.
+            </p>
+            <p>
+              Un groupe, lui, le remarque. Et c’est souvent ce qui suffit à y
+              retourner.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= COMMENT CA MARCHE ================= -->
+      <section class="section" id="fonctionnement">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <h2 class="h2">Comment ça marche</h2>
+            <p class="lede">
+              Trois choses à faire une fois, puis l’app s’occupe du rythme.
+            </p>
+          </div>
+
+          <ol class="steps">
+            <li class="step reveal">
+              <div class="step-figure">
+                <picture>
+                  <source srcset="assets/illus/trio-warmup.webp" type="image/webp" />
+                  <img
+                    src="assets/illus/trio-warmup.png"
+                    width="315"
+                    height="243"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Illustration des mascottes Tribos, un renard, un loup et un singe, en train de s’échauffer ensemble"
+                  />
+                </picture>
+              </div>
+              <div class="step-body">
+                <p class="step-index">01</p>
+                <h3>Choisis ton programme</h3>
+                <p>
+                  Renforcement musculaire, poids du corps, cyclisme, natation&#8239;:
+                  tu choisis le programme que ton groupe va suivre.
+                </p>
+              </div>
+            </li>
+
+            <li class="step reveal">
+              <div class="step-figure">
+                <picture>
+                  <source srcset="assets/illus/fox-weights.webp" type="image/webp" />
+                  <img
+                    src="assets/illus/fox-weights.png"
+                    width="244"
+                    height="250"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Illustration du renard orange de Tribos soulevant un haltère"
+                  />
+                </picture>
+              </div>
+              <div class="step-body">
+                <p class="step-index">02</p>
+                <h3>Ajoute tes amis</h3>
+                <p>
+                  Partage le code de ton groupe. Ils le rejoignent et vous
+                  démarrez tous sur le même programme.
+                </p>
+              </div>
+            </li>
+
+            <li class="step reveal">
+              <div class="step-figure">
+                <picture>
+                  <source srcset="assets/illus/trio-calm.webp" type="image/webp" />
+                  <img
+                    src="assets/illus/trio-calm.png"
+                    width="322"
+                    height="271"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Illustration des mascottes Tribos en séance, l’une en yoga, l’une à la corde à sauter, l’une en course"
+                  />
+                </picture>
+              </div>
+              <div class="step-body">
+                <p class="step-index">03</p>
+                <h3>Fais ta séance</h3>
+                <p>
+                  Chaque jour, ta séance t’attend sur l’accueil. Tu la termines,
+                  tu marques tes points.
+                </p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ================= BENTO ================= -->
+      <section class="section" id="app">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <h2 class="h2">Ce qu’il y a dans l’app</h2>
+            <p class="lede">
+              Pas de tableau de bord à remplir. Une séance, un groupe, un
+              classement.
+            </p>
+          </div>
+
+          <div class="bento">
+            <article class="tile tile-shot reveal">
+              <div class="tile-text">
+                <h3>Séance du jour</h3>
+                <p>
+                  Une seule séance à faire, déjà prête&#8239;: exercices, durée et
+                  points annoncés à l’avance.
+                </p>
+              </div>
+              <div class="shot-crop">
+                <picture>
+                  <source
+                    type="image/webp"
+                    srcset="assets/app/seance-sm.webp 450w, assets/app/seance.webp 900w"
+                    sizes="(max-width: 640px) 80vw, 360px"
+                  />
+                  <img
+                    srcset="assets/app/seance-sm.png 450w, assets/app/seance.png 900w"
+                    sizes="(max-width: 640px) 80vw, 360px"
+                    src="assets/app/seance.png"
+                    width="786"
+                    height="1704"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Aperçu d’une séance Tribos nommée Leg Day, avec la liste des exercices, la durée et les points"
+                  />
+                </picture>
+              </div>
+            </article>
+
+            <article class="tile tile-accent reveal" style="--i: 1">
+              <div class="tile-text">
+                <h3>Classement du groupe</h3>
+                <p>
+                  Chaque séance terminée rapporte des points et fait bouger le
+                  classement de ton groupe.
+                </p>
+              </div>
+              <svg class="tile-glyph" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-trophy" /></svg>
+            </article>
+
+            <article class="tile tile-pattern reveal" style="--i: 2">
+              <div class="tile-text">
+                <h3>Série et points</h3>
+                <p>
+                  Chaque jour d’affilée fait grandir ta série, chaque séance
+                  ajoute des points à ton total.
+                </p>
+              </div>
+              <svg class="tile-glyph" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-flame" /></svg>
+            </article>
+
+            <article class="tile reveal" style="--i: 3">
+              <div class="tile-text">
+                <h3>Programme commun</h3>
+                <p>
+                  Tout le groupe suit le même programme, la même semaine, les
+                  mêmes séances.
+                </p>
+              </div>
+              <div class="tile-thumb">
+                <picture>
+                  <source srcset="assets/app/programmes.webp" type="image/webp" />
+                  <img
+                    src="assets/app/programmes.png"
+                    width="393"
+                    height="983"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Écran Choisis ton programme dans Tribos, avec les programmes classés par discipline"
+                  />
+                </picture>
+              </div>
+            </article>
+
+            <article class="tile tile-ink reveal" style="--i: 4">
+              <div class="tile-text">
+                <h3>Messages du groupe</h3>
+                <p>
+                  Un fil de discussion dans l’app pour se chambrer, se relancer
+                  et fêter les séances.
+                </p>
+              </div>
+              <svg class="tile-glyph" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-chat-circle-dots" /></svg>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= LE GROUPE ================= -->
+      <section class="section" id="groupe">
+        <div class="wrap split">
+          <div class="split-media reveal">
+            <div class="phone">
+              <picture>
+                  <source
+                    type="image/webp"
+                    srcset="assets/app/groupe-sm.webp 450w, assets/app/groupe.webp 900w"
+                    sizes="(max-width: 640px) 80vw, 360px"
+                  />
+                  <img
+                    srcset="assets/app/groupe-sm.png 450w, assets/app/groupe.png 900w"
+                    sizes="(max-width: 640px) 80vw, 360px"
+                  src="assets/app/groupe.png"
+                  width="900"
+                  height="1824"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Écran Groupe de Tribos avec le classement des membres et les messages du groupe"
+                />
+                </picture>
+            </div>
+          </div>
+
+          <div class="split-body reveal" style="--i: 1">
+            <p class="eyebrow">Le groupe</p>
+            <h2 class="h2">C’est le groupe qui te fait revenir.</h2>
+            <p>
+              Le classement du groupe se met à jour à chaque séance terminée. Tu
+              vois qui a bougé aujourd’hui, et où tu te situes.
+            </p>
+            <p>
+              Les messages vivent au même endroit que les séances. Une séance
+              validée, une vanne, une relance&#8239;: tout reste dans le groupe.
+            </p>
+
+            <ul class="feature-list">
+              <li>
+                <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-trophy" /></svg>
+                <span><strong>Classement</strong> mis à jour à chaque séance validée.</span>
+              </li>
+              <li>
+                <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-chat-circle-dots" /></svg>
+                <span><strong>Messages</strong> du groupe, au même endroit que les séances.</span>
+              </li>
+              <li>
+                <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-users-three" /></svg>
+                <span><strong>Code d’invitation</strong> à partager pour ouvrir ton groupe.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ================= ENTREPRISES ================= -->
+      <section class="section-tight">
+        <div class="wrap">
+          <div class="band reveal">
+            <img
+              class="band-watermark"
+              loading="lazy"
+              src="assets/brand/tribos-mark-white.png"
+              width="512"
+              height="512"
+              alt=""
+              aria-hidden="true"
             />
-            <label class="sr-only" for="bot-field">Laisser ce champ vide</label>
-            <input
-              id="bot-field"
-              class="bot-field"
-              name="bot-field"
-              type="text"
-              autocomplete="off"
-            />
-            <button type="submit">Je veux ma place</button>
-          </form>
-          <p class="form-note">Inscription rapide. Accès anticipé dès l’ouverture des places.</p>
+            <div class="band-inner">
+              <div>
+                <h2 class="h3">Tribos pour les équipes</h2>
+                <p>
+                  Un groupe d’entreprise, un programme commun et un classement
+                  interne pour faire bouger tes collègues ensemble.
+                </p>
+              </div>
+              <a class="btn btn-ink" href="entreprises.html">
+                En savoir plus
+                <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-arrow-right" /></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= ROADMAP ================= -->
+      <section class="section">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <h2 class="h2">Ce qui arrive</h2>
+            <p class="lede">Ce sur quoi on travaille pour la suite.</p>
+          </div>
+
+          <div class="roadmap">
+            <div class="roadmap-item reveal">
+              <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-calendar-check" /></svg>
+              <h3>Séances dans l’agenda</h3>
+              <p>Les séances qui se posent toutes seules dans vos agendas.</p>
+            </div>
+            <div class="roadmap-item reveal" style="--i: 1">
+              <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-barbell" /></svg>
+              <h3>Séances ajustées</h3>
+              <p>Un programme commun, avec des séances ajustées à chaque profil.</p>
+            </div>
+            <div class="roadmap-item reveal" style="--i: 2">
+              <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-sparkle" /></svg>
+              <h3>Personnalisation</h3>
+              <p>Une personnalisation plus fine, sans casser la dynamique du groupe.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= FAQ ================= -->
+      <section class="section-tight" id="faq">
+        <div class="wrap">
+          <h2 class="h2 reveal">Questions fréquentes</h2>
+
+          <div class="faq reveal" style="--i: 1">
+            <details>
+              <summary>
+                Tribos est gratuit&#8239;?
+                <svg class="chev" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-plus" /></svg>
+              </summary>
+              <div class="answer">
+                <p>
+                  Oui, la bêta est gratuite. On veut d’abord voir si le produit
+                  tient avec de vrais groupes. Toute offre payante serait
+                  annoncée avant.
+                </p>
+              </div>
+            </details>
+
+            <details>
+              <summary>
+                C’est disponible quand&#8239;?
+                <svg class="chev" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-plus" /></svg>
+              </summary>
+              <div class="answer">
+                <p>
+                  Tribos est en bêta privée et les accès s’ouvrent
+                  progressivement. On n’annonce pas de date publique&#8239;: on préfère
+                  ouvrir quand c’est prêt.
+                </p>
+              </div>
+            </details>
+
+            <details>
+              <summary>
+                Il me faut du matériel&#8239;?
+                <svg class="chev" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-plus" /></svg>
+              </summary>
+              <div class="answer">
+                <p>
+                  Pas forcément. Plusieurs programmes se font au poids du corps,
+                  chez toi, sans équipement. D’autres, comme le renforcement
+                  musculaire, demandent des haltères ou une salle.
+                </p>
+              </div>
+            </details>
+
+            <details>
+              <summary>
+                Mes amis doivent avoir l’app&#8239;?
+                <svg class="chev" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-plus" /></svg>
+              </summary>
+              <div class="answer">
+                <p>
+                  Oui, sinon ils n’apparaissent pas au classement du groupe.
+                  Donne-leur le code de ton groupe&#8239;: ils créent un compte, entrent
+                  le code, et vous êtes ensemble.
+                </p>
+              </div>
+            </details>
+
+            <details>
+              <summary>
+                iOS ou Android&#8239;?
+                <svg class="chev" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-plus" /></svg>
+              </summary>
+              <div class="answer">
+                <p>
+                  La bêta démarre sur Android. Tribos est développé avec Flutter,
+                  donc la version iPhone suit. Ton email nous dit sur quel
+                  téléphone te faire signe en premier.
+                </p>
+              </div>
+            </details>
+
+            <details>
+              <summary>
+                Que deviennent mes données&#8239;?
+                <svg class="chev" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-plus" /></svg>
+              </summary>
+              <div class="answer">
+                <p>
+                  Ton adresse email sert uniquement à te prévenir de l’ouverture
+                  de la bêta. Elle n’est pas vendue. Tu peux demander sa
+                  suppression à tout moment.
+                </p>
+                <p>
+                  Le détail est dans la
+                  <a href="confidentialite.html">politique de confidentialité</a>.
+                </p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= BETA ================= -->
+      <section class="section-tight" id="beta">
+        <div class="wrap">
+          <div class="signup reveal">
+            <div class="signup-inner">
+              <div>
+                <h2>Entre dans la bêta Tribos</h2>
+                <p class="lede">
+                  Laisse ton email&#8239;: on te prévient dès qu’une place se libère
+                  pour ton groupe.
+                </p>
+              </div>
+
+              <form
+                class="form"
+                name="beta-signup"
+                method="post"
+                action="./merci.html"
+                data-netlify="true"
+                netlify-honeypot="bot-field"
+                data-waitlist
+                data-success="./merci.html"
+                data-endpoint="/"
+              >
+                <input type="hidden" name="form-name" value="beta-signup" />
+
+                <p class="honeypot" aria-hidden="true">
+                  <label for="bot-field">Laisser ce champ vide</label>
+                  <input id="bot-field" name="bot-field" type="text" tabindex="-1" autocomplete="off" />
+                </p>
+
+                <div class="field" data-field-email>
+                  <label for="email">Adresse email</label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    inputmode="email"
+                    autocomplete="email"
+                    placeholder="prenom@email.com"
+                    required
+                    aria-describedby="email-help"
+                  />
+                  <p class="error" id="email-error"></p>
+                  <p class="help" id="email-help">
+                    Pas de spam. Un email quand ton accès est prêt, et c’est tout.
+                  </p>
+                </div>
+
+                <!-- Always rendered so the live region is stable: it is empty and
+                     zero-height until a state lands on it, rather than being
+                     display:none, which makes announcements unreliable. -->
+                <p class="form-status" role="status" aria-live="polite" data-status></p>
+
+                <button class="btn btn-primary" type="submit">Rejoindre la bêta</button>
+
+                <p class="consent-note">
+                  En envoyant ton email, tu acceptes d’être recontacté au sujet de
+                  la bêta Tribos. Tu peux te désinscrire à tout moment.
+                  <a href="confidentialite.html">Politique de confidentialité</a>.
+                </p>
+              </form>
+            </div>
+          </div>
         </div>
       </section>
     </main>
+
+    <footer class="footer">
+      <div class="wrap">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <a class="brand" href="./">
+              <img src="assets/brand/tribos-icon-64.png" width="30" height="30" alt="" />
+              <span class="brand-name">Tribos</span>
+            </a>
+            <p>
+              Tribos, l’app pour s’entraîner en groupe&#8239;: un programme commun, une
+              séance par jour.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="footer-heading">Produit</h2>
+            <ul class="footer-links">
+              <li><a href="#fonctionnement">Fonctionnement</a></li>
+              <li><a href="#groupe">Le groupe</a></li>
+              <li><a href="#faq">Questions fréquentes</a></li>
+              <li><a href="#beta">Rejoindre la bêta</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="footer-heading">Entreprises</h2>
+            <ul class="footer-links">
+              <li><a href="entreprises.html">Tribos pour les équipes</a></li>
+              <li><a href="entreprises.html#contact">Nous contacter</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="footer-heading">Légal</h2>
+            <ul class="footer-links">
+              <li><a href="confidentialite.html">Politique de confidentialité</a></li>
+              <li><a href="mentions-legales.html">Mentions légales</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© 2026 Tribos. Tous droits réservés.</p>
+          <p>Bêta privée</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="assets/js/site.js" defer></script>
   </body>
 </html>

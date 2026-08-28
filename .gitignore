@@ -1,0 +1,10 @@
+.DS_Store
+
+# Working directory shared with coding agents (also excluded by Conductor).
+.context/
+
+# gstack CLI scratch output.
+.gstack/
+
+# Dépendances locales éventuelles (le site n’en a aucune en production).
+node_modules/

@@ -1,0 +1,18 @@
+# Tribos - https://tribos.app/
+# Le crawl est ouvert sur tout le site.
+#
+# /merci.html n'est volontairement PAS en Disallow : la page porte déjà
+# <meta name="robots" content="noindex, follow">, et un Disallow empêcherait les
+# robots de la télécharger, donc de lire ce noindex. Une URL bloquée par
+# robots.txt peut rester indexée si elle est liée depuis ailleurs. On laisse donc
+# passer le robot pour qu'il voie la consigne et désindexe.
+#
+# README.md et tools/ sont publiés par Netlify (racine du dépôt) sans intérêt
+# pour la recherche : ils sont écartés ici.
+
+User-agent: *
+Allow: /
+Disallow: /README.md
+Disallow: /tools/
+
+Sitemap: https://tribos.app/sitemap.xml
