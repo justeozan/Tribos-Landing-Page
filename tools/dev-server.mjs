@@ -123,10 +123,10 @@ const server = createServer(async (req, res) => {
     }
     try {
       const out = await runBetaSignup(bodyString);
-      send(res, 200, { statusCode: out.status, response: JSON.stringify(out.payload) });
+      send(res, 200, { responseStatusCode: out.status, responseBody: JSON.stringify(out.payload) });
     } catch (e) {
       console.error("[dev-server] function error:", e);
-      send(res, 500, { statusCode: 500, response: JSON.stringify({ success: false, error: "Function error." }) });
+      send(res, 500, { responseStatusCode: 500, responseBody: JSON.stringify({ success: false, error: "Function error." }) });
     }
     return;
   }
