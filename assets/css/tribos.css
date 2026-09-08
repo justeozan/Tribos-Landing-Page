@@ -1,21 +1,28 @@
 /* =========================================================================
    TRIBOS - Design system
-   One accent (brand orange), one radius rule, one theme per page.
+   One accent (brand orange), one radius rule, ONE theme: dark, locked.
+
+   The page is a dark poster (near-black warm base) carrying orange gradient
+   "blaze" panels and light app-true cards. There is no light mode and no
+   toggle: the whole composition is built on that contrast, and a light
+   variant would be a different design, not a theme.
 
    Radius rule (locked):
      - interactive (buttons, inputs, pills, chips) -> full pill
      - cards, panels, tiles                        -> var(--r-card)   20px
-     - media, phone frames, large tiles            -> var(--r-media)  32px
+     - media, phone frames, large panels           -> var(--r-media)  32px
 
    Contrast notes (WCAG AA verified):
-     - White on #F3730A is only 2.9:1 -> banned. Orange surfaces always
-       carry ink-coloured text (7.3:1).
-     - Orange as *text* on light paper uses --accent-deep (#B24A00, 5.1:1).
+     - White on #F3730A is 2.9:1 -> banned. Flat orange surfaces carry
+       ink-coloured text (--on-accent).
+     - On blaze gradients, display text sits only over zones at or below
+       --blaze-mid (#C2410C, 4.9:1 with white).
+     - Orange as *text* on the dark base uses --accent-deep (#FFA25C).
    ========================================================================= */
 
 /* ---------- Tokens ---------- */
 :root {
-  color-scheme: light dark;
+  color-scheme: dark;
 
   /* Type */
   --font-display: "Bricolage Grotesque", "Outfit", ui-sans-serif, system-ui, sans-serif;
@@ -53,95 +60,60 @@
   --gutter: clamp(1.25rem, 0.9rem + 1.7vw, 2.5rem);
   --nav-h: 68px;
 
-  /* Motion */
+  /* Motion.
+     --motion is a distance multiplier, not an on/off switch: reduced-motion
+     sets it to 0 so every authored translate/rotate collapses to zero while
+     opacity cross-fades still play. That keeps one set of rules for both
+     modes instead of a parallel reduced-motion stylesheet. */
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: linear(0, 0.42 12%, 0.86 22%, 1.06 30%, 1.11 36%, 1.04 47%, 0.99 60%, 1);
   --dur: 0.55s;
+  --motion: 1;
+  --lift: calc(var(--motion) * 1px);
 
-  /* Elevation, tinted to the paper hue (never pure black) */
-  --shadow-1: 0 1px 2px rgb(60 40 20 / 0.05), 0 4px 14px rgb(60 40 20 / 0.05);
-  --shadow-2: 0 2px 6px rgb(60 40 20 / 0.06), 0 18px 40px rgb(60 40 20 / 0.09);
-  --shadow-3: 0 4px 10px rgb(60 40 20 / 0.07), 0 40px 80px rgb(60 40 20 / 0.14);
+  /* Elevation on a near-black page: soft and deep, never a hard black line */
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.3), 0 4px 14px rgb(0 0 0 / 0.28);
+  --shadow-2: 0 2px 6px rgb(0 0 0 / 0.34), 0 18px 40px rgb(0 0 0 / 0.42);
+  --shadow-3: 0 4px 10px rgb(0 0 0 / 0.38), 0 40px 90px rgb(0 0 0 / 0.55);
 }
 
-/* Light (default) */
-:root,
-[data-theme="light"] {
-  --paper: #faf8f5;
-  --surface: #ffffff;
-  --sand: #f1ece5;
-  --ink: #171310;
-  --body: #55504a;
-  --muted: #756e66;
-  --line: #e7e0d7;
-  --line-strong: #d6cec3;
+/* Dark, locked. No [data-theme] switching: the head script may still set the
+   attribute for legacy visitors with a stored choice, and nothing reads it. */
+:root {
+  --paper: #0d0b09;
+  --surface: #1a1613;
+  --sand: #151110;
+  --ink: #f6f1ea;
+  --body: #beb5aa;
+  --muted: #97897b;
+  --line: #272018;
+  --line-strong: #3a322a;
   --accent: #f3730a;
-  --accent-soft: #ffeed0;
-  --accent-deep: #b24a00;
-  --on-accent: #2a1400;
-  --grain: 0.035;
+  --accent-soft: #2e1b0c;
+  --accent-deep: #ffa25c;
+  --on-accent: #221000;
+  --grain: 0.05;
 
-  /* Always-dark panel. Deliberately theme-independent: the signup block and the
-     ink bento tile are dark CARDS inside the page, not an inverted section.
-     Built on var(--ink) they flipped to near-white in dark mode and lost their
-     text entirely. */
-  --panel: #171310;
+  /* Blaze: the orange poster gradient family (hero, phone poster, CTA panel).
+     Display text over a blaze surface sits only where the gradient has reached
+     --blaze-mid or darker; --blaze-hi is reserved for glows and edges. */
+  --blaze-hi: #f58022;
+  --blaze-mid: #c2410c;
+  --blaze-lo: #571c02;
+  --on-blaze: #ffffff;
+  --on-blaze-dim: rgb(255 255 255 / 0.86);
+  --blaze-line: rgb(255 255 255 / 0.34);
+
+  /* Slightly-lifted dark card (FAQ, ink tile, statement support) */
+  --panel: #1e1915;
   --panel-fg: #fdfaf6;
   --panel-fg-dim: #c9c0b6;
   --panel-line: #72685e;
   --panel-line-hover: #968a7c;
-  --panel-input: #221d18;
+  --panel-input: #2a241e;
   --panel-placeholder: #9b9187;
   --panel-help: #a89e93;
   --panel-link: #ffbc7d;
-}
-
-/* Dark */
-[data-theme="dark"] {
-  --paper: #12100e;
-  --surface: #1b1815;
-  --sand: #201c18;
-  --ink: #f5f1ec;
-  --body: #b8afa5;
-  --muted: #9b9187;
-  --line: #2e2925;
-  --line-strong: #3d3630;
-  --accent: #ff8a2b;
-  --accent-soft: #3a2410;
-  --accent-deep: #ffa65c;
-  --on-accent: #1a1108;
-  --grain: 0.06;
-  /* Panel lifts off the dark page instead of merging into it. */
-  --panel: #221d18;
-  --panel-input: #2c2620;
-  --panel-line: #7a7065;
-  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.3), 0 4px 14px rgb(0 0 0 / 0.28);
-  --shadow-2: 0 2px 6px rgb(0 0 0 / 0.34), 0 18px 40px rgb(0 0 0 / 0.42);
-  --shadow-3: 0 4px 10px rgb(0 0 0 / 0.36), 0 40px 80px rgb(0 0 0 / 0.52);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --paper: #12100e;
-    --surface: #1b1815;
-    --sand: #201c18;
-    --ink: #f5f1ec;
-    --body: #b8afa5;
-    --muted: #9b9187;
-    --line: #2e2925;
-    --line-strong: #3d3630;
-    --accent: #ff8a2b;
-    --accent-soft: #3a2410;
-    --accent-deep: #ffa65c;
-    --on-accent: #1a1108;
-    --grain: 0.06;
-    /* Panel lifts off the dark page instead of merging into it. */
-    --panel: #221d18;
-    --panel-input: #2c2620;
-    --panel-line: #7a7065;
-    --shadow-1: 0 1px 2px rgb(0 0 0 / 0.3), 0 4px 14px rgb(0 0 0 / 0.28);
-    --shadow-2: 0 2px 6px rgb(0 0 0 / 0.34), 0 18px 40px rgb(0 0 0 / 0.42);
-    --shadow-3: 0 4px 10px rgb(0 0 0 / 0.36), 0 40px 80px rgb(0 0 0 / 0.52);
-  }
 }
 
 /* ---------- Reset ---------- */
@@ -166,7 +138,15 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
+}
+
+/* `clip` on the root, not `hidden` on the body. `overflow: hidden` makes an
+   element a scroll container, and a scroll container with nothing to scroll
+   makes every CSS scroll-driven timeline inside it inactive -- the animation
+   then freezes on its first keyframe, which for a reveal means invisible
+   content. `clip` prevents the horizontal scrollbar without that side effect. */
+html {
+  overflow-x: clip;
 }
 
 img,
@@ -266,7 +246,9 @@ ol {
 }
 
 .section {
-  padding-block: clamp(4rem, 2.5rem + 6vw, 8.5rem);
+  /* Per-section override, so the vertical rhythm is composed rather than
+     alternating between the same two values nine times. */
+  padding-block: var(--section-air, clamp(4rem, 2.5rem + 6vw, 8.5rem));
 }
 
 .section-tight {
@@ -294,21 +276,15 @@ ol {
 .grain {
   position: fixed;
   inset: 0;
-  z-index: 60;
+  /* Deliberately BELOW the nav (50) and the menu panel (45). At z-index 60 this
+     blended layer sat over the nav's backdrop-filter, which forces the whole
+     document into a single blending group and repaints it every frame. That is
+     invisible on a static page and ruinous once scroll-driven animation runs. */
+  z-index: 1;
   pointer-events: none;
   opacity: var(--grain);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
-  mix-blend-mode: multiply;
-}
-
-[data-theme="dark"] .grain {
   mix-blend-mode: screen;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .grain {
-    mix-blend-mode: screen;
-  }
 }
 
 /* ---------- Type helpers ---------- */
@@ -578,23 +554,6 @@ ol {
   display: none;
 }
 
-[data-theme="dark"] .theme-toggle .icon-sun {
-  display: none;
-}
-
-[data-theme="dark"] .theme-toggle .icon-moon {
-  display: block;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .theme-toggle .icon-sun {
-    display: none;
-  }
-  :root:not([data-theme="light"]) .theme-toggle .icon-moon {
-    display: block;
-  }
-}
-
 @media (max-width: 860px) {
   .nav-links {
     display: none;
@@ -606,8 +565,10 @@ ol {
   position: relative;
   display: grid;
   align-items: center;
-  /* Hero must fit above the fold: viewport minus the sticky nav. */
-  min-height: calc(100dvh - var(--nav-h));
+  /* Hero must fit above the fold: viewport minus the sticky nav. Capped so a
+     tall desktop viewport does not stretch it into an empty field, and so the
+     next section always peeks in as a scroll affordance. */
+  min-height: min(calc(100dvh - var(--nav-h)), 880px);
   padding-top: clamp(2rem, 1.5rem + 2vw, 3.5rem);
   padding-bottom: clamp(2.5rem, 2rem + 3vw, 5rem);
   overflow: clip;
@@ -623,7 +584,8 @@ ol {
     radial-gradient(46% 38% at 78% 18%, color-mix(in srgb, var(--accent) 26%, transparent) 0%, transparent 70%),
     radial-gradient(38% 34% at 12% 8%, color-mix(in srgb, var(--accent) 14%, transparent) 0%, transparent 68%),
     radial-gradient(50% 40% at 50% 100%, color-mix(in srgb, var(--accent) 8%, transparent) 0%, transparent 72%);
-  filter: blur(10px);
+  /* No filter: blur() here. These are radial gradients, they are already soft,
+     and blurring a 130%-tall box costs a full-viewport GPU pass per frame. */
 }
 
 .hero-grid {
@@ -649,12 +611,26 @@ ol {
   font-size: var(--step-1);
 }
 
-/* Below 640px the forced break makes the headline wrap worse than natural
-   flow does, so it is dropped and the text reflows. */
+/* The headline is authored as three <span class="l"> lines so CSS owns the
+   break (and so each line can carry its own entrance delay). Below 640px they
+   run together and the text reflows naturally, which wraps better than a
+   forced break at that width. */
+.hero-copy h1 .l {
+  display: block;
+}
+
 @media (max-width: 640px) {
-  .hero-copy h1 br {
-    display: none;
+  .hero-copy h1 .l {
+    display: inline;
   }
+}
+
+/* "ensemble" is the whole product thesis. --accent-deep, not --accent: orange
+   as text on light paper needs the darker value to clear AA. */
+.hero-copy h1 em {
+  font-style: normal;
+  color: var(--accent-deep);
+  position: relative;
 }
 
 .hero-actions {
@@ -675,17 +651,38 @@ ol {
   box-shadow: var(--shadow-3), inset 0 1px 0 rgb(255 255 255 / 0.16);
 }
 
-.phone::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 20px;
-  translate: -50% 0;
-  width: 78px;
-  height: 22px;
-  border-radius: var(--r-pill);
-  background: #14100c;
-  z-index: 2;
+/* No notch. The captures are full-frame Android screenshots with no status bar
+   of their own, so an iPhone notch drawn on top covered the app's own header.
+   The frame renders a real status row instead (.phone-status), which reads as
+   "app" rather than hiding it. */
+.phone-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 18px 5px;
+  border-radius: 37px 37px 0 0;
+  background: var(--app-surface, #fff);
+  color: var(--app-ink, #111827);
+  font-family: var(--font-text);
+  font-size: 11px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.phone-status .icon {
+  width: 13px;
+  height: 13px;
+}
+
+.phone-status-icons {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.phone-status + picture img,
+.phone-status + img {
+  border-radius: 0 0 37px 37px;
 }
 
 .phone img {
@@ -776,14 +773,23 @@ ol {
 .statement-support {
   display: grid;
   gap: var(--s-4);
-  max-width: 52ch;
+  max-width: 46ch;
+  font-size: var(--step-1);
 }
 
 @media (min-width: 900px) {
   .statement-inner {
-    grid-template-columns: 1.1fr 0.9fr;
-    align-items: end;
-    gap: clamp(2rem, 6vw, 6rem);
+    /* Deliberately NOT a two-column "quote left, explainer floating right"
+       header. The support text is the consequence of the quote, so it sits
+       under it and starts where the quote's second thought does, rather than
+       hanging unaligned in the right margin. */
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: start;
+    gap: var(--s-6);
+  }
+
+  .statement-support {
+    margin-left: clamp(0rem, 14vw, 12rem);
   }
 }
 
@@ -874,7 +880,7 @@ ol {
   border: 1px solid var(--line);
   border-radius: var(--r-card);
   background: var(--surface);
-  overflow: hidden;
+  overflow: clip;
   transition: translate 0.3s var(--ease), box-shadow 0.3s var(--ease),
     border-color 0.3s var(--ease);
 }
@@ -914,7 +920,7 @@ ol {
   border-radius: 26px 26px 0 0;
   border: 1px solid var(--line);
   border-bottom: 0;
-  overflow: hidden;
+  overflow: clip;
   box-shadow: var(--shadow-2);
 }
 
@@ -1110,10 +1116,9 @@ ol {
 .band {
   position: relative;
   border-radius: var(--r-media);
-  background: var(--accent);
   color: var(--on-accent);
   padding: clamp(2rem, 1.4rem + 3vw, 4rem);
-  overflow: hidden;
+  overflow: clip;
 }
 
 .band::before {
@@ -1256,7 +1261,7 @@ ol {
   border-radius: var(--r-media);
   background: var(--panel);
   padding: clamp(2rem, 1.4rem + 4vw, 4.5rem);
-  overflow: hidden;
+  overflow: clip;
 }
 
 .signup::before {
@@ -1282,9 +1287,20 @@ ol {
 
 @media (min-width: 900px) {
   .signup-inner {
+    /* Two columns on desktop, but the DOM order is heading -> form -> support
+       so that a phone gets the ask immediately after the promise instead of
+       behind seven reassurance bullets. Grid areas put it back. */
     grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
-    gap: clamp(2.5rem, 5vw, 5rem);
+    grid-template-areas:
+      "head form"
+      "support form";
+    align-items: start;
+    gap: clamp(1.5rem, 3vw, 2.5rem) clamp(2.5rem, 5vw, 5rem);
   }
+
+  .signup-head { grid-area: head; }
+  .signup-support { grid-area: support; }
+  .signup-inner form { grid-area: form; }
 }
 
 .signup h2 {
@@ -1541,16 +1557,36 @@ ol {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion: 0;
+  }
+
   html {
     scroll-behavior: auto;
   }
+
+  /* 1ms, not 0.001ms: sub-millisecond durations round to zero in some engines
+     and then `transitionend` / `animationend` never fire, hanging any script
+     waiting on them. Delays are zeroed too, otherwise a staggered entrance
+     turns into elements popping in late for exactly the people who asked for
+     less movement.
+
+     System invariant this relies on: every @keyframes block in this file ends
+     at 100% on the resting, legible state. That is what makes a 1ms run land
+     on the correct final frame rather than a half-transformed one. */
   *,
   *::before,
   *::after {
-    animation-duration: 0.001ms !important;
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
+    transition-duration: 1ms !important;
+    transition-delay: 0ms !important;
   }
+}
+
+:root[data-motion="off"] {
+  --motion: 0;
 }
 
 /* ---------- Mobile menu ---------- */
@@ -1771,4 +1807,2851 @@ ol {
   .nav .brand {
     flex: none;
   }
+}
+
+/* =========================================================================
+   PART 2 - App surfaces, motion system, conversion
+
+   Split from the base sheet above on purpose. Everything below either
+   (a) recreates a piece of the real Tribos app as live DOM, or
+   (b) exists to move a visitor toward the beta form.
+
+   Two rules govern the whole block:
+
+   1. CONTENT REVEAL IS NEVER SCROLL-DRIVEN. Anything that decides whether text
+      is visible runs on the IntersectionObserver path (.reveal -> .is-in) that
+      the base sheet already ships. CSS scroll-driven animation is used only for
+      decoration - parallax, drift, the nav rail - so a browser that reports
+      support but behaves oddly can never leave the page blank.
+   2. ORANGE NEVER CARRIES WHITE TEXT, and the app blue introduced here is held
+      to the same standard: #3B82F6 with white is 3.7:1 and is therefore used
+      for graph fills only, never behind a label.
+   ========================================================================= */
+
+/* ---------- Utilities ---------- */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* The product's whole vocabulary is numerals: pts, XP, %, jours, x2, Niv 12.
+   Tabular figures stop them shifting width while a counter ticks. */
+.num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums lining;
+  letter-spacing: -0.02em;
+}
+
+/* =========================================================================
+   Motion system
+   ========================================================================= */
+
+/* ---------- Per-word headline entrance ---------- */
+/* site.js wraps each word in .word > .word-in and puts the running index on
+   --w. The parent keeps the full string as aria-label, so this is invisible to
+   assistive tech. */
+/* Deliberately NOT the overflow-mask version of this effect. An inline-block
+   with overflow:hidden establishes its own baseline, so every line box grows by
+   whatever padding is needed to clear descenders, and a three-line hero
+   headline ends up with gaping leading. A short rise plus a fade reads just as
+   well and leaves the line box alone. */
+.word {
+  display: inline-block;
+}
+
+.word-in {
+  display: inline-block;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-split] .word-in {
+    opacity: 0;
+    translate: 0 calc(14 * var(--lift));
+    transition: opacity 0.6s var(--ease), translate 0.7s var(--ease);
+    transition-delay: calc(var(--w, 0) * 42ms);
+  }
+
+  .js [data-split].is-in .word-in {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+/* ---------- Reveal variants ---------- */
+/* One primitive was doing the whole page. These give a section its own entrance
+   so nine blocks stop arriving identically. */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-anim="slide"] {
+    opacity: 0;
+    translate: -34px 0;
+    transition: opacity 0.7s var(--ease), translate 0.7s var(--ease);
+    transition-delay: calc(var(--i, 0) * 70ms);
+  }
+
+  .js [data-anim="pop"] {
+    opacity: 0;
+    scale: 0.94;
+    transition: opacity 0.6s var(--ease), scale 0.6s var(--ease);
+    transition-delay: calc(var(--i, 0) * 70ms);
+  }
+
+  .js [data-anim="clip"] {
+    clip-path: inset(0 0 102% 0);
+    translate: 0 0.24em;
+    transition: clip-path 0.85s var(--ease), translate 0.85s var(--ease);
+    transition-delay: calc(var(--i, 0) * 70ms);
+  }
+
+  .js [data-anim].is-in {
+    opacity: 1;
+    scale: 1;
+    translate: 0 0;
+    clip-path: inset(-12% 0 -12% 0);
+  }
+}
+
+/* Children index themselves so the markup stops carrying style="--i: 3". */
+.bento .tile:nth-child(1) { --i: 0; }
+.bento .tile:nth-child(2) { --i: 1; }
+.bento .tile:nth-child(3) { --i: 2; }
+.bento .tile:nth-child(4) { --i: 3; }
+.bento .tile:nth-child(5) { --i: 4; }
+.faq details:nth-child(1) { --i: 0; }
+.faq details:nth-child(2) { --i: 1; }
+.faq details:nth-child(3) { --i: 2; }
+.faq details:nth-child(4) { --i: 3; }
+.faq details:nth-child(5) { --i: 4; }
+.faq details:nth-child(6) { --i: 5; }
+.faq details:nth-child(7) { --i: 6; }
+
+/* ---------- Scroll-linked decoration ---------- */
+/* Everything in this block is purely decorative. If `animation-timeline` is
+   unsupported the elements simply sit still, and nothing is hidden. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .parallax-slow {
+      animation: driftUp linear both;
+      animation-timeline: view();
+      animation-range: entry 0% exit 100%;
+    }
+
+    .parallax-fast {
+      animation: driftUpFar linear both;
+      animation-timeline: view();
+      animation-range: entry 0% exit 100%;
+    }
+
+    @keyframes driftUp {
+      to {
+        translate: 0 -34px;
+      }
+    }
+
+    @keyframes driftUpFar {
+      to {
+        translate: 0 -70px;
+      }
+    }
+  }
+
+  @supports (animation-timeline: scroll(root block)) {
+    /* Reading-progress rail under the nav. One rule, no JS, no scroll listener. */
+    .nav::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -1px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-deep));
+      transform-origin: 0 50%;
+      scale: 0 1;
+      animation: railGrow linear both;
+      animation-timeline: scroll(root block);
+    }
+
+    @keyframes railGrow {
+      to {
+        scale: 1 1;
+      }
+    }
+  }
+}
+
+/* ---------- Ambient hero field drift ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-field {
+    animation: fieldDrift 26s ease-in-out infinite alternate;
+  }
+
+  @keyframes fieldDrift {
+    to {
+      translate: 3% -2%;
+      scale: 1.09;
+    }
+  }
+}
+
+/* ---------- Points burst ---------- */
+/* Twelve absolutely-positioned dots, removed on a timer. Cheaper than a canvas
+   and it inherits the accent colour for free. */
+.burst {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.burst i {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--on-accent);
+  opacity: 0;
+  animation: burstOut 0.72s var(--ease) forwards;
+  animation-delay: var(--d, 0ms);
+}
+
+@keyframes burstOut {
+  0% {
+    opacity: 1;
+    translate: -50% -50%;
+    scale: 0.4;
+  }
+  100% {
+    opacity: 0;
+    translate: calc(-50% + var(--dx)) calc(-50% + var(--dy));
+    scale: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .burst {
+    display: none;
+  }
+}
+
+/* ---------- Magnetic + tilt hooks ---------- */
+/* site.js only writes --mx/--my and --rx/--ry. The transforms live here so the
+   script never has to know about layout. */
+[data-magnetic] {
+  translate: var(--mx, 0) var(--my, 0);
+  transition: translate 0.32s var(--ease);
+}
+
+[data-magnetic]:hover {
+  transition-duration: 0.08s;
+}
+
+[data-tilt] {
+  transform-style: preserve-3d;
+  rotate: none;
+  transform: perspective(1200px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.5s var(--ease);
+}
+
+[data-tilt][data-tilting="true"] {
+  transition-duration: 0.12s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-magnetic],
+  [data-tilt] {
+    translate: none;
+    transform: none;
+  }
+}
+
+/* ---------- Marquee ---------- */
+/* Exactly one on the page. The track is duplicated once and translated by
+   -50%, which is what makes the loop seamless. */
+.marquee {
+  --marquee-duration: 44s;
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--s-4);
+  border-block: 1px solid var(--line);
+  background: var(--sand);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 0;
+  animation: marqueeRun var(--marquee-duration) linear infinite;
+}
+
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-group {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.5rem, 1rem + 2vw, 3rem);
+  padding-right: clamp(1.5rem, 1rem + 2vw, 3rem);
+}
+
+.marquee-group span {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.marquee-group .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex: 0 0 auto;
+}
+
+@keyframes marqueeRun {
+  to {
+    translate: -50% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+  .marquee {
+    mask-image: none;
+  }
+}
+
+/* ---------- Mascots ---------- */
+/* They are not decoration in the product: the fox is the "premier pas" badge,
+   the monkey is 10 sessions, the wolf is 50. Treated as characters, they get a
+   slow idle so they read as alive rather than pasted. */
+.mascot {
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .is-in .mascot,
+  .mascot {
+    animation: mascotBob 7s ease-in-out infinite alternate;
+  }
+
+  @keyframes mascotBob {
+    to {
+      translate: 0 -7px;
+      rotate: 1.5deg;
+    }
+  }
+}
+
+/* =========================================================================
+   .appui - live recreations of the real app interface
+
+   Why these are DOM and not screenshots: the shipped captures are in English
+   ("Good Morning", "days streak", "LET'S WORKOUT") and carry development data,
+   on a French page whose only job is to be believed. Rebuilt here they are
+   translated, sharp at any DPI, themable, and - the actual point - they can
+   move.
+
+   The block carries its own tokens because what makes a surface read as "the
+   app" rather than "a landing-page card" is concrete: 16px radius instead of
+   20/32, a strict 4px spacing scale, and the app's cool grey #E5E7EB border
+   instead of the site's warm sand line. Values are lifted from
+   lib/core/app_theme.dart.
+   ========================================================================= */
+
+.appui,
+.appscreen,
+.appduo,
+.board,
+.statgrid,
+.badges,
+.bubble,
+.appnav,
+.streak,
+.tabbar {
+  --app-surface: #ffffff;
+  --app-alt: #f9fafb;
+  --app-ink: #111827;
+  --app-body: #374151;
+  --app-muted: #6b7280;
+  --app-line: #e5e7eb;
+  --app-radius: 16px;
+  --app-radius-sm: 12px;
+
+  /* Blue is the app's genuine secondary (the Défi card, the "today" dot). It is
+     allowed here and NOWHERE else on the site - never on a link, button, focus
+     ring or anything clickable - so the single-accent promise holds. */
+  --app-blue: #2563eb;        /* flat fill that carries white text - 5.1:1   */
+  --app-blue-graph: #3b82f6;  /* graph fill ONLY - 3.7:1, never behind text  */
+  --app-blue-ink: #1d4ed8;    /* blue AS text on white - 6.7:1               */
+  --app-blue-soft: #eff6ff;
+  /* AppTheme.challengeBlue. Darkened from the app's #4499F2 (3.0:1 with
+     white) to clear AA where it carries a label. */
+  --app-challenge: #1f74c9;
+  --app-challenge-ink: #12588f;
+  --app-green: #10b981;
+  --app-amber: #f59e0b;
+  --app-red: #ef4444;
+
+  color: var(--app-ink);
+  /* App type, never the site's display face. Bricolage inside these cards is
+     the fastest way to make them stop looking like the product. */
+  font-family: var(--font-text);
+  line-height: 1.5;
+}
+
+/* Card chrome belongs to .appui alone; .appscreen only carries the tokens so
+   its children (.appduo, .appnav, .board) can resolve them. */
+.appui {
+  background: var(--app-surface);
+  border: 1px solid var(--app-line);
+  border-radius: var(--app-radius);
+  box-shadow: 0 4px 12px rgb(17 24 39 / 0.06);
+  font-size: 14px;
+  padding: 16px;
+}
+
+.appui .t {
+  font-family: var(--font-text);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--app-ink);
+  margin: 0;
+}
+
+.appui .sub {
+  font-size: 12px;
+  color: var(--app-muted);
+  margin: 2px 0 0;
+}
+
+/* ---------- Streak card ---------- */
+.streak {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.streak-title {
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.25;
+  margin: 0;
+  color: var(--app-ink);
+}
+
+.streak-title em {
+  font-style: normal;
+  color: var(--accent-deep);
+}
+
+.streak-week {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+  /* Column 1 only: the flame occupies column 2 across both rows, exactly as it
+     does in the app's own card. */
+  grid-column: 1;
+}
+
+.streak-week .day {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-size: 10px;
+  font-weight: 600;
+  background: var(--app-alt);
+  color: var(--app-muted);
+}
+
+.streak-week .day.is-done {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.streak-week .day.is-today {
+  background: var(--app-blue);
+  color: #fff;
+}
+
+.streak-flame {
+  width: 52px;
+  height: 52px;
+  color: var(--accent);
+  grid-row: 1 / 3;
+  grid-column: 2;
+  align-self: center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .is-in .streak-week .day {
+    animation: dayPop 0.45s var(--ease) both;
+    animation-delay: calc(var(--d) * 90ms + 200ms);
+  }
+
+  @keyframes dayPop {
+    0% {
+      scale: 0.4;
+      opacity: 0;
+    }
+    62% {
+      scale: 1.14;
+    }
+    100% {
+      scale: 1;
+      opacity: 1;
+    }
+  }
+
+  .is-in .streak-flame {
+    animation: flameFlicker 2.6s ease-in-out infinite alternate;
+  }
+
+  @keyframes flameFlicker {
+    from {
+      scale: 1;
+      rotate: -2deg;
+      filter: drop-shadow(0 0 0 transparent);
+    }
+    to {
+      scale: 1.07;
+      rotate: 2deg;
+      filter: drop-shadow(0 6px 14px rgb(243 115 10 / 0.45));
+    }
+  }
+}
+
+/* ---------- Group leaderboard ---------- */
+/* The product claim is that the ranking moves every time somebody finishes a
+   session. A screenshot can state that; only this can show it. */
+.board {
+  list-style: none;
+  margin: 0;
+  padding: 8px;
+  display: grid;
+  gap: 2px;
+}
+
+.board-row {
+  display: grid;
+  grid-template-columns: 26px 34px minmax(0, 1fr) auto;
+  column-gap: 10px;
+  row-gap: 6px;
+  align-items: center;
+  padding: 8px;
+  border-radius: var(--app-radius-sm);
+  transition: background-color 0.4s var(--ease);
+}
+
+.board-row .rank {
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent-deep);
+}
+
+.board-row .rank .icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Crown colours are the app's, straight from leaderboard_card.dart. */
+.board-row[data-place="1"] .rank { color: #f5b301; }
+.board-row[data-place="2"] .rank { color: #9aa0a6; }
+.board-row[data-place="3"] .rank { color: #c2410c; }
+.board-row[data-place="1"] .rank .num,
+.board-row[data-place="2"] .rank .num,
+.board-row[data-place="3"] .rank .num {
+  display: none;
+}
+
+.board-row[data-place="4"] .rank .icon,
+.board-row[data-place="5"] .rank .icon,
+.board-row[data-place="6"] .rank .icon {
+  display: none;
+}
+
+.board-row .ava {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--app-alt);
+  color: var(--app-body);
+  font-size: 13px;
+  font-weight: 700;
+  overflow: visible;
+}
+
+.board-row .ava img {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.board-row .who {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--app-ink);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.board-row .pts {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--app-ink);
+  white-space: nowrap;
+}
+
+.board-row .bar {
+  grid-column: 1 / -1;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--app-line);
+  overflow: hidden;
+}
+
+.board-row .bar::after {
+  content: "";
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+  transform-origin: 0 50%;
+  scale: var(--fill, 0) 1;
+  transition: scale 0.8s var(--ease);
+}
+
+/* "Toi" - the row the visitor is meant to identify with. Orange at 12% keeps
+   --accent-deep on it at 4.9:1. */
+.board-row.is-me {
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+}
+
+.board-row.is-me .who {
+  color: var(--accent-deep);
+  font-weight: 700;
+}
+
+.board-row[data-moved] {
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+.board-row[data-moved] .pts {
+  animation: ptsPulse 0.7s var(--ease);
+}
+
+@keyframes ptsPulse {
+  40% {
+    scale: 1.18;
+    color: var(--accent-deep);
+  }
+}
+
+.board-more {
+  text-align: center;
+  padding-top: 4px;
+}
+
+.board-more span {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent-deep);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .is-in .board-row {
+    animation: rowIn 0.5s var(--ease) both;
+    animation-delay: calc(var(--r) * 80ms);
+  }
+
+  @keyframes rowIn {
+    from {
+      opacity: 0;
+      translate: -14px 0;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .board-row .bar::after {
+    transition: none;
+  }
+}
+
+/* ---------- Points x2 + Défi pair ---------- */
+.appduo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.appduo .card {
+  border: 1px solid var(--app-line);
+  border-radius: var(--app-radius);
+  background: var(--app-surface);
+  padding: 0 0 10px;
+  overflow: hidden;
+  display: grid;
+  gap: 8px;
+}
+
+.appduo .cap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.appduo .cap-points {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.appduo .cap-defi {
+  background: var(--app-blue);
+  color: #fff;
+}
+
+.appduo .cap .icon {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+}
+
+.appduo .foot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px;
+  padding-inline: 12px;
+  font-size: 11px;
+}
+
+.appduo .foot b {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.appduo .card-points .foot b { color: var(--accent-deep); }
+.appduo .card-points .foot span { color: var(--accent-deep); }
+.appduo .card-defi .foot b { color: var(--app-blue-ink); }
+.appduo .card-defi .foot span { color: var(--app-blue-ink); }
+
+.spark {
+  width: 100%;
+  height: 46px;
+  display: block;
+}
+
+.spark-line {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 260;
+  stroke-dashoffset: 260;
+}
+
+.spark-fill {
+  fill: color-mix(in srgb, var(--accent) 16%, transparent);
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .is-in .spark-line {
+    animation: sparkDraw 1.1s var(--ease) 0.2s forwards;
+  }
+
+  .is-in .spark-fill {
+    animation: sparkFade 0.6s var(--ease) 0.9s forwards;
+  }
+
+  @keyframes sparkDraw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes sparkFade {
+    to {
+      opacity: 1;
+    }
+  }
+
+  .is-in .defi-bars li {
+    animation: barGrow 0.5s var(--ease) both;
+    animation-delay: calc(var(--i) * 70ms + 250ms);
+  }
+
+  @keyframes barGrow {
+    from {
+      scale: 1 0;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spark-line {
+    stroke-dashoffset: 0;
+  }
+  .spark-fill {
+    opacity: 1;
+  }
+}
+
+/* ---------- Stat tiles ---------- */
+.statgrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 720px) {
+  .statgrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.statgrid li {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr);
+  align-items: center;
+  column-gap: 10px;
+  row-gap: 0;
+  padding: 14px;
+  border: 1px solid var(--app-line);
+  border-radius: var(--app-radius-sm);
+  background: var(--app-alt);
+}
+
+.statgrid .icon {
+  width: 22px;
+  height: 22px;
+  grid-row: 1 / 3;
+}
+
+.statgrid b {
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--app-ink);
+}
+
+.statgrid span {
+  font-size: 12px;
+  color: var(--app-muted);
+}
+
+.statgrid .s-streak .icon { color: var(--accent); }
+.statgrid .s-xp .icon { color: var(--accent-deep); }
+.statgrid .s-podium .icon { color: var(--app-amber); }
+.statgrid .s-defi .icon { color: var(--app-green); }
+
+/* ---------- XP ring ---------- */
+/* @property lets the conic stop animate; without a registered custom property
+   the browser cannot interpolate it and the ring would jump. */
+@property --ring {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+
+.ring {
+  position: relative;
+  width: 84px;
+  height: 84px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: conic-gradient(var(--accent) var(--ring), var(--app-line) 0);
+  transition: --ring 0.9s var(--ease);
+}
+
+.is-in .ring {
+  --ring: var(--ring-to, 68%);
+}
+
+.ring::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  background: var(--app-surface);
+}
+
+.ring b {
+  position: relative;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--app-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ring {
+    transition: none;
+    --ring: var(--ring-to, 68%);
+  }
+}
+
+/* ---------- Chat bubble ---------- */
+.bubble {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 32px;
+  gap: 10px;
+  align-items: end;
+  padding: 12px;
+  border: 1px solid var(--app-line);
+  border-radius: var(--app-radius);
+  background: var(--app-surface);
+}
+
+.bubble p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--app-body);
+}
+
+.bubble .ava {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* ---------- App tab bar ---------- */
+/* The app's own floating pill, reused as the control for the screen gallery:
+   one phone whose contents change, instead of three stacked screenshots. */
+.tabbar {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding: 8px;
+  border-radius: 40px;
+  background: var(--app-surface, #fff);
+  border: 1px solid var(--app-line, #e5e7eb);
+  box-shadow: 0 8px 20px rgb(17 24 39 / 0.08);
+  margin-inline: auto;
+  max-width: 380px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tabbar::before {
+    transition: none;
+  }
+}
+
+/* Without JS the pill is meaningless, so it is hidden and every panel stays
+   visible and stacked. `html.js` is set by the head script before first paint. */
+html:not(.js) .tabbar {
+  display: none;
+}
+
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    translate: 0 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tabpanel {
+    animation: none;
+  }
+}
+
+/* =========================================================================
+   Conversion surfaces
+
+   The page has one job. Everything here exists to make the email field easy to
+   reach, easy to trust, and hard to scroll past.
+   ========================================================================= */
+
+/* ---------- Forms on light paper ---------- */
+/* The base .field styles are painted with the --panel-* tokens because the only
+   form used to live inside the dark signup panel. Rather than fork them, a form
+   on light paper just remaps those tokens locally: one declaration block, and
+   every existing input/label/help rule keeps working untouched. */
+.form-paper {
+  --panel-fg: var(--ink);
+  --panel-fg-dim: var(--body);
+  --panel-line: var(--line-strong);
+  --panel-line-hover: var(--muted);
+  --panel-input: var(--surface);
+  --panel-placeholder: var(--muted);
+  --panel-help: var(--muted);
+  --panel-link: var(--accent-deep);
+}
+
+/* The error colour was hardcoded to a light-on-dark salmon. Tokenised so the
+   paper variant can use a red that actually passes on a light background. */
+.field .error {
+  color: var(--field-error, #ffb4a1);
+}
+
+.form-paper .field .error {
+  --field-error: #b3261e;
+}
+
+.form-inline {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--s-3);
+  align-items: start;
+}
+
+.form-inline .field {
+  grid-column: 1;
+  gap: 0;
+}
+
+.form-inline .btn {
+  width: auto;
+  white-space: nowrap;
+}
+
+.form-inline .form-status,
+.form-inline .help,
+.form-inline .consent-note {
+  grid-column: 1 / -1;
+  margin-top: 0;
+}
+
+@media (max-width: 620px) {
+  .form-inline {
+    grid-template-columns: 1fr;
+  }
+  .form-inline .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ---------- Platform chips ---------- */
+/* Nothing is pre-selected. Pre-checking Android would add friction to correct
+   it and poison the one datum the field exists to collect. */
+.chips {
+  border: 0;
+  padding: 0;
+  margin: 0 0 var(--s-4);
+  display: grid;
+  gap: var(--s-2);
+}
+
+.chips legend {
+  padding: 0;
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--panel-fg);
+}
+
+.chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+}
+
+.chip input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.chip span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 44px;
+  padding-inline: 1.1rem;
+  border: 1px solid var(--panel-line);
+  border-radius: var(--r-pill);
+  color: var(--panel-fg);
+  font-size: var(--step--1);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s var(--ease), border-color 0.2s var(--ease),
+    color 0.2s var(--ease);
+}
+
+.chip:hover span {
+  border-color: var(--panel-line-hover);
+}
+
+.chip input:checked + span {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+  font-weight: 700;
+}
+
+.chip input:focus-visible + span {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---------- Assurances list ---------- */
+.assurances {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s-3);
+}
+
+.assurances li {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: start;
+  font-size: var(--step--1);
+  color: var(--panel-fg-dim);
+}
+
+.assurances .icon {
+  width: 18px;
+  height: 18px;
+  margin-top: 0.22em;
+  color: var(--accent);
+}
+
+.assurances strong {
+  color: var(--panel-fg);
+}
+
+/* ---------- Signup: full-bleed, not a card in a list ---------- */
+/* It was a .section-tight (the smaller of the two padding tokens) wrapping an
+   inset card, i.e. the page whispered at its only conversion point. The panel
+   is now the section. */
+.section-beta {
+  background: var(--panel);
+  --section-air: clamp(5rem, 3rem + 8vw, 11rem);
+  padding-block: var(--section-air);
+  position: relative;
+  overflow: clip;
+}
+
+.section-beta .signup {
+  background: none;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  overflow: visible;
+}
+
+.section-beta .signup::before {
+  inset: -40% -10% auto -10%;
+}
+
+.section-beta .signup h2 {
+  font-size: var(--step-4);
+  max-width: 16ch;
+}
+
+.signup-mascot {
+  position: absolute;
+  right: 2%;
+  bottom: -4%;
+  width: clamp(130px, 15vw, 210px);
+  pointer-events: none;
+  opacity: 0.95;
+  z-index: 0;
+}
+
+@media (max-width: 1080px) {
+  .signup-mascot {
+    display: none;
+  }
+}
+
+.signup-next {
+  list-style: none;
+  margin: var(--s-5) 0 0;
+  padding: var(--s-5) 0 0;
+  border-top: 1px solid var(--panel-line);
+  display: grid;
+  gap: var(--s-3);
+}
+
+.signup-next li {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: start;
+  font-size: var(--step--1);
+  color: var(--panel-fg-dim);
+}
+
+.signup-next .icon {
+  width: 18px;
+  height: 18px;
+  margin-top: 0.22em;
+  color: var(--accent);
+}
+
+.signup-next strong {
+  color: var(--panel-fg);
+}
+
+.signup-inner > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- Sticky signup dock (small screens) ---------- */
+/* A link, never an input. A fixed input fights the iOS keyboard, which detaches
+   fixed elements and parks them mid-screen; the tap that opens the keyboard
+   should be the one that also lands you on the real field. */
+.cta-dock {
+  position: fixed;
+  inset: auto 0 0;
+  z-index: 44;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  padding: 0.7rem var(--gutter);
+  padding-bottom: calc(0.7rem + env(safe-area-inset-bottom, 0px));
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-top: 1px solid var(--line);
+  translate: 0 130%;
+  visibility: hidden;
+  transition: translate 0.35s var(--ease), visibility 0s linear 0.35s;
+}
+
+.cta-dock[data-show="true"] {
+  translate: 0 0;
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.cta-dock-line {
+  margin: 0;
+  font-size: var(--step--1);
+  color: var(--muted);
+  line-height: 1.3;
+}
+
+.cta-dock .btn {
+  flex: 0 0 auto;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .cta-dock {
+    background: var(--paper);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+@media (min-width: 900px) {
+  .cta-dock {
+    display: none;
+  }
+}
+
+/* Keep the last footer row reachable above the dock. */
+@media (max-width: 899px) {
+  .footer-bottom {
+    padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-dock {
+    transition: none;
+  }
+}
+
+/* ---------- Live eyebrow ---------- */
+/* The one semantic status indicator on the page: the beta wave is genuinely
+   open or it is not. Bump the number in the markup by hand when a wave closes;
+   a stale value is the only way this becomes dishonest. */
+.eyebrow-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.eyebrow-live .pulse {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex: 0 0 auto;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .eyebrow-live .pulse::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulseHalo 2.4s ease-out infinite;
+  }
+
+  @keyframes pulseHalo {
+    from {
+      opacity: 0.6;
+      scale: 1;
+    }
+    to {
+      opacity: 0;
+      scale: 3.2;
+    }
+  }
+}
+
+/* ---------- Hero conversion block ---------- */
+.hero-form {
+  margin-top: var(--s-6);
+  max-width: 30rem;
+}
+
+.hero-secondary {
+  margin-top: var(--s-4);
+  font-size: var(--step--1);
+}
+
+/* The phone leans toward the pointer; --px/--py come from site.js. */
+.hero-visual .phone {
+  transition: transform 0.5s var(--ease);
+}
+
+/* ---------- Statement: the one inverted beat ---------- */
+/* The --panel-* tokens are deliberately theme-independent, so a dark statement
+   band reads identically in both themes with no new tokens. */
+.statement {
+  background: var(--panel);
+  border-block: 0;
+  color: var(--panel-fg-dim);
+}
+
+.statement blockquote {
+  color: var(--panel-fg);
+  font-size: var(--step-4);
+  max-width: 20ch;
+}
+
+.statement-support p {
+  color: var(--panel-fg-dim);
+}
+
+/* ---------- Pinned screen sequence ---------- */
+.sequence {
+  display: grid;
+  gap: var(--s-7);
+  margin-top: var(--s-8);
+}
+
+@media (min-width: 900px) {
+  .sequence {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
+    gap: clamp(2rem, 1rem + 5vw, 6rem);
+    align-items: start;
+  }
+
+  .sequence-media {
+    position: sticky;
+    top: calc(var(--nav-h) + clamp(2rem, 8vh, 5rem));
+  }
+}
+
+.sequence-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s-7);
+}
+
+@media (min-width: 900px) {
+  .sequence-steps {
+    gap: clamp(5rem, 22vh, 11rem);
+  }
+}
+
+.sequence-step {
+  display: grid;
+  gap: var(--s-4);
+  justify-items: start;
+  transition: opacity 0.45s var(--ease);
+}
+
+@media (min-width: 900px) {
+  .js .sequence-step[data-on="false"] {
+    opacity: 0.5;
+  }
+}
+
+/* The step number is the graphic spine of this section, not a 14px caption.
+   It sits above the title with its own air and turns accent when the step is
+   the one being illustrated. */
+.sequence-step .step-index {
+  font-size: var(--step-4);
+  line-height: 0.8;
+  color: var(--line-strong);
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.04em;
+  transition: color 0.45s var(--ease);
+  margin: 0 0 var(--s-2);
+}
+
+.sequence-step[data-on="true"] .step-index {
+  color: var(--accent);
+}
+
+.sequence-step h3 {
+  font-size: var(--step-3);
+  margin: 0;
+  max-width: 16ch;
+}
+
+.sequence-step p {
+  margin: 0;
+  max-width: 40ch;
+  font-size: var(--step-1);
+}
+
+.sequence-screens {
+  position: relative;
+  display: grid;
+}
+
+.sequence-screens > * {
+  grid-area: 1 / 1;
+}
+
+/* Without JS the three screens would stack in one grid area and the last one
+   would win by paint order, which is arbitrary. Showing only the first pairs
+   the phone with step 01, which is what the copy beside it describes. */
+html:not(.js) .sequence-screen + .sequence-screen {
+  display: none;
+}
+
+.js .sequence-screen {
+  opacity: 0;
+  scale: 0.97;
+  transition: opacity 0.5s var(--ease), scale 0.5s var(--ease);
+  pointer-events: none;
+}
+
+.js .sequence-screen[data-on="true"] {
+  opacity: 1;
+  scale: 1;
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .sequence-screen {
+    transition: none;
+  }
+}
+
+/* ---------- Progression ---------- */
+.progression {
+  display: grid;
+  gap: var(--s-6);
+}
+
+@media (min-width: 900px) {
+  .progression {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2rem, 1rem + 4vw, 4.5rem);
+    align-items: center;
+  }
+}
+
+.level-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--app-line);
+}
+
+.level-row .t {
+  font-size: 18px;
+}
+
+/* ---------- Share rack ---------- */
+.share-rack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  margin-top: var(--s-5);
+}
+
+.share-rack .btn .icon {
+  width: 18px;
+  height: 18px;
+}
+
+.share-note {
+  margin-top: var(--s-4);
+  font-size: var(--step--1);
+  color: var(--muted);
+}
+
+.share-msg {
+  margin-top: var(--s-5);
+  padding: var(--s-4) var(--s-5);
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--r-card);
+  background: var(--surface);
+  font-size: var(--step--1);
+  color: var(--body);
+}
+
+/* The copy button is useless without JS, so it only renders once the head
+   script has marked the document. */
+html:not(.js) [data-needs-js] {
+  display: none;
+}
+
+/* ---------- Section rhythm ---------- */
+/* Deliberately uneven: the bento gets the most air, the wedge and the ask sit
+   closer together so the argument lands and the form is right there. */
+#fonctionnement { --section-air: clamp(4rem, 2.5rem + 6vw, 8.5rem); }
+#app { --section-air: clamp(4.5rem, 2.5rem + 7vw, 10rem); }
+#groupe { --section-air: clamp(4rem, 2.5rem + 5vw, 7.5rem); }
+#progression { --section-air: clamp(4rem, 2.5rem + 5vw, 7.5rem); }
+
+/* Break the left rail exactly once, so the eye resets. Doing it twice would
+   just be a new uniformity. */
+@media (min-width: 1080px) {
+  #app .section-head {
+    margin-left: clamp(0rem, 10vw, 8rem);
+  }
+}
+
+#app .section-head h2 {
+  font-size: var(--step-4);
+  max-width: 13ch;
+}
+
+/* ---------- Step figures break their box ---------- */
+.step-figure {
+  overflow: visible;
+}
+
+.step-figure img {
+  transition: scale 0.4s var(--ease), rotate 0.4s var(--ease);
+}
+
+.step:hover .step-figure img {
+  scale: 1.07;
+  rotate: -2.5deg;
+}
+
+/* ---------- Tile refinements ---------- */
+/* The screenshot parallaxes out of its own frame on hover, at a longer duration
+   than the card lift, so the tile stops moving as one rigid slab. */
+.tile-shot .shot-crop img {
+  transition: translate 0.55s var(--ease);
+}
+
+.tile-shot:hover .shot-crop img {
+  translate: 0 -12px;
+}
+
+.tile-appui {
+  background: var(--sand);
+}
+
+.tile-appui .appui {
+  width: 100%;
+}
+
+/* ---------- FAQ: animated open ---------- */
+@supports (interpolate-size: allow-keywords) {
+  :root {
+    interpolate-size: allow-keywords;
+  }
+}
+
+.faq details[open] .answer {
+  border-left: 2px solid var(--accent);
+  padding-left: var(--s-4);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .faq .answer {
+    animation: answerIn 0.34s var(--ease);
+  }
+
+  @keyframes answerIn {
+    from {
+      opacity: 0;
+      translate: 0 -6px;
+    }
+  }
+}
+
+/* ---------- Group stat row ---------- */
+/* The app's own Groupe header, which is also the only horizontal rhythm on a
+   page that is otherwise a stack of vertical blocks. */
+.groupstats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.groupstats li {
+  display: grid;
+  gap: 2px;
+  justify-items: center;
+  padding: var(--s-4) var(--s-2);
+  text-align: center;
+}
+
+.groupstats li + li {
+  border-inline-start: 1px solid var(--line);
+}
+
+.groupstats .icon {
+  width: 20px;
+  height: 20px;
+  color: var(--accent);
+  margin-bottom: 2px;
+}
+
+.groupstats b {
+  font-size: var(--step-2);
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.1;
+}
+
+.groupstats span {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--muted);
+}
+
+@media (max-width: 560px) {
+  .groupstats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .groupstats li:nth-child(3) {
+    border-inline-start: 0;
+  }
+  .groupstats li:nth-child(n + 3) {
+    border-top: 1px solid var(--line);
+  }
+}
+
+/* ---------- Live app screen inside a phone frame ---------- */
+/* Used where the shipped capture could not be: the real home screen is in
+   English ("Good Morning", "days streak", "Way to go !"), and this page is
+   written in strict French down to the narrow no-break spaces. Rebuilt as DOM
+   it is translated, sharp at any DPI, follows the theme, and moves. */
+.phone-app {
+  width: min(340px, 100%);
+  height: auto;
+}
+
+/* Decorative copy of the app's floating tab bar. Not interactive, so it is
+   hidden from assistive tech rather than pretending to be a tablist. */
+.appnav {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: 6px;
+  border-radius: 999px;
+  background: var(--app-surface, #fff);
+  border: 1px solid var(--app-line, #e5e7eb);
+  box-shadow: 0 6px 16px rgb(17 24 39 / 0.08);
+  margin-top: 2px;
+}
+
+/* The hero phone rules in the base sheet size the frame by HEIGHT so a
+   screenshot stays inside the fold. A frame holding live DOM has to size to its
+   content instead, or it renders a tall empty bezel under the screen. Matched
+   with :has() so any phone containing an app screen gets it, on every page,
+   without the markup having to remember a modifier class. */
+.hero-visual .phone-app,
+.hero-visual .phone:has(.appscreen) {
+  width: min(340px, 100%);
+  height: auto;
+  padding: 9px;
+}
+
+@media (max-width: 1080px) {
+  .hero-visual .phone-app,
+  .hero-visual .phone:has(.appscreen) {
+    width: min(320px, 78vw);
+  }
+}
+
+/* ---------- Phone proportions ----------
+   A frame that sizes to its contents is not a phone: the live home screen is
+   only ~470px of cards, so the bezel came out around 3:4 and read as a tablet.
+   The screen therefore carries a real handset aspect ratio and the content sits
+   inside it, exactly as it does on a device: cards from the top, the floating
+   tab bar pinned to the bottom, app background in between.
+
+   9:18.5 on the screen itself, not 9:19.5, because the status row above it is
+   part of the same glass. Screen + status comes out at 9:19.5 overall, which is
+   an iPhone 15 / Pixel 8 face. */
+.phone-app .appscreen {
+  aspect-ratio: 9 / 18.5;
+  display: flex;
+  flex-direction: column;
+  /* clip, never hidden: `overflow: hidden` would make this a scroll container,
+     and a scroll container with nothing to scroll deactivates every CSS
+     scroll-driven timeline inside it. */
+  overflow: clip;
+}
+
+/* Screenshot frames are the TOP of a phone, not a whole one.
+   These captures are deliberately partial: the Play boards crop the screen and
+   let it run off the bottom edge, so they sit between 0.67 and 0.89 wide-to-tall
+   where a handset face is 0.46. Forcing them into a full phone either crops them
+   sideways (the group banner lost "Les" from "Les Loups") or leaves a dead slab
+   of bezel. So the device keeps its top corners and side rails, drops the bottom
+   entirely, and is clipped by the box it sits in. Same device the store boards
+   use, and it works at any capture height. */
+.phone-bleed {
+  padding: 9px 9px 0;
+  border-radius: 46px 46px 0 0;
+  align-self: end;
+  overflow: clip;
+}
+
+.phone-bleed picture {
+  display: block;
+}
+
+.phone-bleed img {
+  width: 100%;
+  height: auto;
+  border-radius: 30px 30px 0 0;
+}
+
+/* The media box clips the device, which is what makes it read as continuing
+   past the edge rather than as a stunted phone. The height cap is what does the
+   clipping: without it the box would just grow to fit and nothing would be cut. */
+.split-media {
+  place-items: end center;
+  padding-bottom: 0;
+  overflow: clip;
+  max-height: clamp(470px, 70vh, 700px);
+}
+
+.sequence-screens {
+  align-items: end;
+  overflow: clip;
+  max-height: clamp(490px, 74vh, 740px);
+}
+
+.phone-bleed {
+  width: min(340px, 100%);
+}
+
+/* ---------- App screen typographic scale ---------- */
+/* The real app lays these out on a 393px viewport. The phone frame here has a
+   ~322px inner width, so the whole scale is stepped down proportionally rather
+   than letting the app's absolute pixel sizes overflow a narrower box. */
+.appscreen .appui {
+  padding: 11px;
+  font-size: 12px;
+  border-radius: 13px;
+}
+
+/* ---------- Flat leaderboard (on the accent tile) ---------- */
+/* Same component, no card chrome: on the orange tile the surrounding surface IS
+   the card, and everything is drawn in --on-accent ink because white on
+   #F3730A is 2.9:1 and is banned everywhere on this site. */
+.board-flat {
+  --app-line: color-mix(in srgb, var(--on-accent) 22%, transparent);
+  background: none;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+  margin-top: var(--s-4);
+  color: var(--on-accent);
+}
+
+.board-flat .board-row {
+  grid-template-columns: 22px minmax(0, 1fr) auto;
+  padding: 6px 0;
+  color: var(--on-accent);
+}
+
+.board-flat .board-row .rank {
+  color: var(--on-accent);
+}
+
+.board-flat .board-row .who,
+.board-flat .board-row .pts {
+  color: var(--on-accent);
+  font-size: 14px;
+}
+
+.board-flat .board-row.is-me {
+  background: color-mix(in srgb, var(--on-accent) 12%, transparent);
+  padding-inline: 8px;
+  margin-inline: -8px;
+}
+
+.board-flat .board-row.is-me .who {
+  color: var(--on-accent);
+  font-weight: 800;
+}
+
+.board-flat .board-row .bar {
+  background: color-mix(in srgb, var(--on-accent) 18%, transparent);
+  height: 4px;
+}
+
+.board-flat .board-row .bar::after {
+  background: var(--on-accent);
+}
+
+.board-flat .board-row[data-moved] {
+  background: color-mix(in srgb, var(--on-accent) 18%, transparent);
+}
+
+/* Rank colours are the app's gold/silver/bronze, which have no contrast job to
+   do here: they sit on orange as small glyphs beside an ink label. */
+.board-flat .board-row[data-place="1"] .rank { color: #7a4a00; }
+.board-flat .board-row[data-place="2"] .rank { color: #6b4a1f; }
+.board-flat .board-row[data-place="3"] .rank { color: #5c3a12; }
+
+/* ---------- Bento tiles as containers ---------- */
+/* A bento cell's width comes from the grid, not the viewport, so a media query
+   cannot tell whether a tile is 380px or 640px wide. Container queries can, and
+   the app components inside need to reflow at the tile's own width. */
+.tile {
+  container-type: inline-size;
+}
+
+@container (max-width: 400px) {
+  .appduo {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.tile .appduo .cap {
+  font-size: 13px;
+}
+
+.tile .appduo .foot b {
+  font-size: 18px;
+}
+
+/* ---------- Flat board spacing ---------- */
+.board-flat .board-row {
+  row-gap: 8px;
+  padding-block: 8px;
+}
+
+.board-flat .board-row + .board-row {
+  border-top: 1px solid color-mix(in srgb, var(--on-accent) 14%, transparent);
+}
+
+/* ---------- Chat bubble on the ink tile ---------- */
+.tile-ink .bubble {
+  --app-surface: color-mix(in srgb, var(--panel-fg) 8%, transparent);
+  --app-line: color-mix(in srgb, var(--panel-fg) 16%, transparent);
+  --app-ink: var(--panel-fg);
+  --app-body: var(--panel-fg-dim);
+  margin-top: var(--s-4);
+}
+
+.tile-ink .bubble p {
+  font-size: var(--step--1);
+  line-height: 1.5;
+}
+
+.tile-ink .bubble .ava {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+/* ---------- Progression card ---------- */
+/* Full wrap width so its left edge lines up with the section head above it.
+   Centred under a left-aligned heading read as an accident. */
+.progress-card {
+  margin-top: var(--s-7);
+  padding: clamp(1rem, 0.4rem + 2vw, 1.75rem);
+}
+
+.progress-card .statgrid {
+  margin-top: 16px;
+}
+
+/* The fox is spotting you while you type. It must land on the baseline of the
+   panel, not be sliced by it. */
+.signup-mascot {
+  bottom: 0;
+}
+
+/* ---------- Invite block (confirmation page) ---------- */
+.invite {
+  display: grid;
+  gap: var(--s-5);
+  margin-top: var(--s-7);
+  padding: clamp(1.25rem, 0.75rem + 2vw, 2.25rem);
+  border: 1px solid var(--line);
+  border-radius: var(--r-media);
+  background: linear-gradient(155deg, var(--accent-soft), var(--surface) 62%);
+}
+
+@media (min-width: 760px) {
+  .invite {
+    grid-template-columns: minmax(0, 1fr) clamp(150px, 20vw, 220px);
+    align-items: center;
+    gap: var(--s-6);
+  }
+}
+
+.invite-body h2 {
+  margin-bottom: var(--s-3);
+}
+
+.invite-body > p {
+  max-width: 52ch;
+}
+
+.invite-figure {
+  justify-self: center;
+}
+
+.invite-figure img {
+  width: 100%;
+  height: auto;
+}
+
+.invite-form {
+  margin-top: var(--s-7);
+  padding-top: var(--s-6);
+  border-top: 1px solid var(--line);
+}
+
+.invite-form .chips legend {
+  font-size: var(--step-0);
+  margin-bottom: var(--s-3);
+}
+
+.invite-form .btn {
+  /* .form .btn is width:100% because the signup panel's button is full-bleed.
+     This one sits under a row of chips and should not span the measure. */
+  justify-self: start;
+  width: auto;
+}
+
+.invite-form[data-done="true"] .chips,
+.invite-form[data-done="true"] .btn,
+.invite-form[data-done="true"] .help {
+  display: none;
+}
+
+.share-rack .btn[data-copied="true"] {
+  border-color: var(--accent);
+  color: var(--accent-deep);
+}
+
+.share-msg a {
+  color: var(--accent-deep);
+}
+
+/* The confirmation page has no sticky dock: the visitor already converted, and
+   a second "rejoindre la bêta" bar over an invite flow is noise. */
+.cta-dock:not([data-show]) {
+  visibility: hidden;
+}
+
+.groupstats-label {
+  margin: var(--s-5) 0 var(--s-2);
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--muted);
+}
+
+/* "Badges" was set at the 10px in-app label size, which is right inside a phone
+   frame and too small as a heading on the page itself. */
+.progress-card .appscreen-label {
+  font-size: var(--step--1);
+  margin-top: 20px;
+  margin-bottom: 8px;
+}
+
+/* =========================================================================
+   Corrected app components
+
+   The first pass of this sheet was built from the Figma mocks in the app repo.
+   Those mocks are stale, and two of them describe a product Tribos is not:
+
+     - the group screen showed a points ranking. The shipped app shows a shared
+       weekly objective, and lib/screens/group/widgets/weekly_goal_card.dart is
+       explicit about why: members are "JAMAIS retries par contribution : c'est
+       un objectif commun, pas un classement".
+     - the "Defi ! 5 000" card read as a step goal. A defi is a challenge of 2
+       to 5 SESSIONS aimed at one member of your group, and it sits on their
+       home screen until Sunday. The app measures sessions and nothing else.
+
+   Everything below matches the shipped app.
+   ========================================================================= */
+
+/* ---------- Weekly group objective ---------- */
+.goal {
+  display: grid;
+  gap: 10px;
+}
+
+.goal-count {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin: 0;
+}
+
+.goal-count b {
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--app-ink);
+}
+
+.goal-count span {
+  font-size: 17px;
+  font-weight: 600;
+  /* The target stays grey: the number the group has actually done is the one
+     that carries the accent. Straight from weekly_goal_card.dart. */
+  color: var(--app-muted);
+}
+
+.goal-bar {
+  height: 12px;
+  border-radius: 999px;
+  background: var(--app-line);
+  overflow: hidden;
+}
+
+.goal-bar::after {
+  content: "";
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+  transform-origin: 0 50%;
+  scale: var(--fill, 0) 1;
+  transition: scale 0.9s var(--ease) 0.2s;
+}
+
+.is-in .goal-bar::after {
+  scale: var(--fill, 0.25) 1;
+}
+
+/* Members, never ordered by contribution. */
+.goal-members {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.goal-members li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px 5px 5px;
+  border-radius: 999px;
+  background: var(--app-alt);
+  font-size: 13px;
+  color: var(--app-ink);
+}
+
+.goal-members .ava {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.goal-members b {
+  color: var(--app-green);
+  font-weight: 700;
+}
+
+/* ---------- Séances de la semaine (the blue home card) ---------- */
+/* Turns blue and takes the challenger's name only when a group member has
+   actually sent a defi. */
+.weekcard {
+  display: grid;
+  gap: 8px;
+  padding: 0 0 10px;
+  border: 1px solid var(--app-line);
+  border-radius: var(--app-radius);
+  background: var(--app-surface);
+  overflow: hidden;
+}
+
+.weekcard .cap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--app-challenge);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.weekcard .cap .icon {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+}
+
+.weekbars {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 4px;
+  height: 44px;
+  padding-inline: 12px;
+  margin: 0;
+  list-style: none;
+}
+
+.weekbars li {
+  flex: 1;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--app-challenge) 26%, transparent);
+  height: var(--h);
+  transform-origin: 50% 100%;
+}
+
+.weekbars li.is-done {
+  background: var(--app-challenge);
+}
+
+.weekcard .foot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px;
+  padding-inline: 12px;
+  font-size: 11px;
+  color: var(--app-challenge-ink);
+}
+
+.weekcard .foot b {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .is-in .weekbars li {
+    animation: barGrow 0.5s var(--ease) both;
+    animation-delay: calc(var(--i) * 60ms + 250ms);
+  }
+}
+
+/* ---------- Defi badge ---------- */
+.defi-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--app-challenge);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.defi-pill .icon {
+  width: 13px;
+  height: 13px;
+}
+
+/* ---------- "Ce que Tribos ne fait pas" ---------- */
+.nots {
+  display: grid;
+  gap: var(--s-3);
+  margin: var(--s-6) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 700px) {
+  .nots {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--s-3) var(--s-6);
+  }
+}
+
+.nots li {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: baseline;
+  padding-bottom: var(--s-3);
+  border-bottom: 1px solid var(--line);
+  color: var(--body);
+}
+
+.nots li .icon {
+  width: 16px;
+  height: 16px;
+  color: var(--muted);
+  translate: 0 0.15em;
+}
+
+.nots strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ---------- Phone whose screen bleeds off the bottom ---------- */
+/* The Play boards are composed this way on purpose, and the app repo explains
+   why: these screens are top-heavy (group banner, programme hero card), so
+   letting them run off the bottom keeps the part that matters visible instead
+   of cropping it. The site reuses the device, not just the image. */
+.phone-bleed {
+  padding-bottom: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.phone-bleed picture,
+.phone-bleed img {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.phone-bleed img {
+  border-radius: 0 0 0 0;
+}
+
+/* The frame is sized by width here, not height: these captures are partial
+   screens, so a fixed height would letterbox them. */
+.split-media .phone-bleed,
+.sequence-screen .phone-bleed {
+  width: min(340px, 100%);
+}
+
+.goal-members li {
+  transition: background-color 0.4s var(--ease);
+}
+
+.goal-members li[data-active="false"] {
+  opacity: 0.6;
+}
+
+.goal-members li[data-moved] {
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .goal-members li[data-moved] b {
+    animation: ptsPulse 0.7s var(--ease);
+  }
+}
+
+/* ---------- Screenshot crop offset ---------- */
+/* The tile is called "Chaque exercice en image", so the crop has to land on the
+   exercise rows. Cropping from y=0 showed the screen's near-empty header (a
+   close button, a title) and read as a blank card. */
+.tile-shot .shot-crop img {
+  translate: 0 var(--shot-shift, 0);
+}
+
+.tile-shot:hover .shot-crop img {
+  translate: 0 calc(var(--shot-shift, 0px) - 12px);
+}
+
+.tile-shot {
+  --shot-shift: -30%;
+}
+
+/* =========================================================================
+   PART 3 - The poster layer
+
+   Dark page, orange blaze panels, photography. Three surface families:
+     1. the near-black base (--paper) carrying most sections;
+     2. .blaze panels: orange gradient posters with white display type,
+        duotone photography and a ghost wordmark;
+     3. light app-true cards (.appui/.phone) that pop off both.
+   ========================================================================= */
+
+/* ---------- Nav on a dark poster ---------- */
+.nav {
+  border-bottom-color: transparent;
+}
+
+.nav[data-stuck="true"] {
+  background: color-mix(in srgb, var(--paper) 84%, transparent);
+  border-bottom-color: var(--line);
+}
+
+/* White pill CTA in the nav, GYROZ-style: reads over both the blaze hero and
+   the dark page. */
+.btn-light {
+  background: #fff;
+  color: #221000;
+  border-color: transparent;
+}
+
+.btn-light:hover {
+  background: #ffe9d4;
+  color: #221000;
+}
+
+/* ---------- Blaze surface ---------- */
+.blaze {
+  position: relative;
+  isolation: isolate;
+  color: var(--on-blaze);
+  background:
+    radial-gradient(120% 90% at 82% -10%, var(--blaze-hi) 0%, transparent 55%),
+    radial-gradient(130% 110% at 20% 118%, #2a0e01 0%, transparent 60%),
+    linear-gradient(168deg, var(--blaze-mid) 8%, #9a3607 45%, var(--blaze-lo) 100%);
+  overflow: clip;
+}
+
+/* The photographic field: duotone runners, screened into the gradient so the
+   highlights glow and the shadows disappear into it. */
+.blaze-field {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-size: cover;
+  background-position: center right;
+  mix-blend-mode: screen;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Ghost wordmark, the Nebula move: display type as texture, clipped by the
+   panel, never interactive, never read (aria-hidden in the markup). */
+.ghost {
+  position: absolute;
+  z-index: -1;
+  inset: auto 0 -0.14em 0;
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(6rem, 24vw, 22rem);
+  line-height: 0.8;
+  letter-spacing: -0.03em;
+  text-align: center;
+  color: rgb(255 255 255 / 0.07);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+/* ---------- Hero poster ---------- */
+.hero {
+  padding: 0;
+  min-height: 0;
+  overflow: visible;
+}
+
+/* The old ambient field is replaced by the blaze panel itself. */
+.hero-field {
+  display: none;
+}
+
+.hero-poster {
+  position: relative;
+  min-height: min(calc(100dvh - var(--nav-h) - 1rem), 860px);
+  display: grid;
+  align-items: center;
+  border-radius: 0 0 var(--r-media) var(--r-media);
+  padding-block: clamp(4.5rem, 8vh, 7rem) clamp(3.5rem, 7vh, 6rem);
+}
+
+.hero-poster .hero-grid {
+  width: 100%;
+}
+
+.hero-copy .eyebrow {
+  color: var(--on-blaze-dim);
+}
+
+.hero-copy .eyebrow .pulse {
+  background: #fff;
+}
+
+.hero-copy .eyebrow .pulse::after {
+  background: #fff;
+}
+
+.hero-copy h1 {
+  color: var(--on-blaze);
+  text-wrap: balance;
+}
+
+/* "tes potes." keeps the emphasis but in white italic: orange-on-orange would
+   vanish and a second hue would cheapen the poster. */
+.hero-copy h1 em {
+  color: var(--on-blaze);
+  font-style: italic;
+  padding-right: 0.06em;
+}
+
+.hero-copy .lede {
+  color: var(--on-blaze-dim);
+}
+
+.hero-secondary .link-arrow {
+  color: var(--on-blaze);
+}
+
+/* ---------- Form on a blaze surface ---------- */
+.form-blaze {
+  --panel-fg: var(--on-blaze);
+  --panel-fg-dim: var(--on-blaze-dim);
+  --panel-line: var(--blaze-line);
+  --panel-line-hover: rgb(255 255 255 / 0.6);
+  --panel-input: rgb(0 0 0 / 0.24);
+  --panel-placeholder: rgb(255 255 255 / 0.62);
+  --panel-help: var(--on-blaze-dim);
+  --panel-link: #fff;
+  --field-error: #ffd6c9;
+}
+
+.form-blaze .field input {
+  color: #fff;
+}
+
+.form-blaze .consent-note,
+.form-blaze .help {
+  color: var(--on-blaze-dim);
+}
+
+.form-blaze .consent-note a {
+  color: #fff;
+}
+
+/* ---------- Gallery (tilted cards) ---------- */
+.gallery {
+  --section-air: clamp(4rem, 2.5rem + 6vw, 8rem);
+  padding-block: var(--section-air);
+}
+
+.gallery-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(0.9rem, 0.5rem + 1.6vw, 1.8rem);
+  align-items: center;
+  margin-top: var(--s-7);
+}
+
+.gallery-card {
+  border-radius: clamp(1.4rem, 1rem + 1.6vw, 2.4rem);
+  overflow: clip;
+  box-shadow: var(--shadow-2);
+  rotate: var(--tilt, 0deg);
+  transition: rotate 0.5s var(--ease), scale 0.5s var(--ease);
+}
+
+.gallery-card:nth-child(1) { --tilt: -4deg; }
+.gallery-card:nth-child(2) { --tilt: 2.5deg; translate: 0 clamp(0.5rem, 2vw, 1.8rem); }
+.gallery-card:nth-child(3) { --tilt: -2deg; translate: 0 calc(-1 * clamp(0.4rem, 1.6vw, 1.4rem)); }
+.gallery-card:nth-child(4) { --tilt: 3.5deg; }
+
+.gallery-card:hover {
+  rotate: 0deg;
+  scale: 1.03;
+}
+
+.gallery-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 3 / 4;
+}
+
+.gallery-caption {
+  margin: var(--s-7) auto 0;
+  max-width: 26ch;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+@media (max-width: 760px) {
+  .gallery-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .js .gallery-card {
+    opacity: 0;
+    scale: 0.9;
+    rotate: 0deg;
+    transition: opacity 0.7s var(--ease), scale 0.7s var(--ease), rotate 0.7s var(--ease);
+    transition-delay: calc(var(--i, 0) * 110ms);
+  }
+
+  .js .is-in .gallery-card {
+    opacity: 1;
+    scale: 1;
+    rotate: var(--tilt, 0deg);
+  }
+}
+
+/* ---------- Phone poster (Nebula beat) ---------- */
+.poster {
+  position: relative;
+  border-radius: var(--r-media);
+  padding: clamp(3rem, 2rem + 5vw, 6rem) var(--gutter) 0;
+  display: grid;
+  justify-items: center;
+  text-align: center;
+}
+
+.poster-head {
+  max-width: 34ch;
+  margin-bottom: var(--s-6);
+}
+
+.poster-head h2 {
+  color: var(--on-blaze);
+  font-size: var(--step-4);
+  margin-bottom: var(--s-3);
+}
+
+.poster-head p {
+  color: var(--on-blaze-dim);
+  font-size: var(--step-1);
+  margin: 0;
+}
+
+.poster .phone-app {
+  margin-bottom: calc(-1 * clamp(3rem, 8vw, 7rem));
+  box-shadow: 0 30px 80px rgb(0 0 0 / 0.5);
+}
+
+/* The poster hangs the phone over the next section's top. */
+.poster-wrap {
+  padding-bottom: clamp(3rem, 8vw, 7rem);
+}
+
+/* ---------- CTA panel ("Prends ta place.") ---------- */
+.section-beta {
+  background: none;
+  padding-block: var(--section-air, clamp(4rem, 3rem + 6vw, 9rem));
+}
+
+.beta-panel {
+  position: relative;
+  isolation: isolate;
+  border-radius: var(--r-media);
+  padding: clamp(2rem, 1.2rem + 4vw, 4.5rem);
+  overflow: clip;
+}
+
+.beta-panel .signup {
+  background: none;
+  border: 0;
+  padding: 0;
+  overflow: visible;
+}
+
+.beta-panel .signup::before {
+  display: none;
+}
+
+.beta-panel .signup h2 {
+  color: var(--on-blaze);
+  font-size: var(--step-4);
+  max-width: 14ch;
+}
+
+.beta-panel .signup .lede {
+  color: var(--on-blaze-dim);
+}
+
+.beta-panel .assurances li {
+  color: var(--on-blaze-dim);
+}
+
+.beta-panel .assurances strong {
+  color: var(--on-blaze);
+}
+
+.beta-panel .assurances .icon {
+  color: #fff;
+}
+
+.beta-panel .chips legend {
+  color: var(--on-blaze);
+}
+
+.beta-panel .chip span {
+  border-color: var(--blaze-line);
+  color: var(--on-blaze);
+}
+
+.beta-panel .chip input:checked + span {
+  background: #fff;
+  border-color: #fff;
+  color: #221000;
+}
+
+.beta-panel .chip input:focus-visible + span {
+  outline-color: #fff;
+}
+
+.beta-panel .field label {
+  color: var(--on-blaze);
+}
+
+/* ---------- Statement, Nebula-grey ---------- */
+.statement {
+  background: none;
+  border-block: 0;
+}
+
+.statement blockquote {
+  color: var(--muted);
+  font-size: var(--step-4);
+  max-width: 22ch;
+}
+
+/* The revealed words land in ink so the line the visitor is "on" reads
+   brighter than the rest: the scrubbed-paragraph effect, IO-driven. */
+.statement blockquote .word-in {
+  color: var(--ink);
+}
+
+.statement-support p {
+  color: var(--body);
+}
+
+/* ---------- Dark-page component fixes ---------- */
+/* The ink tile and FAQ sat on --panel, which matched the old light page. On
+   near-black they need their own lift and a visible line. */
+.tile-ink {
+  border: 1px solid var(--line-strong);
+}
+
+.tile-appui {
+  background: var(--sand);
+}
+
+/* Buttons: the ghost variant needs a visible line on near-black. */
+.btn-ghost {
+  border-color: var(--line-strong);
+}
+
+/* Sticky dock over dark. */
+.cta-dock {
+  background: color-mix(in srgb, var(--paper) 90%, transparent);
+}
+
+/* Marquee: quiet band between poster and black. */
+.marquee {
+  background: var(--sand);
+}
+
+/* Step figures (merci page) keep their soft plate. */
+.step-figure {
+  background: var(--accent-soft);
+}
+
+/* Band (entreprises): the blaze class supplies the surface; its ink button
+   turns white so it reads over the gradient. */
+.band.blaze .btn-ink {
+  background: #fff;
+  color: #221000;
+}
+
+/* Invite card (merci) on dark. */
+.invite {
+  background: linear-gradient(155deg, var(--accent-soft), var(--surface) 62%);
+}
+
+/* Phone frame: deeper bezel shadow so it separates from near-black. */
+.phone {
+  box-shadow: var(--shadow-3), inset 0 1px 0 rgb(255 255 255 / 0.16), 0 0 0 1px rgb(255 255 255 / 0.06);
+}
+
+/* ---------- Poster refinements ---------- */
+/* GYROZ scale on the headline: the poster carries it, so it can be a full step
+   bigger than the old split-hero ever could. */
+.hero-poster .hero-copy h1 {
+  font-size: clamp(2.7rem, 1.6rem + 5vw, 5.6rem);
+  letter-spacing: -0.04em;
+  margin-bottom: var(--s-5);
+}
+
+/* A quiet scrim under the copy column: the photograph keeps its highlights on
+   the right while every line of text sits on a measured, darker field. */
+.hero-poster::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    100deg,
+    rgb(20 6 0 / 0.55) 0%,
+    rgb(20 6 0 / 0.32) 38%,
+    transparent 62%
+  );
+  pointer-events: none;
+}
+
+/* Keep the scrim above the photo field but below the content. */
+.hero-poster .blaze-field {
+  z-index: -2;
+}
+
+.hero-poster .ghost {
+  z-index: -1;
+}
+
+/* ---------- Sequence steps on dark ---------- */
+/* 0.5 opacity de-emphasis was tuned for warm paper; on near-black it pushed the
+   inactive steps under AA. Dim less, and let the index carry the state. */
+@media (min-width: 900px) {
+  .js .sequence-step[data-on="false"] {
+    opacity: 0.62;
+  }
+}
+
+/* ---------- Entreprises band on blaze ---------- */
+/* The band's text tokens dated from its flat-orange card days (--on-accent ink)
+   and turned invisible on the dark gradient. */
+.band.blaze {
+  color: var(--on-blaze-dim);
+}
+
+.band.blaze h2,
+.band.blaze h3 {
+  color: var(--on-blaze);
+}
+
+.band.blaze p {
+  color: var(--on-blaze-dim);
+}
+
+.band.blaze .band-watermark {
+  opacity: 0.1;
+}
+
+/* ---------- FAQ on dark ---------- */
+.faq details {
+  background: var(--surface);
+}
+
+.faq summary:hover {
+  background: var(--sand);
+}
+
+/* ---------- CTA panel scrim + rhythm ---------- */
+/* The glow field brightens the panel's top band, exactly where the platform
+   chips sit. A quiet top scrim keeps every control on a measured field without
+   dulling the glow lower down. */
+.beta-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(180deg, rgb(20 6 0 / 0.34), transparent 55%);
+  pointer-events: none;
+}
+
+.beta-panel .signup {
+  position: relative;
+  z-index: 1;
+}
+
+.beta-panel .signup h2 {
+  max-width: 16ch;
+}
+
+.beta-panel .signup-next {
+  border-top-color: var(--blaze-line);
+}
+
+.beta-panel .signup-next li {
+  color: var(--on-blaze-dim);
+}
+
+.beta-panel .signup-next strong {
+  color: var(--on-blaze);
+}
+
+.beta-panel .signup-next .icon {
+  color: #fff;
 }
