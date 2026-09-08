@@ -62,21 +62,21 @@ du tout au site réel.
 La bonne manière, sans rien installer :
 
 ```bash
-cd /chemin/vers/tribos-landing-page
-python3 -m http.server 8000
+node tools/dev-server.mjs 8000
 ```
 
-Puis ouvrir **http://localhost:8000**.
+Puis ouvrir **http://127.0.0.1:8000**.
 
-Il n’y a rien à compiler ni à surveiller : on modifie un fichier, on recharge la
-page. `Ctrl+C` arrête le serveur.
+Ce serveur remplace `python3 -m http.server` : il sert le site statique ET
+exécute la fonction Appwrite `beta-signup` quand un formulaire est soumis. La
+fonction lit les variables du `.env` local (clé Resend…) et envoie réellement
+les emails. Il n’y a rien à compiler ni à surveiller : on modifie un fichier,
+on recharge la page. `Ctrl+C` arrête le serveur.
 
-Pour tester le comportement exact de la production (en-têtes, CSP,
-redirections, page 404, formulaire), utiliser plutôt la CLI Netlify :
-
-```bash
-npx netlify-cli dev
-```
+En production, la même page envoie les formulaires vers la fonction Appwrite
+Cloud (`beta-signup`, exécution « guests »), les variables étant gérées côté
+Appwrite (variables de projet). Le seul point à garder en tête en local : sans
+`.env`, les emails échouent avec l’erreur « Configuration email absente ».
 
 ---
 

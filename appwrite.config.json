@@ -1,0 +1,33 @@
+{
+    "projectId": "69e8edda0008511fbbf7",
+    "endpoint": "https://fra.cloud.appwrite.io/v1",
+    "functions": [
+        {
+            "$id": "beta-signup",
+            "name": "beta-signup",
+            "runtime": "node-22",
+            "path": "functions/beta-signup",
+            "entrypoint": "index.js",
+            "execute": [
+                "guests"
+            ],
+            "enabled": true,
+            "logging": true,
+            "events": [],
+            "schedule": "",
+            "timeout": 15,
+            "commands": "",
+            "scopes": [],
+            "installationId": "",
+            "providerRepositoryId": "",
+            "providerBranch": "",
+            "providerSilentMode": false,
+            "providerRootDirectory": "",
+            "providerBranches": [],
+            "providerPaths": [],
+            "buildSpecification": "s-2vcpu-2gb",
+            "runtimeSpecification": "s-0.5vcpu-512mb",
+            "deploymentRetention": 0
+        }
+    ]
+}

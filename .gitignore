@@ -8,3 +8,12 @@
 
 # Dépendances locales éventuelles (le site n’en a aucune en production).
 node_modules/
+
+# Secrets locaux (clés API…). La valeur est injectée côté serveur (Appwrite /
+# Netlify), jamais commitée.
+.env
+.env.*
+!.env.example
+
+# Appwrite CLI build cache
+functions/**/.appwrite/

@@ -23,14 +23,34 @@
       .card {
         position: relative;
         display: grid;
-        grid-template-columns: 1fr 420px;
+        grid-template-columns: 1fr 400px;
         align-items: center;
-        gap: 56px;
+        gap: 40px;
         width: 1200px;
         height: 630px;
-        padding: 0 0 0 88px;
-        background: var(--paper);
+        padding: 0 56px 0 88px;
+        color: #fff;
+        background:
+          radial-gradient(120% 90% at 82% -10%, #f58022 0%, transparent 55%),
+          radial-gradient(130% 110% at 20% 118%, #2a0e01 0%, transparent 60%),
+          linear-gradient(168deg, #c2410c 8%, #9a3607 45%, #571c02 100%);
         overflow: hidden;
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: url("../assets/photo/hero-run.jpg") center right / cover;
+        mix-blend-mode: screen;
+        opacity: 0.55;
+      }
+
+      .card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(100deg, rgb(20 6 0 / 0.5) 0%, rgb(20 6 0 / 0.28) 40%, transparent 62%);
       }
 
       .card::before {
@@ -60,6 +80,7 @@
       }
 
       .lockup span {
+        color: #fff;
         font-family: var(--font-display);
         font-size: 44px;
         font-weight: 700;
@@ -73,51 +94,94 @@
       }
 
       .copy h1 {
-        font-size: 66px;
+        /* Sized so the two authored clauses hold two lines beside the phone. */
+        font-size: 64px;
         line-height: 1.02;
         letter-spacing: -0.04em;
         margin-bottom: 26px;
+        color: #fff;
       }
 
       .copy p {
         font-size: 26px;
-        line-height: 1.4;
-        color: var(--body);
-        max-width: 22ch;
+        line-height: 1.35;
+        color: rgb(255 255 255 / 0.88);
       }
 
       .shot {
         position: relative;
         z-index: 1;
         justify-self: center;
-        padding: 11px;
-        border-radius: 46px;
-        background: linear-gradient(160deg, #3a332c, #14100c 55%, #2a241e);
-        box-shadow: var(--shadow-3);
+        display: grid;
+        place-items: center;
+        padding: 0;
       }
 
-      .shot img {
-        display: block;
+      /* The screen is live DOM, not an <img>: it carries its own .phone frame,
+         so this only has to scale it into the card. It is lifted verbatim from
+         the homepage hero, so the social card cannot drift from the page. The
+         previous version embedded the English home capture. */
+      .shot .phone {
         width: 330px;
-        height: 560px;
-        object-fit: cover;
-        object-position: top;
-        border-radius: 36px;
+        margin: 0;
+      }
+
+      /* 630px of canvas cannot hold a whole phone: the frame is clipped from
+         the bottom so the greeting, the streak and the séance card survive. */
+      .shot {
+        max-height: 470px;
+        align-items: start;
+      }
+
+      .shot .phone {
+        align-self: start;
+      }
+
+      /* The card is 630px tall; the full home screen is taller. It is cropped
+         from the bottom so the streak card and the séance card - the two things
+         the headline is about - are always the part that survives. */
+      .shot .appscreen {
+        padding-bottom: 14px;
       }
     </style>
   </head>
   <body>
     <div class="card">
-      <div class="copy">
+      <div class="copy" style="position: relative; z-index: 1">
         <div class="lockup">
           <img src="../assets/brand/tribos-icon.png" alt="" />
           <span>Tribos</span>
         </div>
-        <h1>Le même programme,<br />le même jour, ensemble.</h1>
-        <p>L’app pour s’entraîner en groupe.</p>
+        <h1>Le sport,<br />mais avec tes potes.</h1>
+        <p>Un objectif par semaine,<br />tenu ensemble.</p>
       </div>
-      <div class="shot">
-        <img src="../assets/app/home.png" alt="" />
+      <div class="shot is-in" style="z-index: 1">
+    <div class="phone phone-app">
+      <div class="phone-status" aria-hidden="true">
+        <span>9:41</span>
+        <span class="phone-status-icons">
+          <svg class="icon" viewBox="0 0 256 256" fill="currentColor"><use href="../assets/icons/sprite.svg#i-flame" /></svg>
+          <svg class="icon" viewBox="0 0 256 256" fill="currentColor"><use href="../assets/icons/sprite.svg#i-lightning" /></svg>
+        </span>
+      </div>
+      <picture>
+        <source
+          type="image/webp"
+          srcset="../assets/app/home-sm.webp 450w, ../assets/app/home.webp 604w"
+          sizes="(max-width: 900px) 78vw, 340px"
+        />
+        <img
+          srcset="../assets/app/home-sm.jpg 450w, ../assets/app/home.jpg 604w"
+          sizes="(max-width: 900px) 78vw, 340px"
+          src="../assets/app/home.jpg"
+          width="604"
+          height="1302"
+          loading="eager"
+          decoding="async"
+          alt="Écran d’accueil de Tribos : quatorze jours d’affilée, la séance du jour Leg Day à 75 points, les points doublés et le classement du groupe"
+        />
+      </picture>
+    </div>
       </div>
     </div>
   </body>

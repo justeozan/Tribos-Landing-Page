@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Merci - Tribos</title>
+    <title>C’est noté - Tribos</title>
     <meta
       name="description"
-      content="Ton email est enregistré pour la bêta privée de Tribos. On te prévient dès qu’une place se libère."
+      content="Ton email est enregistré pour la bêta privée de Tribos. Il reste à réunir ton groupe : les groupes déjà formés passent en premier."
     />
     <meta name="robots" content="noindex, follow" />
     <link rel="canonical" href="https://tribos.app/merci.html" />
-    <meta name="theme-color" content="#f3730a" />
+    <meta name="theme-color" content="#0d0b09" />
 
     <meta property="og:url" content="https://tribos.app/merci.html" />
     <meta property="og:type" content="website" />
@@ -24,7 +24,7 @@
     <meta property="og:image" content="https://tribos.app/assets/brand/og-card.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Carte Tribos : le logo, la promesse du produit et l’écran d’accueil de l’application" />
+    <meta property="og:image:alt" content="Carte Tribos : le logo, la promesse « Le sport, mais avec tes potes » et l’écran d’accueil de l’application" />
     <meta name="twitter:card" content="summary_large_image" />
 
     <link rel="icon" href="assets/brand/favicon-32.png" sizes="32x32" />
@@ -76,15 +76,6 @@
         </nav>
 
         <div class="nav-actions">
-          <button
-            class="theme-toggle"
-            type="button"
-            data-theme-toggle
-            aria-label="Passer en thème sombre"
-          >
-            <svg class="icon icon-sun" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-sun" /></svg>
-            <svg class="icon icon-moon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-moon" /></svg>
-          </button>
 
           <a class="btn btn-primary btn-sm" href="index.html#beta">Rejoindre la bêta</a>
 
@@ -109,34 +100,140 @@
       <a href="entreprises.html">Entreprises</a>
       <a href="index.html#faq">Questions fréquentes</a>
       <a class="btn btn-primary" href="index.html#beta">Rejoindre la bêta</a>
-      <p class="menu-theme">
-        Thème
-        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Passer en thème sombre">
-          <svg class="icon icon-sun" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-sun" /></svg>
-          <svg class="icon icon-moon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-moon" /></svg>
-        </button>
-      </p>
     </div>
 
     <main id="contenu">
       <!-- ================= CONFIRMATION ================= -->
+      <!-- The highest-intent 15 seconds on the whole site. Tribos does not work
+           solo, so this page asks for the second signup instead of saying thank
+           you and sending the visitor back to the homepage. -->
       <section class="section-tight">
         <div class="wrap wrap-narrow">
           <div class="section-head reveal">
-            <p class="eyebrow">Inscription enregistrée</p>
-            <h1 class="h1">C’est bon, tu es sur la liste.</h1>
+            <p class="eyebrow">Étape 1 sur 2&#8239;· terminée</p>
+            <h1 class="h1" data-split>C’est noté. Reste la vraie question&#8239;: avec qui&#8239;?</h1>
             <p class="lede">
-              On t’écrit dès qu’une place se libère, avec les instructions
-              d’installation pour ton téléphone.
+              Tribos ne sert à rien tout seul. On ouvre en priorité aux groupes
+              déjà formés&#8239;: chaque personne qui s’inscrit avec toi fait avancer
+              ta place dans la file.
             </p>
           </div>
 
+          <div class="invite reveal" style="--i: 1">
+            <div class="invite-body">
+              <h2 class="h3">Envoie l’invitation maintenant</h2>
+              <p>
+                Il te faut 2 ou 3 personnes pour lancer un groupe. Le message est
+                déjà écrit, tu n’as qu’à choisir par où l’envoyer.
+              </p>
+
+              <!-- Links only. There is deliberately no field anywhere on this
+                   site for a friend's email address: collecting a third party's
+                   address to mail them without their consent is a GDPR problem,
+                   and it would burn the sending domain before launch. -->
+              <div
+                class="share-rack"
+                data-share
+                data-share-url="https://tribos.app/"
+                data-share-text="Je viens de prendre ma place dans la bêta de Tribos. Le principe : chaque semaine on se donne un nombre de séances à faire, et chaque séance de chacun compte pour tout le groupe. Il me faut 2 ou 3 personnes pour lancer le nôtre. Prends ta place ici :"
+              >
+                <button class="btn btn-primary" type="button" data-share-native hidden data-burst>
+                  <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-share" /></svg>
+                  Envoyer l’invitation
+                </button>
+
+                <!-- Real, pre-encoded hrefs so the rack works with JS disabled.
+                     site.js only rewrites them to keep data-share-text as the
+                     single source of truth. -->
+                <a class="btn btn-ghost" data-share-wa href="https://wa.me/?text=Je%20viens%20de%20prendre%20ma%20place%20dans%20la%20b%C3%AAta%20de%20Tribos.%20Le%20principe%E2%80%AF%3A%20chaque%20semaine%20on%20se%20donne%20un%20nombre%20de%20s%C3%A9ances%20%C3%A0%20faire%2C%20et%20chaque%20s%C3%A9ance%20de%20chacun%20compte%20pour%20tout%20le%20groupe.%20Il%20me%20faut%202%20ou%203%20personnes%20pour%20lancer%20le%20n%C3%B4tre.%20Prends%20ta%20place%20ici%E2%80%AF%3A%20https%3A%2F%2Ftribos.app%2F" rel="noopener">
+                  <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-whatsapp" /></svg>
+                  WhatsApp
+                </a>
+
+                <a class="btn btn-ghost" data-share-sms href="sms:?&amp;body=Je%20viens%20de%20prendre%20ma%20place%20dans%20la%20b%C3%AAta%20de%20Tribos.%20Le%20principe%E2%80%AF%3A%20chaque%20semaine%20on%20se%20donne%20un%20nombre%20de%20s%C3%A9ances%20%C3%A0%20faire%2C%20et%20chaque%20s%C3%A9ance%20de%20chacun%20compte%20pour%20tout%20le%20groupe.%20Il%20me%20faut%202%20ou%203%20personnes%20pour%20lancer%20le%20n%C3%B4tre.%20Prends%20ta%20place%20ici%E2%80%AF%3A%20https%3A%2F%2Ftribos.app%2F">
+                  <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-send" /></svg>
+                  SMS
+                </a>
+
+                <button class="btn btn-ghost" type="button" data-share-copy data-needs-js>
+                  <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-copy" /></svg>
+                  <span data-share-label>Copier le message</span>
+                </button>
+              </div>
+
+              <p class="share-msg">
+                «&#8239;Je viens de prendre ma place dans la bêta de Tribos. Le principe : chaque semaine on se donne un nombre de séances à faire, et chaque séance de chacun compte pour tout le groupe. Il me faut 2 ou 3 personnes pour lancer le nôtre. Prends ta place ici : <a href="https://tribos.app/">tribos.app</a>&#8239;»
+              </p>
+            </div>
+
+            <div class="invite-figure" aria-hidden="true">
+              <picture>
+                <source srcset="assets/illus/trio-warmup.webp" type="image/webp" />
+                <img
+                  class="mascot"
+                  src="assets/illus/trio-warmup.png"
+                  width="315"
+                  height="243"
+                  loading="lazy"
+                  decoding="async"
+                  alt=""
+                />
+              </picture>
+            </div>
+          </div>
+
+          <!-- A second, separately-named Netlify form. Declared in static HTML
+               so the build-time parser registers it. It asks for the one thing
+               that actually shapes the next wave: how many places to hold. -->
+          <form
+            class="form form-paper invite-form reveal"
+            style="--i: 2"
+            name="beta-groupe"
+            method="post"
+            action="./merci.html"
+            data-waitlist
+            data-success="inline"
+            data-done-message="C’est noté. On garde les places de ton groupe."
+          >
+            <input type="hidden" name="form-name" value="beta-groupe" />
+            <!-- Filled by site.js from sessionStorage. The address never touches
+                 the URL or the browser history, which a ?e= parameter would. -->
+            <input type="hidden" name="email" value="" data-fill="tribos-email" />
+
+            <p class="honeypot" aria-hidden="true">
+              <label for="bot-groupe">Laisser ce champ vide</label>
+              <input id="bot-groupe" name="bot-field" type="text" tabindex="-1" autocomplete="off" />
+            </p>
+
+            <fieldset class="chips">
+              <legend>Vous serez combien dans le groupe&#8239;?</legend>
+              <div class="chips-row">
+                <label class="chip"><input type="radio" name="taille" value="2-3" /><span>2 à 3</span></label>
+                <label class="chip"><input type="radio" name="taille" value="4-6" /><span>4 à 6</span></label>
+                <label class="chip"><input type="radio" name="taille" value="7+" /><span>7 ou plus</span></label>
+                <label class="chip"><input type="radio" name="taille" value="inconnu" /><span>Je ne sais pas encore</span></label>
+              </div>
+            </fieldset>
+
+            <p class="form-status" role="status" aria-live="polite" data-status></p>
+
+            <button class="btn btn-primary" type="submit" data-burst>
+              Réserver les places de mon groupe
+            </button>
+
+            <p class="help">
+              Ça nous dit quelle taille de vague ouvrir. Tu pourras toujours
+              ajouter du monde après.
+            </p>
+          </form>
+
           <div class="steps">
-            <div class="step reveal" style="--i: 1">
+            <div class="step reveal" style="--i: 3">
               <div class="step-figure">
                 <picture>
                   <source srcset="assets/illus/fox-weights.webp" type="image/webp" />
                   <img
+                    class="mascot"
                     src="assets/illus/fox-weights.png"
                     width="244"
                     height="250"
@@ -148,35 +245,31 @@
               </div>
 
               <div class="step-body">
-                <h2 class="h3">Ce qui se passe maintenant</h2>
+                <h2 class="h3">Ce qui se passe ensuite</h2>
                 <ul class="feature-list">
                   <li>
                     <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-check" /></svg>
-                    <span>On ouvre les accès petit à petit, pour garder un vrai suivi sur chaque groupe.</span>
+                    <span>On ouvre les accès par vagues, pour garder un vrai suivi sur chaque groupe.</span>
                   </li>
                   <li>
                     <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-check" /></svg>
-                    <span>Tu recevras un email avec ton lien d’installation et de quoi créer ton premier groupe.</span>
+                    <span>Tu recevras un email avec ton lien d’installation et de quoi créer ton groupe.</span>
                   </li>
                   <li>
                     <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-check" /></svg>
-                    <span>En attendant, réfléchis à qui tu mets dedans. Tribos est bien plus utile à plusieurs qu’à un.</span>
+                    <span>Un seul email, celui de ton accès. Pas de newsletter, désinscription en un clic.</span>
                   </li>
                 </ul>
               </div>
             </div>
           </div>
 
-          <div class="hero-actions reveal" style="--i: 2">
-            <a class="btn btn-primary" href="index.html">
+          <p class="hero-secondary reveal" style="--i: 4">
+            <a class="link-arrow" href="index.html">
               Retour à l’accueil
               <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-arrow-right" /></svg>
             </a>
-            <a class="link-arrow" href="entreprises.html">
-              Tribos pour les équipes
-              <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-arrow-up-right" /></svg>
-            </a>
-          </div>
+          </p>
         </div>
       </section>
     </main>
