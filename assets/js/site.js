@@ -955,7 +955,7 @@
         })
         .then(function (execution) {
           // The function returns its own payload wrapped in an execution
-          // envelope whose statusCode / response fields we unpack.
+          // envelope whose responseStatusCode / responseBody we unpack.
           var payload = null;
           if (execution && (execution.responseStatusCode || execution.statusCode) === 200) {
             try {
