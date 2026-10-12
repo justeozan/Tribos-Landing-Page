@@ -112,24 +112,30 @@
               Comment demander la suppression de votre compte Tribos et de vos
               données associées, et ce qui est effacé ou conservé.
             </p>
-            <p class="doc-meta">Dernière mise à jour&#8239;: 9 septembre 2026</p>
+            <p class="doc-meta">Dernière mise à jour&#8239;: 12 octobre 2026</p>
           </div>
 
           <!-- ================= CORPS LEGAL ================= -->
           <article class="doc reveal" style="--i: 1">
+            <!--
+              Parcours et cascade vérifiés dans le dépôt de l'app (branche main) :
+              lib/screens/settings/settings_screen.dart,
+              lib/services/account_service.dart, lib/services/group_service.dart,
+              functions/delete-auth-account/src/main.js.
+            -->
             <p>
               La suppression de votre compte se fait directement dans
-              l’application mobile Tribos, de façon automatique et immédiate.
-              Cette page décrit la procédure à suivre, les données supprimées,
-              les données conservées et la durée de conservation, conformément
-              aux exigences de la transaction dans les magasins d’applications.
+              l’application mobile Tribos, de façon automatique. Cette page
+              décrit la procédure à suivre, les données supprimées, les données
+              conservées et leur durée de conservation, conformément aux
+              exigences des boutiques d’applications.
             </p>
 
             <h2>Supprimer le compte depuis l’application</h2>
 
             <p>
-              La suppression est entièrement automatique et ne nécessite aucune
-              intervention de notre part. Elle est irréversible.
+              La suppression ne nécessite aucune intervention de notre part. Elle
+              est irréversible.
             </p>
 
             <ul>
@@ -138,27 +144,39 @@
                 votre compte.
               </li>
               <li>
-                <strong>Allez dans Réglages</strong>, puis tout en bas, dans la
-                section «&#8239;Zone de danger&#8239;».
+                <strong>Ouvrez les Paramètres</strong>&#8239;: sur l’écran
+                d’accueil, touchez votre photo de profil, puis la roue dentée en
+                haut à droite.
               </li>
               <li>
-                <strong>Touchez «&#8239;Supprimer le compte&#8239;»</strong>.
-                L’application vous prévient que cette action est irréversible.
+                <strong>Descendez jusqu’à la section «&#8239;Zone de
+                danger&#8239;»</strong> et touchez «&#8239;Supprimer le
+                compte&#8239;». L’application vous prévient que cette action est
+                irréversible.
               </li>
               <li>
                 <strong>Confirmez</strong> en tapant le mot SUPPRIMER dans la
-                boîte de dialogue. La suppression démarre aussitôt&#8239;: une
-                fois terminée, vous êtes déconnecté et toutes vos données sont
-                effacées.
+                boîte de dialogue, puis touchez «&#8239;Supprimer&#8239;». La
+                suppression démarre aussitôt&#8239;: une fois terminée, vous êtes
+                déconnecté et l’application revient à l’écran de connexion.
               </li>
             </ul>
+
+            <p>
+              Si la suppression est interrompue, par exemple faute de connexion,
+              l’application vous le signale et votre compte reste actif. Une
+              partie de vos données peut alors déjà avoir été effacée&#8239;:
+              relancez simplement la suppression, elle reprend là où elle s’était
+              arrêtée. Si l’échec persiste, écrivez-nous.
+            </p>
 
             <h2>Demander la suppression par e-mail</h2>
 
             <p>
-              Si vous n’avez plus accès à l’application, ou si vous êtes
-              uniquement inscrit·e à la liste d’attente de la bêta sur ce site,
-              vous pouvez demander la suppression par e-mail.
+              Si vous n’avez plus accès à l’application, si la suppression depuis
+              l’application échoue, ou si vous êtes uniquement inscrit·e à la
+              liste d’attente de la bêta sur ce site, vous pouvez demander la
+              suppression par e-mail.
             </p>
 
             <ul>
@@ -180,35 +198,63 @@
 
             <h2>Données supprimées</h2>
 
-            <p>
-              La suppression efface automatiquement et immédiatement
-              l’ensemble des données associées à votre compte&#8239;:
-            </p>
+            <p>La suppression depuis l’application efface&#8239;:</p>
 
             <ul>
-              <li>votre compte et vos identifiants de connexion&#8239;;</li>
-              <li>votre nom, votre pseudo et votre photo de profil&#8239;;</li>
-              <li>vos statistiques et votre progression d’entraînement&#8239;;</li>
-              <li>vos programmes personnalisés et vos séances réalisées&#8239;;</li>
-              <li>vos adhésions et vos messages dans les groupes&#8239;;</li>
               <li>
-                les groupes que vous avez créés, transférés au membre le plus
-                ancien encore présent, ou supprimés s’il ne reste aucun autre
-                membre.
+                votre compte de connexion&#8239;: adresse e-mail, mot de passe,
+                pseudo enregistré comme nom du compte, sessions de connexion et
+                préférences, dont la liste des membres que vous avez
+                bloqués&#8239;;
+              </li>
+              <li>votre profil&#8239;: pseudo et photo de profil&#8239;;</li>
+              <li>vos statistiques, vos points et votre progression d’entraînement&#8239;;</li>
+              <li>
+                les programmes que vous suivez et l’historique de vos séances
+                terminées&#8239;;
+              </li>
+              <li>
+                vos adhésions aux groupes et tous les messages que vous avez
+                envoyés&#8239;;
+              </li>
+              <li>
+                les groupes dont vous êtes propriétaire&#8239;: ils sont
+                transférés au membre le plus ancien encore présent, ou supprimés
+                avec leurs messages s’il ne reste aucun autre membre.
               </li>
             </ul>
 
             <p>
-              Si vous êtes inscrit·e à la liste d’attente de la bêta de ce site,
-              votre adresse e-mail est également supprimée de cette liste.
+              La suppression du compte n’efface pas votre éventuelle inscription
+              à la liste d’attente de la bêta, qui est gérée séparément&#8239;:
+              pour en être retiré·e, écrivez-nous comme indiqué plus haut.
             </p>
 
             <h2>Données conservées et durée de conservation</h2>
 
             <ul>
               <li>
-                <strong>Aucune donnée personnelle n’est conservée</strong> après
-                la suppression de votre compte.
+                <strong>Signalements.</strong> Les signalements que vous avez
+                faits, ou qui vous concernent, sont conservés le temps de leur
+                traitement, et au plus 12&nbsp;mois, pour les besoins de la
+                modération. Ils peuvent contenir une copie du texte d’un message
+                signalé.
+              </li>
+              <li>
+                <strong>Défis.</strong> Les défis que vous avez lancés ou reçus
+                ne sont pas encore effacés automatiquement. Ils ne contiennent ni
+                pseudo, ni adresse e-mail, ni photo&#8239;: seulement des
+                identifiants techniques, le nombre de séances visé et la semaine
+                concernée. Écrivez-nous pour en obtenir l’effacement.
+              </li>
+              <li>
+                <strong>Photos et noms de groupe.</strong> La photo et le nom
+                d’un groupe restent attachés au groupe tant qu’il existe, même si
+                c’est vous qui les avez choisis&#8239;: ce sont des éléments
+                collectifs. Si l’effacement d’une photo échoue, ou si un groupe
+                est supprimé, le fichier de la photo peut subsister sur nos
+                serveurs sans plus être affiché&#8239;; écrivez-nous pour le faire
+                effacer.
               </li>
               <li>
                 <strong>Sauvegardes et journaux techniques.</strong> Les traces
@@ -217,10 +263,10 @@
                 de trente jours après la suppression.
               </li>
               <li>
-                <strong>Compte Google Play.</strong> La gestion de votre compte
-                Google Play et des données qui y sont associées relève de la
-                politique de confidentialité de Google, et non de la présente
-                procédure.
+                <strong>Comptes App Store et Google Play.</strong> La gestion de
+                votre compte Apple ou Google, et des données qui y sont associées,
+                relève des politiques de confidentialité d’Apple et de Google, et
+                non de la présente procédure.
               </li>
               <li>
                 <strong>Obligations légales.</strong> Si une obligation légale
@@ -293,8 +339,10 @@
             <h2 class="footer-heading">Légal</h2>
             <ul class="footer-links">
               <li><a href="confidentialite.html">Politique de confidentialité</a></li>
-              <li><a href="suppression-de-compte.html" aria-current="page">Suppression de compte</a></li>
+              <li><a href="conditions.html">Conditions d’utilisation</a></li>
               <li><a href="mentions-legales.html">Mentions légales</a></li>
+              <li><a href="suppression-de-compte.html" aria-current="page">Suppression de compte</a></li>
+              <li><a href="support.html">Support</a></li>
             </ul>
           </div>
         </div>
