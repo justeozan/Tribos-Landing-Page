@@ -4655,3 +4655,10 @@ html:not(.js) [data-needs-js] {
 .beta-panel .signup-next .icon {
   color: #fff;
 }
+
+/* ---------- Legal pages: paragraph after a list ----------
+   `.doc p + p` and `.doc ul` space paragraphs and lists, but nothing spaced a
+   paragraph that follows a list: it sat flush against the last bullet. */
+.doc ul + p {
+  margin-top: var(--s-4);
+}
