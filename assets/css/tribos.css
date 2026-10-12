@@ -3745,6 +3745,31 @@ html:not(.js) [data-needs-js] {
 }
 
 /* ---------- Invite block (confirmation page) ---------- */
+.testflight {
+  display: grid;
+  gap: var(--s-4);
+  margin-top: var(--s-6);
+  padding: clamp(1.25rem, 0.75rem + 2vw, 2.25rem);
+  border: 1px solid var(--line);
+  border-radius: var(--r-media);
+  background: var(--surface);
+}
+
+.testflight[hidden] {
+  display: none;
+}
+
+.testflight h2 {
+  margin-bottom: var(--s-2);
+}
+
+@media (min-width: 760px) {
+  .testflight {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+  }
+}
+
 .invite {
   display: grid;
   gap: var(--s-5);
