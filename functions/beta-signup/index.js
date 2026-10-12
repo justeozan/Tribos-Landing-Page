@@ -70,7 +70,10 @@ module.exports = async (ctx) => {
   }
 
   const email = String(params.get("email") || "").trim().toLowerCase();
-  const botField = String(params.get("bot-field") || params.get("telephone") || "").trim();
+  // Seul `bot-field` est un piège : `telephone` est le choix Android / iPhone
+  // du formulaire. Le traiter comme un piège jetait toute inscription qui
+  // l'indiquait, en répondant « succès ».
+  const botField = String(params.get("bot-field") || "").trim();
 
   if (botField) {
     return res.json({ success: true, bot: true });

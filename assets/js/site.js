@@ -1046,7 +1046,7 @@
   var platformNotes = {
     android: "Parfait\u202f: Android, c\u2019est la vague en cours.",
     iphone:
-      "Noté. Android passe en premier, la version iPhone suit\u202f: tu es sur la liste iOS dès l\u2019ouverture.",
+      "Parfait\u202f: sur iPhone, le lien d\u2019installation s\u2019affiche juste après ton inscription.",
   };
 
   document.querySelectorAll("[data-field-platform]").forEach(function (fieldset) {
@@ -1062,6 +1062,20 @@
         sessionStorage.setItem("tribos-telephone", value);
       } catch (e) {}
     });
+  });
+
+  /* =====================================================================
+     iPhone beta (TestFlight)
+
+     The iOS beta is open through a public TestFlight link. It is shown on the
+     confirmation page only to visitors who picked iPhone in the form: the
+     choice never leaves the browser (sessionStorage), and Android visitors
+     have nothing to install yet.
+     ===================================================================== */
+  document.querySelectorAll("[data-testflight]").forEach(function (block) {
+    try {
+      if (sessionStorage.getItem("tribos-telephone") === "iphone") block.hidden = false;
+    } catch (e) {}
   });
 
   /* =====================================================================
