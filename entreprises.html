@@ -63,7 +63,7 @@
     <header class="nav" data-nav>
       <div class="wrap nav-inner">
         <a class="brand" href="./" aria-label="Tribos, accueil">
-          <img src="assets/brand/tribos-icon-64.png" width="34" height="34" decoding="async" alt="" />
+          <img src="assets/brand/tribos-icon-64.png" width="32" height="32" decoding="async" alt="" />
           <span class="brand-name">Tribos</span>
         </a>
 
@@ -108,7 +108,7 @@
         <div class="scene scene-band is-top is-stacked">
           <picture class="scene-media" data-pushin data-drift="exit">
             <source
-              media="(max-width: 759px)"
+              media="(max-width: 759px), (orientation: portrait) and (max-width: 1199px)"
               type="image/avif"
               srcset="assets/cine/sommet-portrait-640.avif 640w, assets/cine/sommet-portrait-960.avif 960w, assets/cine/sommet-portrait-1280.avif 1280w, assets/cine/sommet-portrait-1600.avif 1600w"
               sizes="100vw"
@@ -116,7 +116,7 @@
               height="1707"
             />
             <source
-              media="(max-width: 759px)"
+              media="(max-width: 759px), (orientation: portrait) and (max-width: 1199px)"
               type="image/webp"
               srcset="assets/cine/sommet-portrait-640.webp 640w, assets/cine/sommet-portrait-960.webp 960w, assets/cine/sommet-portrait-1280.webp 1280w, assets/cine/sommet-portrait-1600.webp 1600w"
               sizes="100vw"
@@ -124,7 +124,7 @@
               height="1707"
             />
             <source
-              media="(max-width: 759px)"
+              media="(max-width: 759px), (orientation: portrait) and (max-width: 1199px)"
               srcset="assets/cine/sommet-portrait-640.jpg 640w, assets/cine/sommet-portrait-960.jpg 960w"
               sizes="100vw"
               width="960"
@@ -175,12 +175,11 @@
       <section class="section">
         <div class="wrap">
           <div class="section-head reveal">
-            <p class="eyebrow">En équipe</p>
-            <h2 class="h2" data-split>Pourquoi ça marche en équipe</h2>
+            <h2 class="h2-s" data-split>Pourquoi ça marche en équipe</h2>
           </div>
 
-          <div class="roadmap">
-            <div class="roadmap-item reveal">
+          <div class="feature-rows">
+            <div class="feature-row reveal">
               <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-users-three" /></svg>
               <h3>Du lien, pas un séminaire</h3>
               <p>
@@ -188,7 +187,7 @@
                 crée du lien entre services et entre sites.
               </p>
             </div>
-            <div class="roadmap-item reveal" style="--i: 1">
+            <div class="feature-row reveal" style="--i: 1">
               <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-calendar-check" /></svg>
               <h3>Un cadre simple</h3>
               <p>
@@ -196,7 +195,7 @@
                 semaine, rien à négocier entre niveaux.
               </p>
             </div>
-            <div class="roadmap-item reveal" style="--i: 2">
+            <div class="feature-row reveal" style="--i: 2">
               <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="assets/icons/sprite.svg#i-trophy" /></svg>
               <h3>Une dynamique visible</h3>
               <p>
@@ -209,18 +208,17 @@
       </section>
 
       <!-- ================= COMMENT CA SE MET EN PLACE ================= -->
-      <!-- Three numbered steps. The old mascot illustrations are gone: they
-           belonged to another art direction (and the wolf is off-brand). -->
+      <!-- Three connected steps on the same rail as the home page sequence.
+           The old mascot illustrations are gone: they belonged to another art
+           direction (and the wolf is off-brand). -->
       <section class="section-tight">
         <div class="wrap">
           <div class="section-head reveal">
-            <p class="eyebrow">En trois temps</p>
-            <h2 class="h2" data-split>Comment ça se met en place</h2>
+            <h2 class="h2-s" data-split>Comment ça se met en place</h2>
           </div>
 
-          <ol class="steps steps-row">
-            <li class="step reveal">
-              <p class="step-index">01</p>
+          <ol class="timeline">
+            <li class="timeline-step reveal">
               <h3>Crée le groupe</h3>
               <p>
                 Tu crées le groupe de ton entreprise et tu invites les équipes
@@ -228,8 +226,7 @@
               </p>
             </li>
 
-            <li class="step reveal" style="--i: 1">
-              <p class="step-index">02</p>
+            <li class="timeline-step reveal" style="--i: 1">
               <h3>Choisis le programme</h3>
               <p>
                 Tu choisis un programme adapté au niveau moyen, sur quelques
@@ -237,8 +234,7 @@
               </p>
             </li>
 
-            <li class="step reveal" style="--i: 2">
-              <p class="step-index">03</p>
+            <li class="timeline-step reveal" style="--i: 2">
               <h3>Laisse le groupe vivre</h3>
               <p>
                 Chacun fait sa séance quand il veut. L’objectif commun et les
@@ -252,7 +248,7 @@
       <!-- ================= CONTACT ================= -->
       <section class="section-tight" id="contact">
         <div class="wrap">
-          <div class="band reveal">
+          <div class="band blaze reveal">
             <div class="band-inner">
               <div>
                 <h2>Parlons de ton équipe</h2>
@@ -285,7 +281,7 @@
         <div class="footer-grid">
           <div class="footer-brand">
             <a class="brand" href="./">
-              <img src="assets/brand/tribos-icon-64.png" width="34" height="34" loading="lazy" decoding="async" alt="" />
+              <img src="assets/brand/tribos-icon-64.png" width="32" height="32" loading="lazy" decoding="async" alt="" />
               <span class="brand-name">Tribos</span>
             </a>
             <p>
@@ -323,6 +319,8 @@
             </ul>
           </div>
         </div>
+
+        <p class="footer-mark" aria-hidden="true">Tribos</p>
 
         <div class="footer-bottom">
           <p>© 2026 Tribos. Tous droits réservés.</p>

@@ -7,11 +7,13 @@ responsive variants served by the site into `assets/cine/`:
 
     <name>-<width>.avif / .webp           full frame, desktop and tablet
     <name>-portrait-<width>.avif / .webp  recadrage mobile, renard au centre
+    <crop>-<width>.avif / .webp           paysage seul, sans le renard
     + .jpg at the two smallest widths of each, as the <img> fallback
 
 The masters are the 3D visuals of the "Cinematic 3D" preset
 (.claude/skills/tribos-da-3d-cinematique): the canonical fox, a mountain at
-golden hour, a bottom edge that already fades into the night blue of the page.
+golden hour, a bottom edge that fades into the dark of the page. Their use on
+the site is fixed by .claude/skills/tribos-site-design-system.
 Whatever produced them (a 4K generation, or an x4 upscale of an earlier render),
 the pipeline only crops, resizes and encodes.
 
@@ -57,6 +59,26 @@ VISUALS = (
     Visual("sommet", "sommet-x4.png", (1300, 0, 4300, 3200)),
 )
 
+
+@dataclass(frozen=True)
+class Crop:
+    """A landscape-only cut of a master: the same light, without the fox, used
+    as the backdrop of an interface surface (never with text laid on the fox)."""
+    name: str
+    master: str
+    box: tuple[int, int, int, int]
+    widths: tuple[int, ...] = (700, 1100, 1500)
+
+
+CROPS = (
+    # Soleil, crêtes et mer de nuages, à gauche du renard du sommet : le décor
+    # de la scène orange du téléphone (Comment ça marche).
+    Crop("horizon", "sommet-x4.png", (0, 700, 1750, 2500)),
+    # Pins en contre-jour et soleil, à gauche du renard du sentier : le fond de
+    # la tuile du chat du groupe.
+    Crop("foret", "sentier-x4.png", (0, 250, 1520, 1650)),
+)
+
 # Quality settings, tuned by eye on the hero at 100 %: painterly gradients band
 # early, so the sky sets the floor rather than the fur.
 AVIF = {"quality": 58, "speed": 4}
@@ -99,6 +121,10 @@ def build() -> list[Path]:
         portrait = master.crop(v.portrait_box)
         for w in v.portrait_widths:
             written += encode(resize(portrait, w), OUT / f"{v.name}-portrait-{w}", w in v.portrait_widths[:2])
+    for c in CROPS:
+        cut = Image.open(SRC / c.master).crop(c.box)
+        for w in c.widths:
+            written += encode(resize(cut, w), OUT / f"{c.name}-{w}", w == c.widths[0])
     return written
 
 

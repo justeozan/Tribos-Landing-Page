@@ -14,30 +14,25 @@ traceur.
 
 ---
 
-## Direction artistique
+## Système de design
 
-Depuis le 14 octobre 2026, tout le site suit le preset **Cinematic 3D**
-(`.claude/skills/tribos-da-3d-cinematique/`, voir aussi `docs/brand/`) : une
-interface bleu nuit posée sur des paysages de montagne au coucher du soleil,
-avec le renard canonique en 3D d’animation. Un seul preset sur tout le site :
-pas de photo, pas d’illustration BD, pas de dégradé orange plein écran.
+**Le design du site est fixé** : avant toute modification visuelle, lire
+[`.claude/skills/tribos-site-design-system/SKILL.md`](.claude/skills/tribos-site-design-system/SKILL.md)
+(jetons, composants, composition des pages, images, mouvement, check-list).
+On fait évoluer ce système, on ne refait pas le site de zéro ; `AGENTS.md` (et
+`CLAUDE.md`, qui l’importe) le rappelle à chaque agent qui ouvre le dépôt.
 
-Trois règles tenues dans le code :
+En bref, depuis le 14 octobre 2026, « Noir & Blaze » :
 
-- **L’image et l’interface sont deux couches.** Les visuels (`assets/cine/`)
-  ne portent aucun texte ; titres, formulaires et boutons sont du HTML posé
-  dessus (composant `.scene` dans `tribos.css`).
-- **Le texte ne passe jamais sur le renard.** Sur le hero, la copie occupe le
-  tiers gauche, dans l’ombre de l’image ; ailleurs (fin de page, entreprises,
-  merci, 404), le plan passe seul en bandeau (`.scene-band`) et le titre suit
-  sur la nuit.
-- **Le voile sombre n’existe que pour la lisibilité**, et il est mesuré : tout
-  texte posé sur l’image passe le contraste AA de 1024 à 2560 px de large.
-
-Palette et typographie : nuit `#0A1014` / bleu nuit `#18242B`, ivoire
-`#FFF6EC`, orange de l’interface `#F3730A` (jamais sous du texte blanc), ambre
-`#FF9A43` pour l’orange en petit texte. Une seule famille, Geist (titres en 700
-serrés), et Geist Mono pour les surtitres et les chiffres.
+- **le noir chaud et l’orange** de l’ancien site : fond `#0D0B09`, surfaces
+  graphite, accent `#F3730A` (jamais sous du texte blanc), et une surface
+  d’affiche orange en dégradé (`.blaze`) à quelques moments par page ;
+- **l’artwork Cinematic 3D** du renard canonique (`assets/cine/`) pour le hero,
+  la fin de l’accueil et le haut des pages secondaires, sans texte dans
+  l’image ni sur le renard, avec un voile mesuré (contraste AA de 390 à
+  2560 px) ;
+- **une seule famille**, Geist (titres en 700 serrés) et Geist Mono ;
+- **le logo** est l’icône de l’app (renard blanc en relief sur orange).
 
 ---
 
@@ -55,17 +50,21 @@ serrés), et Geist Mono pour les surtitres et les chiffres.
 ├── robots.txt                Crawl ouvert (README et tools/ exclus)
 ├── sitemap.xml               Les 4 pages indexables
 ├── assets/
-│   ├── css/tribos.css        Design system Cinematic 3D (tokens, scènes, composants, app recréée en DOM)
-│   ├── fonts/                Geist et Geist Mono en woff2, plus fonts.css
+│   ├── css/tribos.css        Système « Noir & Blaze » (jetons, scènes, composants, widgets de l’app)
+│   ├── fonts/                Geist et Geist Mono (fonts.css), Montserrat et Roboto des widgets (OFL)
 │   ├── icons/sprite.svg      Sprite SVG unique, appelé en <use href="...#i-nom">
 │   ├── js/site.js            Menu mobile, ouverture du hero, apparitions, envoi du formulaire
 │   ├── cine/                 Visuels 3D (AVIF + WebP, JPEG de secours), plein cadre et recadrage mobile
-│   ├── app/                  Captures de l’application (webp + png, plus une variante -sm servie en srcset)
+│   ├── app/                  Captures de l’app : ios-* (iPhone, App Store), les autres ne servent plus
+│   ├── appui/                Avatars, bannière et icônes des widgets de l’app (groupe de démo, CC0)
 │   ├── brand/                Icône, favicons, marque Tribos, carte sociale
 │   ├── email/                Visuels des mails Resend (URL publiques, ne jamais écraser)
 │   └── photo/, illus/        Anciens visuels, plus utilisés par aucune page depuis la refonte
+├── AGENTS.md, CLAUDE.md      Consignes pour les agents (non publiées)
 ├── tools/
-│   ├── build-assets.py       Pipeline des captures, icônes et favicons (Python + Pillow)
+│   ├── build-assets.py       Icônes, favicons et anciennes captures Android (Python + Pillow)
+│   ├── build-ios.py          Captures iOS et éléments des widgets, depuis les planches App Store
+│   ├── build-fonts.py        Montserrat et Roboto des widgets, sous-ensemble latin (fontTools)
 │   ├── build-cine.py         Variantes responsives des visuels 3D (Python + Pillow avec AVIF)
 │   ├── cine-generate.py      Génère un master 3D en 4K avec le renard canonique (Hermes, Nano Banana Pro)
 │   ├── cine-prompts/         Prompts des masters, tirés du skill Cinematic 3D
@@ -136,6 +135,28 @@ Si tu ajoutes ou retires une capture, pense à relancer avec `--prune` pour
 supprimer les fichiers devenus orphelins, et à mettre à jour le `srcset`
 correspondant dans le HTML.
 
+### Les captures iOS et les widgets de l’app
+
+Les écrans montrés par le site (`assets/app/ios-*`) viennent des planches App
+Store du dépôt de l’app (`store/app-store/screenshot-0N-*.png`) : l’app iOS en
+version release, connectée au compte de démo « Max » du groupe « Les Loups »,
+toutes les images chargées. `tools/build-ios.py` en découpe l’écran, l’aligne
+sur une hauteur commune et écrit WebP + JPEG en 900 et 450 px ; il produit
+aussi, dans `assets/appui/`, les avatars et la bannière du groupe de démo
+(photos CC0), les icônes de l’app et le sprite des icônes Material utilisées
+par les widgets.
+
+```bash
+mkdir -p .context/src/ios && cp ../Tribos/store/app-store/screenshot-0*.png .context/src/ios/
+/opt/homebrew/bin/python3 tools/build-ios.py
+env -u PYTHONPATH /usr/bin/python3 tools/build-fonts.py   # polices des widgets, une fois
+```
+
+Le détail des sources à recopier (avatars, icônes, polices) est en tête de
+chaque script. Les widgets eux-mêmes (série, points, défi, classement, objectif
+du groupe, chat) sont du HTML/CSS reconstruit depuis le code de l’app : voir le
+skill du système de design, § 12.
+
 ### Les visuels Cinematic 3D
 
 `assets/cine/` est produit par `tools/build-cine.py` à partir de deux masters
@@ -146,6 +167,11 @@ rangés dans `.context/src/cine/` (non versionnés, comme les autres sources) :
 | `sentier-x4.png` | hero de l’accueil, 404, carte sociale | `assets/email/hero-newsletter.jpg` upscalé x4 |
 | `sommet-x4.png` | fin de l’accueil, entreprises, merci | `assets/email/hero-nouvelle-version.jpg` upscalé x4 |
 
+Deux recadrages de paysage seul, sans le renard, sont tirés des mêmes
+masters : `horizon` (soleil et mer de nuages du sommet, fond de la scène du
+téléphone dans « Comment ça marche ») et `foret` (pins en contre-jour du
+sentier, fond de la tuile du chat).
+
 ```bash
 python3 tools/build-cine.py            # recadre, redimensionne, encode, affiche le manifeste
 python3 tools/build-cine.py --prune    # supprime en plus les fichiers devenus inutiles
@@ -153,7 +179,8 @@ python3 tools/build-cine.py --prune    # supprime en plus les fichiers devenus i
 
 Chaque master donne un plein cadre en 1280, 1920, 2560 et 3200 px et un
 recadrage mobile centré sur le renard (`-portrait-`, 640 à 1600 px), en AVIF et
-WebP, avec un JPEG de secours aux deux plus petites largeurs. Les recadrages
+WebP, avec un JPEG de secours aux deux plus petites largeurs ; les paysages
+sortent en 700, 1100 et 1500 px. Les recadrages
 mobiles sont des boîtes en pixels du master, déclarées en tête du script : le
 renard, sa queue et sa main levée doivent y tenir. Le script demande Pillow
 11.3 ou plus, compilé avec AVIF, et s’arrête sinon.
