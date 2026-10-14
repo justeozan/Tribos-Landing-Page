@@ -22,7 +22,7 @@
  *   node tools/build-og.mjs              # PORT=8000 par défaut
  */
 import { spawn } from "node:child_process";
-import { existsSync, mkdirSync, readdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import os from "node:os";
 import path from "node:path";
@@ -81,19 +81,23 @@ if (!bin) {
   process.exit(2);
 }
 
-const debugPort = 9222 + Math.floor(Math.random() * 1);
+// Port 0: Chrome picks a free port and writes it to DevToolsActivePort in its
+// own profile directory. A fixed port (this used to be 9222) can belong to a
+// browser already running on the machine with remote debugging on, and the
+// script would then drive one of that browser's real tabs instead of its own.
+const profile = mkdtempSync(path.join(os.tmpdir(), "tribos-og-"));
 const chrome = spawn(
   bin,
   [
     "--headless=new",
-    `--remote-debugging-port=${debugPort}`,
+    "--remote-debugging-port=0",
     `--window-size=${WIDTH},${HEIGHT}`,
     "--hide-scrollbars",
     "--no-sandbox",
     "--disable-gpu",
     "--force-color-profile=srgb",
     "--font-render-hinting=none",
-    `--user-data-dir=${path.join(os.tmpdir(), "tribos-og")}`,
+    `--user-data-dir=${profile}`,
     "about:blank",
   ],
   { stdio: "ignore" }
@@ -101,9 +105,15 @@ const chrome = spawn(
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
+let debugPort = 0;
+
 async function target() {
   for (let i = 0; i < 80; i++) {
     try {
+      if (!debugPort) {
+        debugPort = parseInt(readFileSync(path.join(profile, "DevToolsActivePort"), "utf8"), 10) || 0;
+        if (!debugPort) throw new Error("port not written yet");
+      }
       const list = await (await fetch(`http://127.0.0.1:${debugPort}/json/list`)).json();
       const page = list.find((t) => t.type === "page");
       if (page) return page;
@@ -194,5 +204,6 @@ try {
 } finally {
   if (ws) ws.close();
   chrome.kill();
+  rmSync(profile, { recursive: true, force: true });
 }
 process.exit(0);

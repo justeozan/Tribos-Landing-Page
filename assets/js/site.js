@@ -129,6 +129,30 @@
   }
 
   /* =====================================================================
+     Opening shot
+
+     The hero image starts slightly wide and dark (CSS, gated on `.js`) and
+     settles once it has decoded, so the push-in never plays over an empty
+     frame. A cached image is lit on the next frame; a failed one is lit
+     anyway, so the scene never stays dimmed.
+     ===================================================================== */
+  document.querySelectorAll("[data-pushin]").forEach(function (media) {
+    var img = media.querySelector("img");
+    if (!img) return;
+    var light = function () {
+      requestAnimationFrame(function () {
+        media.classList.add("is-lit");
+      });
+    };
+    if (img.complete && img.naturalWidth) {
+      light();
+    } else {
+      img.addEventListener("load", light, { once: true });
+      img.addEventListener("error", light, { once: true });
+    }
+  });
+
+  /* =====================================================================
      Split text
 
      Wraps each word of a heading in its own span so the reveal can cascade
@@ -197,8 +221,11 @@
     el.style.setProperty("--words", index);
   }
 
+  // [data-scrub] (the manifesto) is split the same way, but its words are lit
+  // by a CSS view timeline as they cross the reading zone, not by the reveal
+  // observer below.
   if (!reduce) {
-    document.querySelectorAll("[data-split]").forEach(splitWords);
+    document.querySelectorAll("[data-split], [data-scrub]").forEach(splitWords);
   }
 
   /* =====================================================================
@@ -392,8 +419,53 @@
     el.addEventListener("blur", release);
   }
 
+  /* =====================================================================
+     Tile spotlight
+
+     A soft light follows the pointer across the bento tiles. Same shared
+     frame as the effects above: the handler only records coordinates, one
+     rAF writes --sx / --sy, and the gradient itself lives in the stylesheet.
+     ===================================================================== */
+  function bindSpotlight(el) {
+    var lastX = 0;
+    var lastY = 0;
+    var rect = null;
+    var raf = false;
+
+    function write() {
+      raf = false;
+      if (!rect) return;
+      el.style.setProperty("--sx", (lastX - rect.left).toFixed(0) + "px");
+      el.style.setProperty("--sy", (lastY - rect.top).toFixed(0) + "px");
+    }
+
+    el.addEventListener("pointerenter", function (event) {
+      if (event.pointerType !== "mouse") return;
+      rect = el.getBoundingClientRect();
+    });
+
+    el.addEventListener("pointermove", function (event) {
+      if (event.pointerType !== "mouse" || !rect) return;
+      lastX = event.clientX;
+      lastY = event.clientY;
+      if (!raf) {
+        raf = true;
+        queue(write);
+      }
+    });
+
+    el.addEventListener("pointerleave", function () {
+      rect = null;
+    });
+  }
+
   function bindPointerEffects() {
     if (reduce || !finePointer.matches) return;
+    document.querySelectorAll(".bento .tile").forEach(function (el) {
+      if (el.dataset.spotBound) return;
+      el.dataset.spotBound = "1";
+      bindSpotlight(el);
+    });
     document.querySelectorAll("[data-tilt]").forEach(function (el) {
       if (el.dataset.tiltBound) return;
       el.dataset.tiltBound = "1";
@@ -450,9 +522,10 @@
 
     function tick() {
       // One member finishes a session and banks the points the app awards for
-      // it. Only the mover changes, so the reorder reads as a consequence.
+      // it: 50, or 100 with the regularity bonus. Only the mover changes, so
+      // the reorder reads as a consequence.
       var mover = rows[Math.floor(Math.random() * rows.length)];
-      var gain = [50, 75, 100][Math.floor(Math.random() * 3)];
+      var gain = Math.random() < 0.5 ? 50 : 100;
 
       var first = rows.map(function (row) {
         return row.getBoundingClientRect().top;
@@ -519,21 +592,22 @@
      The product's actual loop: the group owes N sessions this week, everyone's
      sessions count toward the same total, and members are NEVER ranked by
      contribution (lib/screens/group/widgets/weekly_goal_card.dart is explicit
-     about that). Sessions land one at a time and the bar fills; when the target
-     is reached it holds, then starts over.
+     about that). Sessions land one at a time; the bar has one segment per
+     member who trained, as long as their sessions, then what is left, exactly
+     as the app draws it. When the target is reached it holds, then starts over.
 
-     Reduced motion and no-JS both leave the authored 1/4 on screen, which is a
+     Reduced motion and no-JS both leave the authored 3/6 on screen, which is a
      correct still frame of the same thing.
      ===================================================================== */
   function bindGoal(card) {
-    var target = parseInt(card.dataset.target, 10) || 4;
+    var target = parseInt(card.dataset.target, 10) || 6;
     var doneEl = card.querySelector("[data-goal-done]");
-    var bar = card.querySelector("[data-goal-bar]");
-    var status = card.querySelector("[data-goal-status]");
+    var segs = Array.prototype.slice.call(card.querySelectorAll("[data-goal-seg]"));
+    var rest = card.querySelector("[data-goal-rest]");
     var members = Array.prototype.slice.call(
       card.querySelectorAll("[data-goal-member]")
     );
-    if (!doneEl || !bar || !members.length) return;
+    if (!doneEl || !rest || !members.length || segs.length !== members.length) return;
 
     var counts = members.map(function (m) {
       return parseInt(m.querySelector("[data-goal-count]").textContent, 10) || 0;
@@ -541,21 +615,29 @@
     var timer = null;
     var running = false;
 
+    // A segment's length is its share of the bar (flex-grow); a zero one is
+    // flagged so the stylesheet hands its gutter back.
+    function setSegment(el, n) {
+      el.style.setProperty("--n", String(n));
+      if (n > 0) el.removeAttribute("data-empty");
+      else el.setAttribute("data-empty", "");
+    }
+
     function paint() {
       var done = counts.reduce(function (a, b) {
         return a + b;
       }, 0);
       doneEl.textContent = String(done);
-      bar.style.setProperty("--fill", Math.min(done / target, 1).toFixed(3));
+      segs.forEach(function (seg, i) {
+        setSegment(seg, counts[i]);
+      });
+      // Monday morning, nobody has trained: the whole bar is still to do.
+      setSegment(rest, done === 0 ? 1 : Math.max(target - done, 0));
       members.forEach(function (m, i) {
         var b = m.querySelector("[data-goal-count]");
+        // Zero sessions: no figure at all, for anyone (the app's rule).
         b.textContent = counts[i] ? String(counts[i]) : "";
-        m.dataset.active = counts[i] ? "true" : "false";
       });
-      if (status) {
-        status.textContent = done + " séance" + (done > 1 ? "s" : "") +
-          " sur " + target + " cette semaine.";
-      }
       return done;
     }
 
@@ -677,8 +759,10 @@
         screens.forEach(function (screen, i) {
           screen.dataset.on = String(i === index);
         });
+        // Steps already read stay lit on the rail: progress, not a pointer.
         steps.forEach(function (step, i) {
           step.dataset.on = String(i === index);
+          step.dataset.past = String(i < index);
         });
       };
 

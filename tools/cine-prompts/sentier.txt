@@ -1,0 +1,27 @@
+Image 1 is the canonical Tribos fox mascot. Reproduce this exact character: same face shape, same large expressive dark brown eyes and their placement, same black nose, cream cheeks, muzzle and chest, same large pointed ears with warm pink inner fur and cream tufts, same orange fur colour, same fluffy cream-tipped tail, same body proportions, same white athletic headband, teal sleeveless sports top and dark navy sports shorts. Never redesign the character. Ignore the logo and the words printed in image 1: they are not part of the character.
+Image 2 shows the same fox in the established Tribos Cinematic 3D universe: match its rendering quality, fur grooming, golden-hour lighting and colour grading. Do not copy its framing; follow the composition below.
+
+Create a cinematic, premium 3D animated-film website hero for Tribos, a social sports and group-motivation brand.
+Ultra-wide desktop composition, 21:9 aspect ratio.
+
+SCENE:
+An expansive mountain landscape at golden hour. Dramatic layered mountain peaks, a dense pine forest, softly blurred dark foreground vegetation and warm orange clouds illuminated by the setting sun. Deep blue-grey shadows contrast with glowing amber and copper highlights. Build depth with four layers: dark, softly blurred foreground vegetation; a detailed pine forest in the middle ground; distant mountains in atmospheric haze; glowing sunset clouds and a luminous sky. The low sun sits behind the ridges in the right half of the frame and sends soft volumetric rays through the haze.
+
+CHARACTER:
+The canonical Tribos orange fox mascot stands confidently in the center-right foreground, its body centred at about 62% of the image width. Framed from the tips of the ears down to mid-thigh, the head in the upper third of the frame, large enough to read the facial expression and the athletic outfit. Expressive dark brown eyes, detailed soft orange fur, cream cheeks and muzzle, large pointed ears, a fluffy cream-tipped tail curling out beside the body, white athletic headband, teal sleeveless sports top, dark navy sports shorts and a small black outdoor backpack. Hands resting casually in the shorts pockets, relaxed confident smile, upright athletic posture, head turned slightly toward the left of the frame as if looking at the trail ahead. Warm orange rim light outlines the ears, the fur and the tail; soft golden reflections on the face; cool blue shadows on the side away from the sun.
+
+RENDERING:
+Pixar-inspired premium 3D animated feature-film quality, sophisticated stylized character design, beautifully groomed fur with individually defined strands, detailed textile materials with stitching and folds, cinematic global illumination, realistic contact shadows, warm subsurface scattering in the ears, golden rim lighting and atmospheric environmental depth. Controlled highlights, no excessive bloom.
+
+COMPOSITION:
+Reserve the entire left 42% of the frame as a dark, calm and uncluttered area: a shadowed mountain slope and deep blue-grey haze with low local contrast, no bright clouds, no sun and no detailed objects there, so white website typography and an email form can sit on it with strong legibility. Keep the far-right 12% visually calm (soft haze and dark pines) for small secondary labels. The bottom 15% of the frame darkens gradually into deep navy foreground shadows (#0A1014) so the image can blend into a dark web page below.
+
+COLOR:
+Tribos orange (#F87824), burnt orange, copper, amber, golden cream, deep navy and restrained teal. Orange remains the dominant brand colour, through the fox, the sunset light and the reflections.
+
+MOOD:
+Adventurous, confident, warm, premium, friendly and aspirational. Sport is an adventure best shared with friends.
+
+IMPORTANT:
+Generate only the visual background and the mascot. No typography, no letters, no website navigation, no buttons, no logos, no UI elements, no frames and no watermark.
+Avoid photorealism, photorealistic wildlife, toy-like plastic materials, childish proportions, flat vector or 2D comic outlines, oversaturated neon colours, excessive lens flare or bloom, random floating particles and clutter.

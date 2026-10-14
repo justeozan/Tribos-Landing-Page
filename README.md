@@ -14,6 +14,28 @@ traceur.
 
 ---
 
+## Système de design
+
+**Le design du site est fixé** : avant toute modification visuelle, lire
+[`.claude/skills/tribos-site-design-system/SKILL.md`](.claude/skills/tribos-site-design-system/SKILL.md)
+(jetons, composants, composition des pages, images, mouvement, check-list).
+On fait évoluer ce système, on ne refait pas le site de zéro ; `AGENTS.md` (et
+`CLAUDE.md`, qui l’importe) le rappelle à chaque agent qui ouvre le dépôt.
+
+En bref, depuis le 14 octobre 2026, « Noir & Blaze » :
+
+- **le noir chaud et l’orange** de l’ancien site : fond `#0D0B09`, surfaces
+  graphite, accent `#F3730A` (jamais sous du texte blanc), et une surface
+  d’affiche orange en dégradé (`.blaze`) à quelques moments par page ;
+- **l’artwork Cinematic 3D** du renard canonique (`assets/cine/`) pour le hero,
+  la fin de l’accueil et le haut des pages secondaires, sans texte dans
+  l’image ni sur le renard, avec un voile mesuré (contraste AA de 390 à
+  2560 px) ;
+- **une seule famille**, Geist (titres en 700 serrés) et Geist Mono ;
+- **le logo** est l’icône de l’app (renard blanc en relief sur orange).
+
+---
+
 ## Arborescence
 
 ```
@@ -28,15 +50,25 @@ traceur.
 ├── robots.txt                Crawl ouvert (README et tools/ exclus)
 ├── sitemap.xml               Les 4 pages indexables
 ├── assets/
-│   ├── css/tribos.css        Design system complet (tokens, composants, thèmes clair et sombre)
-│   ├── fonts/                Bricolage Grotesque, Geist et Geist Mono en woff2, plus fonts.css
+│   ├── css/tribos.css        Système « Noir & Blaze » (jetons, scènes, composants, widgets de l’app)
+│   ├── fonts/                Geist et Geist Mono (fonts.css), Montserrat et Roboto des widgets (OFL)
 │   ├── icons/sprite.svg      Sprite SVG unique, appelé en <use href="...#i-nom">
-│   ├── js/site.js            Thème, menu mobile, animations d’apparition, envoi du formulaire
-│   ├── app/                  Captures de l’application (webp + png, plus une variante -sm servie en srcset)
-│   ├── brand/                Icône, favicons, marque Tribos
-│   └── illus/                Illustrations des mascottes
+│   ├── js/site.js            Menu mobile, ouverture du hero, apparitions, envoi du formulaire
+│   ├── cine/                 Visuels 3D (AVIF + WebP, JPEG de secours), plein cadre et recadrage mobile
+│   ├── app/                  Captures de l’app : ios-* (iPhone, App Store), les autres ne servent plus
+│   ├── appui/                Avatars, bannière et icônes des widgets de l’app (groupe de démo, CC0)
+│   ├── brand/                Icône, favicons, marque Tribos, carte sociale
+│   ├── email/                Visuels des mails Resend (URL publiques, ne jamais écraser)
+│   └── photo/, illus/        Anciens visuels, plus utilisés par aucune page depuis la refonte
+├── AGENTS.md, CLAUDE.md      Consignes pour les agents (non publiées)
 ├── tools/
-│   ├── build-assets.py       Pipeline de génération des images (Python + Pillow)
+│   ├── build-assets.py       Icônes, favicons et anciennes captures Android (Python + Pillow)
+│   ├── build-ios.py          Captures iOS et éléments des widgets, depuis les planches App Store
+│   ├── build-fonts.py        Montserrat et Roboto des widgets, sous-ensemble latin (fontTools)
+│   ├── build-cine.py         Variantes responsives des visuels 3D (Python + Pillow avec AVIF)
+│   ├── cine-generate.py      Génère un master 3D en 4K avec le renard canonique (Hermes, Nano Banana Pro)
+│   ├── cine-prompts/         Prompts des masters, tirés du skill Cinematic 3D
+│   ├── cine-upscale.py       Upscale x4 Real-ESRGAN d’un rendu existant en master
 │   ├── build-og.mjs          Rend la carte sociale 1200x630 (Chromium headless)
 │   └── og-card.html          Gabarit de cette carte
 └── .context/                 Sources de travail, non versionnées (voir plus bas)
@@ -103,11 +135,80 @@ Si tu ajoutes ou retires une capture, pense à relancer avec `--prune` pour
 supprimer les fichiers devenus orphelins, et à mettre à jour le `srcset`
 correspondant dans le HTML.
 
+### Les captures iOS et les widgets de l’app
+
+Les écrans montrés par le site (`assets/app/ios-*`) viennent des planches App
+Store du dépôt de l’app (`store/app-store/screenshot-0N-*.png`) : l’app iOS en
+version release, connectée au compte de démo « Max » du groupe « Les Loups »,
+toutes les images chargées. `tools/build-ios.py` en découpe l’écran, l’aligne
+sur une hauteur commune et écrit WebP + JPEG en 900 et 450 px ; il produit
+aussi, dans `assets/appui/`, les avatars et la bannière du groupe de démo
+(photos CC0), les icônes de l’app et le sprite des icônes Material utilisées
+par les widgets.
+
+```bash
+mkdir -p .context/src/ios && cp ../Tribos/store/app-store/screenshot-0*.png .context/src/ios/
+/opt/homebrew/bin/python3 tools/build-ios.py
+env -u PYTHONPATH /usr/bin/python3 tools/build-fonts.py   # polices des widgets, une fois
+```
+
+Le détail des sources à recopier (avatars, icônes, polices) est en tête de
+chaque script. Les widgets eux-mêmes (série, points, défi, classement, objectif
+du groupe, chat) sont du HTML/CSS reconstruit depuis le code de l’app : voir le
+skill du système de design, § 12.
+
+### Les visuels Cinematic 3D
+
+`assets/cine/` est produit par `tools/build-cine.py` à partir de deux masters
+rangés dans `.context/src/cine/` (non versionnés, comme les autres sources) :
+
+| Master | Où il sert | Origine actuelle |
+| --- | --- | --- |
+| `sentier-x4.png` | hero de l’accueil, 404, carte sociale | `assets/email/hero-newsletter.jpg` upscalé x4 |
+| `sommet-x4.png` | fin de l’accueil, entreprises, merci | `assets/email/hero-nouvelle-version.jpg` upscalé x4 |
+
+Deux recadrages de paysage seul, sans le renard, sont tirés des mêmes
+masters : `horizon` (soleil et mer de nuages du sommet, fond de la scène du
+téléphone dans « Comment ça marche ») et `foret` (pins en contre-jour du
+sentier, fond de la tuile du chat).
+
+```bash
+python3 tools/build-cine.py            # recadre, redimensionne, encode, affiche le manifeste
+python3 tools/build-cine.py --prune    # supprime en plus les fichiers devenus inutiles
+```
+
+Chaque master donne un plein cadre en 1280, 1920, 2560 et 3200 px et un
+recadrage mobile centré sur le renard (`-portrait-`, 640 à 1600 px), en AVIF et
+WebP, avec un JPEG de secours aux deux plus petites largeurs ; les paysages
+sortent en 700, 1100 et 1500 px. Les recadrages
+mobiles sont des boîtes en pixels du master, déclarées en tête du script : le
+renard, sa queue et sa main levée doivent y tenir. Le script demande Pillow
+11.3 ou plus, compilé avec AVIF, et s’arrête sinon.
+
+**Les masters actuels sont provisoires.** Ce sont les visuels 3D des mails
+(1200x800), upscalés par `tools/cine-upscale.py`. Ils sont fidèles au renard
+canonique, mais leur soleil est à gauche, là où le hero pose son texte : le
+voile sombre compense. Les vrais masters sont à générer en 21:9 et en 4K avec
+les prompts de `tools/cine-prompts/`, qui suivent le skill à la lettre (zone
+sombre à gauche, renard au centre-droit) :
+
+```bash
+~/.hermes/hermes-agent/venv/bin/python tools/cine-generate.py sentier \
+    docs/brand/mascotte/renard-canonique-debout.png assets/email/hero-newsletter.jpg
+```
+
+Puis contrôler le rendu à l’œil (visage, proportions, tenue : jamais de renard
+redessiné), le renommer `sentier-x4.png`, adapter les boîtes mobiles et les
+`width`/`height` des `<img>` si le format a changé (3:2 aujourd’hui, 21:9
+ensuite), et relancer `build-cine.py`. Le 14 octobre 2026, aucune génération
+n’était possible : Higgsfield sans crédit, Everygen sans abonnement, crédits
+Nous et OpenRouter épuisés, route ChatGPT/Codex en 403.
+
 **La carte sociale** (`assets/brand/og-card.png`, 1200x630, celle qui s’affiche
 au partage d’un lien) est à part : elle porte du texte, donc elle est rendue
 depuis `tools/og-card.html` par un Chromium headless, qui réutilise les vraies
-polices et les vrais tokens du site. À relancer si la marque, la promesse ou la
-capture d’accueil changent :
+polices et les vrais tokens du site. À relancer si la marque, la promesse ou le
+visuel du hero changent :
 
 ```bash
 python3 -m http.server 8000 &      # le gabarit a besoin d’un vrai serveur
