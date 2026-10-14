@@ -119,6 +119,13 @@
   [headers.values]
     Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
 
+# Visuels Cinematic 3D (tools/build-cine.py) : mêmes règles que les autres
+# images, noms stables sans hash de contenu.
+[[headers]]
+  for = "/assets/cine/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+
 [[headers]]
   for = "/assets/brand/*"
   [headers.values]

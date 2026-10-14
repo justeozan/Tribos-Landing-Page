@@ -14,6 +14,33 @@ traceur.
 
 ---
 
+## Direction artistique
+
+Depuis le 14 octobre 2026, tout le site suit le preset **Cinematic 3D**
+(`.claude/skills/tribos-da-3d-cinematique/`, voir aussi `docs/brand/`) : une
+interface bleu nuit posée sur des paysages de montagne au coucher du soleil,
+avec le renard canonique en 3D d’animation. Un seul preset sur tout le site :
+pas de photo, pas d’illustration BD, pas de dégradé orange plein écran.
+
+Trois règles tenues dans le code :
+
+- **L’image et l’interface sont deux couches.** Les visuels (`assets/cine/`)
+  ne portent aucun texte ; titres, formulaires et boutons sont du HTML posé
+  dessus (composant `.scene` dans `tribos.css`).
+- **Le texte ne passe jamais sur le renard.** Sur le hero, la copie occupe le
+  tiers gauche, dans l’ombre de l’image ; ailleurs (fin de page, entreprises,
+  merci, 404), le plan passe seul en bandeau (`.scene-band`) et le titre suit
+  sur la nuit.
+- **Le voile sombre n’existe que pour la lisibilité**, et il est mesuré : tout
+  texte posé sur l’image passe le contraste AA de 1024 à 2560 px de large.
+
+Palette et typographie : nuit `#0A1014` / bleu nuit `#18242B`, ivoire
+`#FFF6EC`, orange de l’interface `#F3730A` (jamais sous du texte blanc), ambre
+`#FF9A43` pour l’orange en petit texte. Une seule famille, Geist (titres en 700
+serrés), et Geist Mono pour les surtitres et les chiffres.
+
+---
+
 ## Arborescence
 
 ```
@@ -28,15 +55,21 @@ traceur.
 ├── robots.txt                Crawl ouvert (README et tools/ exclus)
 ├── sitemap.xml               Les 4 pages indexables
 ├── assets/
-│   ├── css/tribos.css        Design system complet (tokens, composants, thèmes clair et sombre)
-│   ├── fonts/                Bricolage Grotesque, Geist et Geist Mono en woff2, plus fonts.css
+│   ├── css/tribos.css        Design system Cinematic 3D (tokens, scènes, composants, app recréée en DOM)
+│   ├── fonts/                Geist et Geist Mono en woff2, plus fonts.css
 │   ├── icons/sprite.svg      Sprite SVG unique, appelé en <use href="...#i-nom">
-│   ├── js/site.js            Thème, menu mobile, animations d’apparition, envoi du formulaire
+│   ├── js/site.js            Menu mobile, ouverture du hero, apparitions, envoi du formulaire
+│   ├── cine/                 Visuels 3D (AVIF + WebP, JPEG de secours), plein cadre et recadrage mobile
 │   ├── app/                  Captures de l’application (webp + png, plus une variante -sm servie en srcset)
-│   ├── brand/                Icône, favicons, marque Tribos
-│   └── illus/                Illustrations des mascottes
+│   ├── brand/                Icône, favicons, marque Tribos, carte sociale
+│   ├── email/                Visuels des mails Resend (URL publiques, ne jamais écraser)
+│   └── photo/, illus/        Anciens visuels, plus utilisés par aucune page depuis la refonte
 ├── tools/
-│   ├── build-assets.py       Pipeline de génération des images (Python + Pillow)
+│   ├── build-assets.py       Pipeline des captures, icônes et favicons (Python + Pillow)
+│   ├── build-cine.py         Variantes responsives des visuels 3D (Python + Pillow avec AVIF)
+│   ├── cine-generate.py      Génère un master 3D en 4K avec le renard canonique (Hermes, Nano Banana Pro)
+│   ├── cine-prompts/         Prompts des masters, tirés du skill Cinematic 3D
+│   ├── cine-upscale.py       Upscale x4 Real-ESRGAN d’un rendu existant en master
 │   ├── build-og.mjs          Rend la carte sociale 1200x630 (Chromium headless)
 │   └── og-card.html          Gabarit de cette carte
 └── .context/                 Sources de travail, non versionnées (voir plus bas)
@@ -103,11 +136,52 @@ Si tu ajoutes ou retires une capture, pense à relancer avec `--prune` pour
 supprimer les fichiers devenus orphelins, et à mettre à jour le `srcset`
 correspondant dans le HTML.
 
+### Les visuels Cinematic 3D
+
+`assets/cine/` est produit par `tools/build-cine.py` à partir de deux masters
+rangés dans `.context/src/cine/` (non versionnés, comme les autres sources) :
+
+| Master | Où il sert | Origine actuelle |
+| --- | --- | --- |
+| `sentier-x4.png` | hero de l’accueil, 404, carte sociale | `assets/email/hero-newsletter.jpg` upscalé x4 |
+| `sommet-x4.png` | fin de l’accueil, entreprises, merci | `assets/email/hero-nouvelle-version.jpg` upscalé x4 |
+
+```bash
+python3 tools/build-cine.py            # recadre, redimensionne, encode, affiche le manifeste
+python3 tools/build-cine.py --prune    # supprime en plus les fichiers devenus inutiles
+```
+
+Chaque master donne un plein cadre en 1280, 1920, 2560 et 3200 px et un
+recadrage mobile centré sur le renard (`-portrait-`, 640 à 1600 px), en AVIF et
+WebP, avec un JPEG de secours aux deux plus petites largeurs. Les recadrages
+mobiles sont des boîtes en pixels du master, déclarées en tête du script : le
+renard, sa queue et sa main levée doivent y tenir. Le script demande Pillow
+11.3 ou plus, compilé avec AVIF, et s’arrête sinon.
+
+**Les masters actuels sont provisoires.** Ce sont les visuels 3D des mails
+(1200x800), upscalés par `tools/cine-upscale.py`. Ils sont fidèles au renard
+canonique, mais leur soleil est à gauche, là où le hero pose son texte : le
+voile sombre compense. Les vrais masters sont à générer en 21:9 et en 4K avec
+les prompts de `tools/cine-prompts/`, qui suivent le skill à la lettre (zone
+sombre à gauche, renard au centre-droit) :
+
+```bash
+~/.hermes/hermes-agent/venv/bin/python tools/cine-generate.py sentier \
+    docs/brand/mascotte/renard-canonique-debout.png assets/email/hero-newsletter.jpg
+```
+
+Puis contrôler le rendu à l’œil (visage, proportions, tenue : jamais de renard
+redessiné), le renommer `sentier-x4.png`, adapter les boîtes mobiles et les
+`width`/`height` des `<img>` si le format a changé (3:2 aujourd’hui, 21:9
+ensuite), et relancer `build-cine.py`. Le 14 octobre 2026, aucune génération
+n’était possible : Higgsfield sans crédit, Everygen sans abonnement, crédits
+Nous et OpenRouter épuisés, route ChatGPT/Codex en 403.
+
 **La carte sociale** (`assets/brand/og-card.png`, 1200x630, celle qui s’affiche
 au partage d’un lien) est à part : elle porte du texte, donc elle est rendue
 depuis `tools/og-card.html` par un Chromium headless, qui réutilise les vraies
-polices et les vrais tokens du site. À relancer si la marque, la promesse ou la
-capture d’accueil changent :
+polices et les vrais tokens du site. À relancer si la marque, la promesse ou le
+visuel du hero changent :
 
 ```bash
 python3 -m http.server 8000 &      # le gabarit a besoin d’un vrai serveur

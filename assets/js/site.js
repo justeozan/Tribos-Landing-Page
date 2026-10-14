@@ -129,6 +129,30 @@
   }
 
   /* =====================================================================
+     Opening shot
+
+     The hero image starts slightly wide and dark (CSS, gated on `.js`) and
+     settles once it has decoded, so the push-in never plays over an empty
+     frame. A cached image is lit on the next frame; a failed one is lit
+     anyway, so the scene never stays dimmed.
+     ===================================================================== */
+  document.querySelectorAll("[data-pushin]").forEach(function (media) {
+    var img = media.querySelector("img");
+    if (!img) return;
+    var light = function () {
+      requestAnimationFrame(function () {
+        media.classList.add("is-lit");
+      });
+    };
+    if (img.complete && img.naturalWidth) {
+      light();
+    } else {
+      img.addEventListener("load", light, { once: true });
+      img.addEventListener("error", light, { once: true });
+    }
+  });
+
+  /* =====================================================================
      Split text
 
      Wraps each word of a heading in its own span so the reveal can cascade

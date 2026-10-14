@@ -1,0 +1,27 @@
+Image 1 is the canonical Tribos fox mascot. Reproduce this exact character: same face shape, same large expressive dark brown eyes and their placement, same black nose, cream cheeks, muzzle and chest, same large pointed ears with warm pink inner fur and cream tufts, same orange fur colour, same fluffy cream-tipped tail, same body proportions, same white athletic headband, teal sleeveless sports top and dark navy sports shorts. Never redesign the character. Ignore the logo and the words printed in image 1: they are not part of the character.
+Image 2 shows the same fox in the established Tribos Cinematic 3D universe: match its rendering quality, fur grooming, golden-hour lighting and colour grading. Do not copy its framing; follow the composition below.
+
+Create the closing shot of a cinematic, premium 3D animated-film website for Tribos, a social sports and group-motivation brand.
+Ultra-wide composition, 21:9 aspect ratio. This image is shown full width with no text laid over it.
+
+SCENE:
+A mountain summit at sunset, above a vast sea of glowing golden clouds. Layered distant peaks in atmospheric haze, a low sun close to the horizon in the left third of the frame, warm volumetric light across the clouds, a few dark pine silhouettes at the lower edges. Deep blue-grey shadows contrast with amber, copper and golden-cream highlights.
+
+CHARACTER:
+The canonical Tribos orange fox mascot has just reached the summit and stands on a rocky ledge in the center-right of the frame, one fist raised high in celebration, the other hand holding a backpack strap, a proud and joyful smile. Framed from the raised fist down to the knees, large enough to read the expression. White athletic headband, teal sleeveless sports top, dark navy sports shorts, small black outdoor backpack, fluffy cream-tipped tail. Strong warm rim light from the sun on the ears, the fur and the tail; cool blue shadows on the side away from the sun.
+
+RENDERING:
+Pixar-inspired premium 3D animated feature-film quality, sophisticated stylized character design, beautifully groomed fur with individually defined strands, detailed textile materials, cinematic global illumination, realistic contact shadows on the rock, warm subsurface scattering in the ears and atmospheric depth. Controlled highlights, no excessive bloom.
+
+COMPOSITION:
+Keep the fist and the ear tips well inside the top of the frame. The bottom 20% darkens gradually into deep navy shadows (#0A1014) so the image blends into a dark web page below. Leave the sky open and calm around the fox: this is the emotional peak of the page, a moment of collective achievement.
+
+COLOR:
+Tribos orange (#F87824), burnt orange, copper, amber, golden cream, deep navy and restrained teal. Orange stays the dominant colour.
+
+MOOD:
+Triumphant, warm, generous and shared: the feeling of reaching the top together.
+
+IMPORTANT:
+Generate only the visual background and the mascot. No typography, no letters, no website navigation, no buttons, no logos, no UI elements, no frames and no watermark.
+Avoid photorealism, photorealistic wildlife, toy-like plastic materials, childish proportions, flat vector or 2D comic outlines, oversaturated neon colours, excessive lens flare or bloom, random floating particles and clutter.

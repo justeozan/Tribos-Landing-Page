@@ -8,6 +8,10 @@
       dans un Chromium headless, pour réutiliser les vraies polices et les vrais
       tokens du site plutôt que de recomposer la marque à la main.
       Régénérer avec : node tools/build-og.mjs
+
+      Preset Cinematic 3D, comme le hero de la page d'accueil : le plan du
+      sentier (renard canonique au coucher du soleil), le texte en HTML sur un
+      voile sombre à gauche, jamais dans l'image.
     -->
     <link rel="stylesheet" href="../assets/fonts/fonts.css" />
     <link rel="stylesheet" href="../assets/css/tribos.css" />
@@ -18,171 +22,118 @@
         width: 1200px;
         height: 630px;
         overflow: hidden;
+        background: var(--night-0);
+      }
+
+      body::before {
+        display: none;
       }
 
       .card {
         position: relative;
+        isolation: isolate;
         display: grid;
-        grid-template-columns: 1fr 400px;
-        align-items: center;
-        gap: 40px;
+        align-content: center;
         width: 1200px;
         height: 630px;
-        padding: 0 56px 0 88px;
-        color: #fff;
-        background:
-          radial-gradient(120% 90% at 82% -10%, #f58022 0%, transparent 55%),
-          radial-gradient(130% 110% at 20% 118%, #2a0e01 0%, transparent 60%),
-          linear-gradient(168deg, #c2410c 8%, #9a3607 45%, #571c02 100%);
+        padding: 0 72px;
         overflow: hidden;
       }
 
-      .card::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: url("../assets/photo/hero-run.jpg") center right / cover;
-        mix-blend-mode: screen;
-        opacity: 0.55;
+      /* The fox sits right of centre; the crop keeps its head, its wave and
+         its tail inside the frame, and the sun-lit left goes under the veil. */
+      .card .scene-media img {
+        object-position: 70% 22%;
       }
 
+      .card::before,
       .card::after {
         content: "";
         position: absolute;
         inset: 0;
-        background: linear-gradient(100deg, rgb(20 6 0 / 0.5) 0%, rgb(20 6 0 / 0.28) 40%, transparent 62%);
+        z-index: -1;
       }
 
       .card::before {
-        content: "";
-        position: absolute;
-        inset: -30% -20% auto auto;
-        width: 780px;
-        height: 780px;
-        background: radial-gradient(
-          circle,
-          color-mix(in srgb, var(--accent) 34%, transparent),
-          transparent 68%
+        background: linear-gradient(
+          90deg,
+          rgb(10 16 20 / 0.94) 0%,
+          rgb(10 16 20 / 0.86) 30%,
+          rgb(10 16 20 / 0.5) 46%,
+          transparent 62%
         );
+      }
+
+      .card::after {
+        background: linear-gradient(0deg, rgb(10 16 20 / 0.7) 0%, transparent 34%);
       }
 
       .lockup {
         display: flex;
         align-items: center;
-        gap: 18px;
-        margin-bottom: 40px;
+        gap: 16px;
+        margin-bottom: 44px;
       }
 
       .lockup img {
-        width: 72px;
-        height: 72px;
-        border-radius: 20px;
+        width: 60px;
+        height: 60px;
+        border-radius: 17px;
+        box-shadow: 0 8px 26px rgb(243 115 10 / 0.35);
       }
 
       .lockup span {
-        color: #fff;
         font-family: var(--font-display);
-        font-size: 44px;
+        font-size: 38px;
         font-weight: 700;
         letter-spacing: -0.03em;
-        color: var(--ink);
+        color: var(--ivory);
       }
 
-      .copy {
-        position: relative;
-        z-index: 1;
+      .card h1 {
+        font-size: 92px;
+        line-height: 0.95;
+        letter-spacing: -0.047em;
+        margin-bottom: 30px;
       }
 
-      .copy h1 {
-        /* Sized so the two authored clauses hold two lines beside the phone. */
-        font-size: 64px;
-        line-height: 1.02;
-        letter-spacing: -0.04em;
-        margin-bottom: 26px;
-        color: #fff;
+      .card h1 .l {
+        display: block;
       }
 
-      .copy p {
-        font-size: 26px;
-        line-height: 1.35;
-        color: rgb(255 255 255 / 0.88);
-      }
-
-      .shot {
-        position: relative;
-        z-index: 1;
-        justify-self: center;
-        display: grid;
-        place-items: center;
-        padding: 0;
-      }
-
-      /* The screen is live DOM, not an <img>: it carries its own .phone frame,
-         so this only has to scale it into the card. It is lifted verbatim from
-         the homepage hero, so the social card cannot drift from the page. The
-         previous version embedded the English home capture. */
-      .shot .phone {
-        width: 330px;
+      .card .eyebrow {
         margin: 0;
+        font-size: 19px;
+        letter-spacing: 0.14em;
+        color: rgb(255 246 236 / 0.88);
       }
 
-      /* 630px of canvas cannot hold a whole phone: the frame is clipped from
-         the bottom so the greeting, the streak and the séance card survive. */
-      .shot {
-        max-height: 470px;
-        align-items: start;
-      }
-
-      .shot .phone {
-        align-self: start;
-      }
-
-      /* The card is 630px tall; the full home screen is taller. It is cropped
-         from the bottom so the streak card and the séance card - the two things
-         the headline is about - are always the part that survives. */
-      .shot .appscreen {
-        padding-bottom: 14px;
+      .card .eyebrow .pulse {
+        width: 11px;
+        height: 11px;
       }
     </style>
   </head>
   <body>
     <div class="card">
-      <div class="copy" style="position: relative; z-index: 1">
-        <div class="lockup">
-          <img src="../assets/brand/tribos-icon.png" alt="" />
-          <span>Tribos</span>
-        </div>
-        <h1>Le sport,<br />mais avec tes potes.</h1>
-        <p>Un objectif par semaine,<br />tenu ensemble.</p>
-      </div>
-      <div class="shot is-in" style="z-index: 1">
-    <div class="phone phone-app">
-      <div class="phone-status" aria-hidden="true">
-        <span>9:41</span>
-        <span class="phone-status-icons">
-          <svg class="icon" viewBox="0 0 256 256" fill="currentColor"><use href="../assets/icons/sprite.svg#i-flame" /></svg>
-          <svg class="icon" viewBox="0 0 256 256" fill="currentColor"><use href="../assets/icons/sprite.svg#i-lightning" /></svg>
-        </span>
-      </div>
-      <picture>
-        <source
-          type="image/webp"
-          srcset="../assets/app/home-sm.webp 450w, ../assets/app/home.webp 604w"
-          sizes="(max-width: 900px) 78vw, 340px"
-        />
-        <img
-          srcset="../assets/app/home-sm.jpg 450w, ../assets/app/home.jpg 604w"
-          sizes="(max-width: 900px) 78vw, 340px"
-          src="../assets/app/home.jpg"
-          width="604"
-          height="1302"
-          loading="eager"
-          decoding="async"
-          alt="Écran d’accueil de Tribos : quatorze jours d’affilée, la séance du jour Leg Day à 75 points, les points doublés et le classement du groupe"
-        />
+      <picture class="scene-media">
+        <source type="image/avif" srcset="../assets/cine/sentier-1920.avif" />
+        <img src="../assets/cine/sentier-1920.jpg" width="1920" height="1280" alt="" />
       </picture>
-    </div>
+
+      <div class="lockup">
+        <img src="../assets/brand/tribos-icon.png" alt="" />
+        <span>Tribos</span>
       </div>
+      <h1>
+        <span class="l">Le sport,</span>
+        <span class="l">mais avec</span>
+        <span class="l"><em class="lit">tes potes.</em></span>
+      </h1>
+      <p class="eyebrow eyebrow-live">
+        <span class="pulse" aria-hidden="true"></span>
+        Bêta privée&#8239;· Android et iPhone
+      </p>
     </div>
   </body>
 </html>

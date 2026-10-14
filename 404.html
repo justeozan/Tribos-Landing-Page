@@ -10,7 +10,7 @@
     />
     <meta name="robots" content="noindex" />
     <link rel="canonical" href="https://tribos.evey.run/404.html" />
-    <meta name="theme-color" content="#0d0b09" />
+    <meta name="theme-color" content="#0a1014" />
 
     <meta property="og:url" content="https://tribos.evey.run/404.html" />
     <meta property="og:type" content="website" />
@@ -24,14 +24,13 @@
     <meta property="og:image" content="https://tribos.evey.run/assets/brand/og-card.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Carte Tribos : le logo, la promesse « Le sport, mais avec tes potes » et l’écran d’accueil de l’application" />
+    <meta property="og:image:alt" content="Carte Tribos : le renard de Tribos sur un sentier de montagne au coucher du soleil, le logo et la promesse « Le sport, mais avec tes potes »" />
     <meta name="twitter:card" content="summary_large_image" />
 
     <link rel="icon" href="/assets/brand/favicon-32.png" sizes="32x32" />
     <link rel="icon" href="/assets/brand/favicon-16.png" sizes="16x16" />
     <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" />
 
-    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/bricolage-grotesque-latin.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/geist-latin.woff2" crossorigin />
     <link rel="stylesheet" href="/assets/fonts/fonts.css" />
     <link rel="stylesheet" href="/assets/css/tribos.css" />
@@ -65,7 +64,7 @@
     <header class="nav" data-nav>
       <div class="wrap nav-inner">
         <a class="brand" href="/" aria-label="Tribos, accueil">
-          <img src="/assets/brand/tribos-icon-64.png" width="30" height="30" decoding="async" alt="" aria-hidden="true" />
+          <img src="/assets/brand/tribos-icon-64.png" width="34" height="34" decoding="async" alt="" aria-hidden="true" />
           <span class="brand-name">Tribos</span>
         </a>
 
@@ -77,7 +76,7 @@
 
         <div class="nav-actions">
 
-          <a class="btn btn-primary btn-sm" href="/index.html#beta">Rejoindre la bêta</a>
+          <a class="btn btn-light btn-sm" href="/index.html#beta">Rejoindre la bêta</a>
 
           <button
             class="menu-toggle"
@@ -104,23 +103,72 @@
 
     <main id="contenu">
       <!-- ================= 404 ================= -->
-      <section class="section-tight">
-        <div class="wrap wrap-narrow">
-          <div class="section-head reveal">
-            <p class="eyebrow">Erreur 404</p>
-            <h1 class="h1">Page introuvable</h1>
-            <p class="lede">Cette page n’existe pas ou a été déplacée.</p>
-          </div>
+      <section class="page-hero" aria-labelledby="page-title">
+        <div class="scene scene-band is-top is-stacked">
+          <picture class="scene-media" data-pushin data-drift="exit">
+            <source
+              media="(max-width: 759px)"
+              type="image/avif"
+              srcset="/assets/cine/sentier-portrait-640.avif 640w, /assets/cine/sentier-portrait-960.avif 960w, /assets/cine/sentier-portrait-1280.avif 1280w, /assets/cine/sentier-portrait-1600.avif 1600w"
+              sizes="100vw"
+              width="1600"
+              height="1707"
+            />
+            <source
+              media="(max-width: 759px)"
+              type="image/webp"
+              srcset="/assets/cine/sentier-portrait-640.webp 640w, /assets/cine/sentier-portrait-960.webp 960w, /assets/cine/sentier-portrait-1280.webp 1280w, /assets/cine/sentier-portrait-1600.webp 1600w"
+              sizes="100vw"
+              width="1600"
+              height="1707"
+            />
+            <source
+              media="(max-width: 759px)"
+              srcset="/assets/cine/sentier-portrait-640.jpg 640w, /assets/cine/sentier-portrait-960.jpg 960w"
+              sizes="100vw"
+              width="960"
+              height="1024"
+            />
+            <source
+              type="image/avif"
+              srcset="/assets/cine/sentier-1280.avif 1280w, /assets/cine/sentier-1920.avif 1920w, /assets/cine/sentier-2560.avif 2560w, /assets/cine/sentier-3200.avif 3200w"
+              sizes="100vw"
+            />
+            <source
+              type="image/webp"
+              srcset="/assets/cine/sentier-1280.webp 1280w, /assets/cine/sentier-1920.webp 1920w, /assets/cine/sentier-2560.webp 2560w, /assets/cine/sentier-3200.webp 3200w"
+              sizes="100vw"
+            />
+            <img
+              src="/assets/cine/sentier-1920.jpg"
+              srcset="/assets/cine/sentier-1280.jpg 1280w, /assets/cine/sentier-1920.jpg 1920w"
+              sizes="100vw"
+              width="1920"
+              height="1280"
+              fetchpriority="high"
+              decoding="async"
+              alt="Le renard de Tribos lève le poing au sentier d’une montagne, au-dessus d’une mer de nuages dorée par le soleil couchant"
+            />
+          </picture>
+        </div>
 
-          <div class="hero-actions reveal" style="--i: 1">
-            <a class="btn btn-primary" href="/index.html">
-              Retour à l’accueil
-              <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="/assets/icons/sprite.svg#i-arrow-right" /></svg>
-            </a>
-            <a class="link-arrow" href="/entreprises.html">
-              Tribos pour les équipes
-              <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="/assets/icons/sprite.svg#i-arrow-up-right" /></svg>
-            </a>
+
+        <div class="wrap wrap-narrow scene-band-body">
+          <div class="page-head reveal">
+            <p class="eyebrow">Erreur 404</p>
+            <h1 id="page-title" class="h1">Page introuvable</h1>
+            <p class="lede">Cette page n’existe pas ou a été déplacée.</p>
+
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="/index.html">
+                Retour à l’accueil
+                <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="/assets/icons/sprite.svg#i-arrow-right" /></svg>
+              </a>
+              <a class="link-arrow" href="/entreprises.html">
+                Tribos pour les équipes
+                <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="/assets/icons/sprite.svg#i-arrow-up-right" /></svg>
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -131,7 +179,7 @@
         <div class="footer-grid">
           <div class="footer-brand">
             <a class="brand" href="/">
-              <img src="/assets/brand/tribos-icon-64.png" width="30" height="30" loading="lazy" decoding="async" alt="" aria-hidden="true" />
+              <img src="/assets/brand/tribos-icon-64.png" width="34" height="34" loading="lazy" decoding="async" alt="" aria-hidden="true" />
               <span class="brand-name">Tribos</span>
             </a>
             <p>
