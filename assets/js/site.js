@@ -14,6 +14,9 @@
    ========================================================================= */
 (function () {
   "use strict";
+  var EN = document.documentElement.lang === "en";
+  function t(fr, en) { return EN ? en : fr; }
+
 
   var root = document.documentElement;
   var reduceQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -86,7 +89,9 @@
   // that does the opposite, and only one of the two toggles was ever corrected.
   function syncThemeLabels() {
     var label =
-      currentTheme() === "dark" ? "Passer en thème clair" : "Passer en thème sombre";
+      currentTheme() === "dark"
+        ? t("Passer en thème clair", "Switch to light theme")
+        : t("Passer en thème sombre", "Switch to dark theme");
     themeToggles.forEach(function (btn) {
       btn.setAttribute("aria-label", label);
     });
@@ -553,8 +558,10 @@
         m.dataset.active = counts[i] ? "true" : "false";
       });
       if (status) {
-        status.textContent = done + " séance" + (done > 1 ? "s" : "") +
-          " sur " + target + " cette semaine.";
+        status.textContent = EN
+          ? done + " of " + target + " sessions this week."
+          : done + " séance" + (done > 1 ? "s" : "") +
+            " sur " + target + " cette semaine.";
       }
       return done;
     }
@@ -973,10 +980,10 @@
           if (!target || target === "inline") {
             form.dataset.done = "true";
             if (submit) submit.removeAttribute("aria-busy");
-            setStatus("ok", form.dataset.doneMessage || "C’est enregistré. Merci\u202f!");
+            setStatus("ok", form.dataset.doneMessage || t("C’est enregistré. Merci\u202f!", "You\u2019re in. Thanks!"));
             return;
           }
-          setStatus("ok", "C’est enregistré. On passe à l’étape 2…");
+          setStatus("ok", t("C’est enregistré. On passe à l’étape 2…", "You\u2019re in. On to step 2…"));
           window.location.assign(target);
         })
         .catch(function () {
@@ -986,7 +993,7 @@
           }
           setStatus(
             "error",
-            "L’envoi a échoué. Réessaie dans un instant."
+            t("L’envoi a échoué. Réessaie dans un instant.", "Something went wrong. Please try again in a moment.")
           );
         });
     });
@@ -1044,9 +1051,9 @@
      rather than a form field.
      ===================================================================== */
   var platformNotes = {
-    android: "Parfait\u202f: Android, c\u2019est la vague en cours.",
+    android: t("Parfait\u202f: Android, c\u2019est la vague en cours.", "Great: Android is the wave rolling out right now."),
     iphone:
-      "Parfait\u202f: sur iPhone, le lien d\u2019installation s\u2019affiche juste après ton inscription.",
+      t("Parfait\u202f: sur iPhone, le lien d\u2019installation s\u2019affiche juste après ton inscription.", "Great: on iPhone, the install link appears right after you sign up."),
   };
 
   document.querySelectorAll("[data-field-platform]").forEach(function (fieldset) {
@@ -1121,7 +1128,7 @@
       var original = label.textContent;
       copy.addEventListener("click", function () {
         var done = function () {
-          label.textContent = "Copié\u202f!";
+          label.textContent = t("Copié\u202f!", "Copied!");
           copy.dataset.copied = "true";
           setTimeout(function () {
             label.textContent = original;

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Got it - Tribos</title>
+    <meta
+      name="description"
+      content="Your email is saved for the private Tribos beta. Now gather your group: groups that are already formed go first."
+    />
+    <meta name="robots" content="noindex, follow" />
+    <link rel="canonical" href="https://tribos.evey.run/en/merci.html" />
+    <link rel="alternate" hreflang="fr" href="https://tribos.evey.run/merci.html" />
+    <link rel="alternate" hreflang="en" href="https://tribos.evey.run/en/merci.html" />
+    <link rel="alternate" hreflang="x-default" href="https://tribos.evey.run/merci.html" />
+    <meta name="theme-color" content="#0d0b09" />
+
+    <meta property="og:url" content="https://tribos.evey.run/en/merci.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Tribos" />
+    <meta property="og:title" content="Thanks - you're on the Tribos list" />
+    <meta
+      property="og:description"
+      content="We'll write to you as soon as a spot opens up, with install instructions for your phone."
+    />
+    <meta property="og:image" content="https://tribos.evey.run/assets/brand/og-card.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Tribos card: the logo, the promise “Sport, but with your friends” and the app's home screen" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="../assets/brand/favicon-32.png" sizes="32x32" />
+    <link rel="icon" href="../assets/brand/favicon-16.png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="../assets/brand/apple-touch-icon.png" />
+
+    <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/bricolage-grotesque-latin.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/geist-latin.woff2" crossorigin />
+    <link rel="stylesheet" href="../assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="../assets/css/tribos.css" />
+
+    <script>
+      // Runs before first paint. Three jobs:
+      //  1. apply the stored theme so the other mode never flashes;
+      //  2. mark the document as script-enabled, which is what gates the
+      //     scroll-reveal styles;
+      //  3. arm a dead-man switch. The reveal blocks start at opacity 0 and are
+      //     only shown by site.js. If that file is blocked, 404s, or fails to
+      //     parse, nothing would ever reveal them and the page would render
+      //     blank. site.js clears this timer as soon as it runs; if it never
+      //     does, the class is dropped and every block returns to full opacity.
+      document.documentElement.classList.add("js");
+      window.__tribosRevealFallback = setTimeout(function () {
+        document.documentElement.classList.remove("js");
+      }, 2500);
+      try {
+        var t = localStorage.getItem("tribos-theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    </script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#contenu">Skip to content</a>
+    <div class="grain" aria-hidden="true"></div>
+    <span data-nav-sentinel aria-hidden="true"></span>
+
+    <header class="nav" data-nav>
+      <div class="wrap nav-inner">
+        <a class="brand" href="./" aria-label="Tribos, home">
+          <img src="../assets/brand/tribos-icon-64.png" width="30" height="30" alt="" />
+          <span class="brand-name">Tribos</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="index.html#fonctionnement">How it works</a>
+          <a href="index.html#groupe">The group</a>
+          <a href="entreprises.html">Teams</a>
+        </nav>
+
+        <div class="nav-actions">
+
+          <a class="btn btn-primary btn-sm" href="index.html#beta">Join the beta</a>
+
+          <button
+            class="menu-toggle"
+            type="button"
+            data-menu-toggle
+            aria-expanded="false"
+            aria-controls="menu-mobile"
+            aria-label="Open menu"
+          >
+            <svg class="icon icon-open" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-list" /></svg>
+            <svg class="icon icon-close" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-x" /></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="menu-panel" id="menu-mobile" data-menu hidden>
+      <a href="index.html#fonctionnement">How it works</a>
+      <a href="index.html#groupe">The group</a>
+      <a href="entreprises.html">Teams</a>
+      <a href="index.html#faq">FAQ</a>
+      <a class="btn btn-primary" href="index.html#beta">Join the beta</a>
+    </div>
+
+    <main id="contenu">
+      <!-- ================= CONFIRMATION ================= -->
+      <!-- The highest-intent 15 seconds on the whole site. Tribos does not work
+           solo, so this page asks for the second signup instead of saying thank
+           you and sending the visitor back to the homepage. -->
+      <section class="section-tight">
+        <div class="wrap wrap-narrow">
+          <div class="section-head reveal">
+            <p class="eyebrow">Step 1 of 2 · done</p>
+            <h1 class="h1" data-split>Got it. Now the real question: who's with you?</h1>
+            <p class="lede">
+              Tribos is no good on your own. We open up to groups that are
+              already formed first: every person who signs up with you moves
+              your place in the queue up.
+            </p>
+          </div>
+
+          <!-- Shown by site.js only when the visitor picked iPhone. -->
+          <div class="testflight" data-testflight hidden>
+            <div>
+              <h2 class="h3">It's already open on iPhone</h2>
+              <p>
+                Install TestFlight, Apple's app for betas, then open this link
+                from your iPhone to install Tribos.
+              </p>
+            </div>
+            <a class="btn btn-primary" href="https://testflight.apple.com/join/Zx22tcmJ" rel="noopener">Install the iPhone beta</a>
+          </div>
+
+          <div class="invite reveal" style="--i: 1">
+            <div class="invite-body">
+              <h2 class="h3">Send the invite now</h2>
+              <p>
+                You need 2 or 3 people to start a group. The message is already
+                written, you just pick where to send it.
+              </p>
+
+              <!-- Links only. There is deliberately no field anywhere on this
+                   site for a friend's email address: collecting a third party's
+                   address to mail them without their consent is a GDPR problem,
+                   and it would burn the sending domain before launch. -->
+              <div
+                class="share-rack"
+                data-share
+                data-share-url="https://tribos.evey.run/en/"
+                data-share-text="I got my spot in the Tribos beta. I need 2 or 3 people to start our group. Join us here:"
+              >
+                <button class="btn btn-primary" type="button" data-share-native hidden data-burst>
+                  <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-share" /></svg>
+                  Send the invite
+                </button>
+
+                <!-- Real, pre-encoded hrefs so the rack works with JS disabled.
+                     site.js only rewrites them to keep data-share-text as the
+                     single source of truth. -->
+                <a class="btn btn-ghost" data-share-wa href="https://wa.me/?text=I%20got%20my%20spot%20in%20the%20Tribos%20beta.%20I%20need%202%20or%203%20people%20to%20start%20our%20group.%20Join%20us%20here%3A%20https%3A%2F%2Ftribos.evey.run%2Fen%2F" rel="noopener">
+                  <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-whatsapp" /></svg>
+                  WhatsApp
+                </a>
+
+                <a class="btn btn-ghost" data-share-sms href="sms:?&amp;body=I%20got%20my%20spot%20in%20the%20Tribos%20beta.%20I%20need%202%20or%203%20people%20to%20start%20our%20group.%20Join%20us%20here%3A%20https%3A%2F%2Ftribos.evey.run%2Fen%2F">
+                  <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-send" /></svg>
+                  SMS
+                </a>
+
+                <button class="btn btn-ghost" type="button" data-share-copy data-needs-js>
+                  <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-copy" /></svg>
+                  <span data-share-label>Copy the message</span>
+                </button>
+              </div>
+
+              <p class="share-msg">
+                “I got my spot in the Tribos beta. I need 2 or 3 people to start our group. Join us here: <a href="https://tribos.evey.run/en/">tribos.evey.run/en</a>”
+              </p>
+            </div>
+
+            <div class="invite-figure" aria-hidden="true">
+              <picture>
+                <source srcset="../assets/illus/trio-warmup.webp" type="image/webp" />
+                <img
+                  class="mascot"
+                  src="../assets/illus/trio-warmup.png"
+                  width="315"
+                  height="243"
+                  loading="lazy"
+                  decoding="async"
+                  alt=""
+                />
+              </picture>
+            </div>
+          </div>
+
+          <!-- A second, separately-named Netlify form. Declared in static HTML
+               so the build-time parser registers it. It asks for the one thing
+               that actually shapes the next wave: how many places to hold. -->
+          <form
+            class="form form-paper invite-form reveal"
+            style="--i: 2"
+            name="beta-groupe"
+            method="post"
+            action="./merci.html"
+            data-waitlist
+            data-success="inline"
+            data-done-message="Got it. We're holding spots for your group."
+          >
+            <input type="hidden" name="form-name" value="beta-groupe" />
+            <!-- Filled by site.js from sessionStorage. The address never touches
+                 the URL or the browser history, which a ?e= parameter would. -->
+            <input type="hidden" name="email" value="" data-fill="tribos-email" />
+
+            <p class="honeypot" aria-hidden="true">
+              <label for="bot-groupe">Leave this field empty</label>
+              <input id="bot-groupe" name="bot-field" type="text" tabindex="-1" autocomplete="off" />
+            </p>
+
+            <fieldset class="chips">
+              <legend>How many of you will be in the group?</legend>
+              <div class="chips-row">
+                <label class="chip"><input type="radio" name="taille" value="2-3" /><span>2 to 3</span></label>
+                <label class="chip"><input type="radio" name="taille" value="4-6" /><span>4 to 6</span></label>
+                <label class="chip"><input type="radio" name="taille" value="7+" /><span>7 or more</span></label>
+                <label class="chip"><input type="radio" name="taille" value="inconnu" /><span>Not sure yet</span></label>
+              </div>
+            </fieldset>
+
+            <p class="form-status" role="status" aria-live="polite" data-status></p>
+
+            <button class="btn btn-primary" type="submit" data-burst>
+              Hold my group's spots
+            </button>
+
+            <p class="help">
+              This tells us what size of wave to open. You can always add
+              more people later.
+            </p>
+          </form>
+
+          <div class="steps">
+            <div class="step reveal" style="--i: 3">
+              <div class="step-figure">
+                <picture>
+                  <source srcset="../assets/illus/fox-weights.webp" type="image/webp" />
+                  <img
+                    class="mascot"
+                    src="../assets/illus/fox-weights.png"
+                    width="244"
+                    height="250"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Illustration of Tribos's orange fox lifting a dumbbell"
+                  />
+                </picture>
+              </div>
+
+              <div class="step-body">
+                <h2 class="h3">What happens next</h2>
+                <ul class="feature-list">
+                  <li>
+                    <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-check" /></svg>
+                    <span>We open access in waves, so we can keep proper track of each group.</span>
+                  </li>
+                  <li>
+                    <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-check" /></svg>
+                    <span>You'll get an email with your install link and everything you need to set up your group.</span>
+                  </li>
+                  <li>
+                    <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-check" /></svg>
+                    <span>One email, the one for your access. No newsletter, unsubscribe in one click.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <p class="hero-secondary reveal" style="--i: 4">
+            <a class="link-arrow" href="index.html">
+              Back to home
+              <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-arrow-right" /></svg>
+            </a>
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <a class="brand" href="./">
+              <img src="../assets/brand/tribos-icon-64.png" width="30" height="30" alt="" />
+              <span class="brand-name">Tribos</span>
+            </a>
+            <p>
+              Tribos, the app for training as a group: one shared program, one
+              session a day.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="footer-heading">Product</h2>
+            <ul class="footer-links">
+              <li><a href="index.html#fonctionnement">How it works</a></li>
+              <li><a href="index.html#groupe">The group</a></li>
+              <li><a href="index.html#faq">FAQ</a></li>
+              <li><a href="index.html#beta">Join the beta</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="footer-heading">Teams</h2>
+            <ul class="footer-links">
+              <li><a href="entreprises.html">Tribos for teams</a></li>
+              <li><a href="entreprises.html#contact">Contact us</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="footer-heading">Legal</h2>
+            <ul class="footer-links">
+              <li><a href="confidentialite.html">Privacy policy</a></li>
+              <li><a href="../merci.html" hreflang="fr" lang="fr">Français</a></li>
+              <li><a href="conditions.html">Terms of use</a></li>
+              <li><a href="mentions-legales.html">Legal notice</a></li>
+              <li><a href="suppression-de-compte.html">Delete your account</a></li>
+              <li><a href="support.html">Support</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© 2026 Tribos. All rights reserved.</p>
+          <p>Private beta</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../assets/js/site.js" defer></script>
+  </body>
+</html>

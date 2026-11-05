@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Delete your account - Tribos</title>
+    <meta
+      name="description"
+      content="Request the deletion of your Tribos account and associated data: procedure, data deleted, data retained and retention periods."
+    />
+    <link rel="canonical" href="https://tribos.evey.run/en/suppression-de-compte.html" />
+    <link rel="alternate" hreflang="fr" href="https://tribos.evey.run/suppression-de-compte.html" />
+    <link rel="alternate" hreflang="en" href="https://tribos.evey.run/en/suppression-de-compte.html" />
+    <link rel="alternate" hreflang="x-default" href="https://tribos.evey.run/suppression-de-compte.html" />
+    <meta name="theme-color" content="#0d0b09" />
+
+    <meta property="og:url" content="https://tribos.evey.run/en/suppression-de-compte.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Tribos" />
+    <meta property="og:title" content="Delete your account - Tribos" />
+    <meta
+      property="og:description"
+      content="How to delete your Tribos account and associated data, and what is erased or retained."
+    />
+    <meta property="og:image" content="https://tribos.evey.run/assets/brand/og-card.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Tribos card: the logo, the promise “Sport, but with your friends” and the app’s home screen" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="../assets/brand/favicon-32.png" sizes="32x32" />
+    <link rel="icon" href="../assets/brand/favicon-16.png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="../assets/brand/apple-touch-icon.png" />
+
+    <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/bricolage-grotesque-latin.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/geist-latin.woff2" crossorigin />
+    <link rel="stylesheet" href="../assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="../assets/css/tribos.css" />
+
+    <script>
+      // Runs before first paint. Three jobs:
+      //  1. apply the stored theme so the other mode never flashes;
+      //  2. mark the document as script-enabled, which is what gates the
+      //     scroll-reveal styles;
+      //  3. arm a dead-man switch. The reveal blocks start at opacity 0 and are
+      //     only shown by site.js. If that file is blocked, 404s, or fails to
+      //     parse, nothing would ever reveal them and the page would render
+      //     blank. site.js clears this timer as soon as it runs; if it never
+      //     does, the class is dropped and every block returns to full opacity.
+      document.documentElement.classList.add("js");
+      window.__tribosRevealFallback = setTimeout(function () {
+        document.documentElement.classList.remove("js");
+      }, 2500);
+      try {
+        var t = localStorage.getItem("tribos-theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    </script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#contenu">Skip to content</a>
+    <div class="grain" aria-hidden="true"></div>
+    <span data-nav-sentinel aria-hidden="true"></span>
+
+    <header class="nav" data-nav>
+      <div class="wrap nav-inner">
+        <a class="brand" href="./" aria-label="Tribos, home">
+          <img src="../assets/brand/tribos-icon-64.png" width="30" height="30" decoding="async" alt="" aria-hidden="true" />
+          <span class="brand-name">Tribos</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="index.html#fonctionnement">How it works</a>
+          <a href="index.html#groupe">The group</a>
+          <a href="entreprises.html">Teams</a>
+        </nav>
+
+        <div class="nav-actions">
+
+          <a class="btn btn-primary btn-sm" href="index.html#beta">Join the beta</a>
+
+          <button
+            class="menu-toggle"
+            type="button"
+            data-menu-toggle
+            aria-expanded="false"
+            aria-controls="menu-mobile"
+            aria-label="Open menu"
+          >
+            <svg class="icon icon-open" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-list" /></svg>
+            <svg class="icon icon-close" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-x" /></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="menu-panel" id="menu-mobile" data-menu hidden>
+      <a href="index.html#fonctionnement">How it works</a>
+      <a href="index.html#groupe">The group</a>
+      <a href="entreprises.html">Teams</a>
+      <a href="index.html#faq">FAQ</a>
+      <a class="btn btn-primary" href="index.html#beta">Join the beta</a>
+    </div>
+
+    <main id="contenu">
+      <!-- ================= EN-TETE ================= -->
+      <section class="section-tight">
+        <div class="wrap">
+          <div class="reveal">
+            <p class="eyebrow">Legal</p>
+            <h1 class="h1">Delete your account</h1>
+            <p class="lede">
+              How to request the deletion of your Tribos account and associated
+              data, and what is erased or retained.
+            </p>
+            <p class="doc-meta">Last updated: October 12, 2026</p>
+          </div>
+
+          <!-- ================= CORPS LEGAL ================= -->
+          <article class="doc" style="--i: 1">
+            <!--
+              Parcours et cascade vérifiés dans le dépôt de l'app (branche main) :
+              lib/screens/settings/settings_screen.dart,
+              lib/services/account_service.dart, lib/services/group_service.dart,
+              functions/delete-auth-account/src/main.js.
+            -->
+            <p>
+              Your account is deleted directly in the Tribos mobile app, and
+              the process is automatic. This page describes the steps to follow,
+              the data deleted, the data retained and how long it is kept, in
+              line with the requirements of the app stores.
+            </p>
+
+            <h2>Delete your account from the app</h2>
+
+            <p>
+              Deletion requires no action on our part. It is irreversible.
+            </p>
+
+            <ul>
+              <li>
+                <strong>Open the Tribos app</strong> and sign in to your
+                account.
+              </li>
+              <li>
+                <strong>Open Settings</strong>: on the home screen, tap your
+                profile picture, then the gear icon at the top right.
+              </li>
+              <li>
+                <strong>Scroll down to the “Zone de danger” section</strong> and
+                tap “Supprimer le compte”. The app warns you that this action is
+                irreversible.
+              </li>
+              <li>
+                <strong>Confirm</strong> by typing the word SUPPRIMER in the
+                dialog box, then tap “Supprimer”. Deletion starts immediately:
+                once it is complete, you are signed out and the app returns to
+                the sign-in screen.
+              </li>
+            </ul>
+
+            <p>
+              If deletion is interrupted, for example because of a lost
+              connection, the app tells you and your account stays active. Some
+              of your data may already have been erased: simply start the
+              deletion again, and it resumes where it stopped. If the failure
+              persists, write to us.
+            </p>
+
+            <h2>Request deletion by email</h2>
+
+            <p>
+              If you no longer have access to the app, if deleting from the app
+              fails, or if you are only signed up to the beta waitlist on this
+              site, you can request deletion by email.
+            </p>
+
+            <ul>
+              <li>
+                <strong>Write to us</strong> at evey.run@gmail.com, from the
+                email address used to create the account, with the subject
+                “Suppression de compte”.
+              </li>
+              <li>
+                <strong>Identity check.</strong> We verify that the request
+                comes from the account holder.
+              </li>
+              <li>
+                <strong>Deletion handled</strong> within a maximum of thirty days
+                from receipt of the verified request.
+              </li>
+            </ul>
+
+            <h2>Data deleted</h2>
+
+            <p>Deleting from the app erases:</p>
+
+            <ul>
+              <li>
+                your sign-in account: email address, password, username saved as
+                the account name, sign-in sessions and preferences, including the
+                list of members you have blocked;
+              </li>
+              <li>your profile: username and profile picture;</li>
+              <li>your statistics, your points and your training progress;</li>
+              <li>
+                the programs you follow and the history of your completed
+                sessions;
+              </li>
+              <li>
+                your group memberships and all the messages you have sent;
+              </li>
+              <li>
+                the groups you own: they are transferred to the longest-standing
+                remaining member, or deleted along with their messages if no
+                other member remains.
+              </li>
+            </ul>
+
+            <p>
+              Deleting your account does not remove your possible sign-up to the
+              beta waitlist, which is managed separately: to be removed from it,
+              write to us as described above.
+            </p>
+
+            <h2>Data retained and retention periods</h2>
+
+            <ul>
+              <li>
+                <strong>Reports.</strong> Reports you have made, or that concern
+                you, are kept for as long as they take to process, and for no
+                more than 12&nbsp;months, for moderation purposes. They may
+                contain a copy of the text of a reported message.
+              </li>
+              <li>
+                <strong>Challenges.</strong> Challenges you have started or
+                received are not yet erased automatically. They contain no
+                username, no email address and no photo: only technical
+                identifiers, the number of sessions targeted and the week
+                concerned. Write to us to have them erased.
+              </li>
+              <li>
+                <strong>Group photos and names.</strong> A group’s photo and name
+                remain attached to the group for as long as it exists, even if
+                you are the one who chose them: they are shared elements. If
+                erasing a photo fails, or if a group is deleted, the photo file
+                may remain on our servers without being displayed; write to us
+                to have it erased.
+              </li>
+              <li>
+                <strong>Backups and technical logs.</strong> Any residual traces
+                in our hosting provider’s backups and technical logs are purged
+                within a maximum of thirty days after deletion.
+              </li>
+              <li>
+                <strong>App Store and Google Play accounts.</strong> Managing
+                your Apple or Google account, and the data associated with it,
+                falls under Apple’s and Google’s privacy policies, and not under
+                this procedure.
+              </li>
+              <li>
+                <strong>Legal obligations.</strong> If a legal obligation
+                required us to keep certain data, that data would be limited to
+                the strict minimum required by law.
+              </li>
+            </ul>
+
+            <h2>Your rights</h2>
+
+            <p>
+              You have, in particular, a right of access, rectification, erasure,
+              restriction of processing and portability, as well as the right to
+              withdraw your consent at any time. The details of these rights and
+              how to exercise them are described in the
+              <a href="confidentialite.html">privacy policy</a>.
+            </p>
+
+            <p>
+              For any question about deleting your account, write to
+              evey.run@gmail.com.
+            </p>
+            <!--
+              Note interne, à ne pas publier telle quelle :
+              Document type à faire relire avant publication ; il ne constitue pas un conseil juridique.
+            -->
+          </article>
+
+          <div class="doc-actions reveal" style="--i: 2">
+            <a class="btn btn-ghost" href="index.html">Back to home</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <a class="brand" href="./">
+              <img src="../assets/brand/tribos-icon-64.png" width="30" height="30" loading="lazy" decoding="async" alt="" aria-hidden="true" />
+              <span class="brand-name">Tribos</span>
+            </a>
+            <p>
+              Tribos, the app for training as a group: a shared program, one
+              session a day.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="footer-heading">Product</h2>
+            <ul class="footer-links">
+              <li><a href="index.html#fonctionnement">How it works</a></li>
+              <li><a href="index.html#groupe">The group</a></li>
+              <li><a href="index.html#faq">FAQ</a></li>
+              <li><a href="index.html#beta">Join the beta</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="footer-heading">Teams</h2>
+            <ul class="footer-links">
+              <li><a href="entreprises.html">Tribos for teams</a></li>
+              <li><a href="entreprises.html#contact">Contact us</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="footer-heading">Legal</h2>
+            <ul class="footer-links">
+              <li><a href="confidentialite.html">Privacy policy</a></li>
+              <li><a href="../suppression-de-compte.html" hreflang="fr" lang="fr">Français</a></li>
+              <li><a href="conditions.html">Terms of use</a></li>
+              <li><a href="mentions-legales.html">Legal notice</a></li>
+              <li><a href="suppression-de-compte.html" aria-current="page">Delete your account</a></li>
+              <li><a href="support.html">Support</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© 2026 Tribos. All rights reserved.</p>
+          <p>Private beta</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../assets/js/site.js" defer></script>
+  </body>
+</html>

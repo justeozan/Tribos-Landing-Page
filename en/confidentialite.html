@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Privacy policy - Tribos</title>
+    <meta
+      name="description"
+      content="How Tribos collects, uses and protects your personal data."
+    />
+    <link rel="canonical" href="https://tribos.evey.run/en/confidentialite.html" />
+    <link rel="alternate" hreflang="fr" href="https://tribos.evey.run/confidentialite.html" />
+    <link rel="alternate" hreflang="en" href="https://tribos.evey.run/en/confidentialite.html" />
+    <link rel="alternate" hreflang="x-default" href="https://tribos.evey.run/confidentialite.html" />
+    <meta name="theme-color" content="#0d0b09" />
+
+    <meta property="og:url" content="https://tribos.evey.run/en/confidentialite.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Tribos" />
+    <meta property="og:title" content="Privacy policy - Tribos" />
+    <meta
+      property="og:description"
+      content="What Tribos collects, why, and what you can ask for at any time."
+    />
+    <meta property="og:image" content="https://tribos.evey.run/assets/brand/og-card.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Tribos card: the logo, the promise “Sport, but with your friends” and the app's home screen" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="../assets/brand/favicon-32.png" sizes="32x32" />
+    <link rel="icon" href="../assets/brand/favicon-16.png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="../assets/brand/apple-touch-icon.png" />
+
+    <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/bricolage-grotesque-latin.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/geist-latin.woff2" crossorigin />
+    <link rel="stylesheet" href="../assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="../assets/css/tribos.css" />
+
+    <script>
+      // Runs before first paint. Three jobs:
+      //  1. apply the stored theme so the other mode never flashes;
+      //  2. mark the document as script-enabled, which is what gates the
+      //     scroll-reveal styles;
+      //  3. arm a dead-man switch. The reveal blocks start at opacity 0 and are
+      //     only shown by site.js. If that file is blocked, 404s, or fails to
+      //     parse, nothing would ever reveal them and the page would render
+      //     blank. site.js clears this timer as soon as it runs; if it never
+      //     does, the class is dropped and every block returns to full opacity.
+      document.documentElement.classList.add("js");
+      window.__tribosRevealFallback = setTimeout(function () {
+        document.documentElement.classList.remove("js");
+      }, 2500);
+      try {
+        var t = localStorage.getItem("tribos-theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    </script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#contenu">Skip to content</a>
+    <div class="grain" aria-hidden="true"></div>
+    <span data-nav-sentinel aria-hidden="true"></span>
+
+    <header class="nav" data-nav>
+      <div class="wrap nav-inner">
+        <a class="brand" href="./" aria-label="Tribos, home">
+          <img src="../assets/brand/tribos-icon-64.png" width="30" height="30" decoding="async" alt="" aria-hidden="true" />
+          <span class="brand-name">Tribos</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="index.html#fonctionnement">How it works</a>
+          <a href="index.html#groupe">The group</a>
+          <a href="entreprises.html">Teams</a>
+        </nav>
+
+        <div class="nav-actions">
+
+          <a class="btn btn-primary btn-sm" href="index.html#beta">Join the beta</a>
+
+          <button
+            class="menu-toggle"
+            type="button"
+            data-menu-toggle
+            aria-expanded="false"
+            aria-controls="menu-mobile"
+            aria-label="Open menu"
+          >
+            <svg class="icon icon-open" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-list" /></svg>
+            <svg class="icon icon-close" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-x" /></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="menu-panel" id="menu-mobile" data-menu hidden>
+      <a href="index.html#fonctionnement">How it works</a>
+      <a href="index.html#groupe">The group</a>
+      <a href="entreprises.html">Teams</a>
+      <a href="index.html#faq">FAQ</a>
+      <a class="btn btn-primary" href="index.html#beta">Join the beta</a>
+    </div>
+
+    <main id="contenu">
+      <!-- ================= EN-TETE ================= -->
+      <section class="section-tight">
+        <div class="wrap">
+          <div class="reveal">
+            <p class="eyebrow">Legal</p>
+            <h1 class="h1">Privacy policy</h1>
+            <p class="lede">
+              What Tribos collects, why, and what you can ask for at any time.
+            </p>
+            <p class="doc-meta">Last updated: October 12, 2026</p>
+          </div>
+
+          <!-- ================= CORPS LEGAL ================= -->
+          <article class="doc" style="--i: 1">
+            <!--
+              Données d'identification : SAHIN Ozan, Villeurbanne,
+              evey.run@gmail.com. Mise à jour : 12 octobre 2026.
+              Sources : dépôt de l'app justeozan/Tribos (branche main),
+              docs/play-app-content.md, lib/services/*.dart, pubspec.yaml,
+              ios/Runner/Info.plist, AndroidManifest.xml.
+            -->
+            <p>
+              This policy covers two things: the Tribos mobile app, on iPhone and
+              Android, and this website, which collects sign-ups for the beta
+              waiting list. We collect the minimum needed to run the service, and
+              we explain below exactly what, why and for how long.
+            </p>
+
+            <p>
+              In short: no advertising, no audience measurement tools, no selling
+              of data. Members of your group see what you share with them in the
+              app, and we only use your data to run Tribos.
+            </p>
+
+            <h2>Who is responsible for your data</h2>
+
+            <p>
+              The data controller is SAHIN Ozan, whose registered office is in
+              Villeurbanne.
+            </p>
+
+            <p>
+              Contact for any question about your data: evey.run@gmail.com.
+            </p>
+
+            <h2>In the Tribos app</h2>
+
+            <h3>The data we collect</h3>
+
+            <ul>
+              <li>
+                <strong>Your account.</strong> Your email address, your password
+                and your username, which also serves as your account name. The
+                password is entrusted to our hosting provider's authentication
+                service, which only keeps a hash of it: it is never stored in
+                plain text.
+              </li>
+              <li>
+                <strong>Your profile.</strong> Your username, your profile photo
+                if you choose one, and a flag that records that you have
+                completed the app's onboarding.
+              </li>
+              <li>
+                <strong>Your workout activity.</strong> The sessions you complete
+                (which session, on what date and time, how many points it earned
+                you), your progress in each program, the programs you follow and
+                your statistics: points, level, current streak and best streak,
+                number of sessions and challenges completed.
+              </li>
+              <li>
+                <strong>Your groups.</strong> The groups you create (name, photo
+                if you add one, invite code, creation date) and those you join
+                (join date, owner or member role).
+              </li>
+              <li>
+                <strong>Your messages.</strong> The text of the messages you send
+                in your group's chat, with their date.
+              </li>
+              <li>
+                <strong>Your challenges.</strong> The challenges you send to a
+                member or receive: who sent it, to whom, in which group, how many
+                sessions are targeted and for which week.
+              </li>
+              <li>
+                <strong>Your reports.</strong> When you report a message or a
+                member, we record your identifier, that of the reported person,
+                the group concerned, what you are reporting (a message or a
+                member), the reason you choose and, for a message, a copy of its
+                text limited to 1,000 characters.
+              </li>
+              <li>
+                <strong>Blocked members.</strong> The list of identifiers of the
+                members you have blocked, saved in your account preferences.
+              </li>
+              <li>
+                <strong>Technical connection data.</strong> When you sign in, our
+                hosting provider records session information, such as your IP
+                address, device and system type, and the country inferred from
+                the IP address.
+              </li>
+            </ul>
+
+            <p>
+              On your phone, the app keeps your sign-in session and remembers
+              that you have already seen the introduction screens.
+            </p>
+
+            <h3>What we do not collect</h3>
+
+            <p>
+              No location, no contacts, no advertising identifier. No step count,
+              heart rate or any other sensor data: Tribos does not connect to any
+              health app or health watch. The sessions counted are only the ones
+              you declare yourself by completing a session.
+            </p>
+
+            <p>
+              The app does not include any advertising, audience measurement or
+              tracking tools, nor any third-party crash reporting tool.
+            </p>
+
+            <p>
+              On Android, it only requests one system permission: access to the
+              Internet. On iPhone, access to your photos or camera is only used at
+              the moment you choose a profile photo or a group photo.
+            </p>
+
+            <h3>Why we use them</h3>
+
+            <ul>
+              <li>
+                Create and secure your account, sign you in and, if you request
+                it, send you a link to reset your password.
+              </li>
+              <li>
+                Run Tribos: track your program, count your sessions and points,
+                calculate your group's weekly goal, display the chat and
+                challenges.
+              </li>
+              <li>
+                Moderation: review reports, remove prohibited content and exclude
+                users who violate the
+                <a href="conditions.html">Terms of use</a>.
+              </li>
+              <li>Hide messages from members you have blocked, so you don't see them.</li>
+              <li>Protect the service against fraudulent access and abuse.</li>
+            </ul>
+
+            <p>
+              We do not use your data for advertising, and we do not use it to
+              profile you.
+            </p>
+
+            <h3>What other members of your group see</h3>
+
+            <p>
+              Tribos is a group app. Members of your groups see your username,
+              your profile photo, your sessions for the week and the last one you
+              completed, your total points, the programs you follow, your messages
+              and the challenges you send them. That is the very principle of the
+              app.
+            </p>
+
+            <p>
+              Profile and group photos are served from an unlisted web address:
+              anyone who obtained that address could display the photo, even
+              without a Tribos account. So avoid photos you would not want to see
+              circulating.
+            </p>
+
+            <h3>Legal basis</h3>
+
+            <ul>
+              <li>
+                <strong>Performance of the contract</strong>, within the meaning of
+                Article 6.1.b of the GDPR, for your account, your profile, your
+                activity, your groups, your messages, your challenges and the list
+                of members you block: without this data, we cannot provide the
+                service described in the
+                <a href="conditions.html">Terms of use</a>.
+              </li>
+              <li>
+                <strong>Our legitimate interest</strong>, within the meaning of
+                Article 6.1.f of the GDPR, for moderation and the handling of
+                reports, account security, downloading font files and looking for
+                app fixes.
+              </li>
+            </ul>
+
+            <h3>How long we keep them</h3>
+
+            <ul>
+              <li>
+                <strong>Your account and your activity data</strong> are kept for
+                as long as your account exists. They are deleted when you delete
+                your account, as described on the
+                <a href="suppression-de-compte.html">Delete your account</a> page.
+              </li>
+              <li>
+                <strong>Messages</strong> are only displayed for 24&nbsp;hours in
+                the app, but they remain stored on our servers beyond that period.
+                They are deleted when their author deletes their account, or when
+                the group is deleted. Leaving a group does not delete the messages
+                you sent there.
+              </li>
+              <li>
+                <strong>Challenges</strong> are not yet deleted automatically, either
+                when an account is deleted or when a group is deleted. They only
+                contain technical identifiers, with no username, email address or
+                photo. Write to us to have them erased.
+              </li>
+              <li>
+                <strong>Reports</strong> are kept for as long as needed to process
+                them, and for no more than 12&nbsp;months.
+              </li>
+              <li>
+                <strong>The list of members you block</strong> is kept for as long
+                as your account exists.
+              </li>
+              <li>
+                <strong>Technical connection data</strong> is kept by our hosting
+                provider for the duration of the session, then in its technical
+                logs, which are deleted through automatic rotation.
+              </li>
+            </ul>
+
+            <h2>On this site: the beta waiting list</h2>
+
+            <h3>The data we collect</h3>
+
+            <p>
+              When you sign up for the beta waiting list, we collect:
+            </p>
+
+            <ul>
+              <li>
+                <strong>Your email address.</strong> This is the only information
+                stored on the waiting list.
+              </li>
+              <li>
+                <strong>Optional answers.</strong> The form may ask you which phone
+                you will use Tribos on (Android or iPhone), and the confirmation
+                page asks how many people will be in your group. These answers are
+                sent to our server along with your address, but they are not
+                stored. Your browser also keeps your address and your phone choice
+                for the length of your visit, in particular to pre-fill the
+                confirmation page.
+              </li>
+              <li>
+                <strong>Technical data related to form submission.</strong> When the
+                form is submitted, our hosting provider records the date and time
+                of submission, the IP address from which the form was sent and the
+                information transmitted by your browser, as well as the result of
+                the invisible honeypot field intended to block bots. This data is
+                used solely to filter automated and abusive submissions.
+              </li>
+            </ul>
+
+            <p>
+              We do not collect your name, your phone number, your company, or any
+              health or training data through this site.
+            </p>
+
+            <h3>Why we collect this data</h3>
+
+            <p>
+              Your email address is used exclusively to let you know when the Tribos
+              beta opens and to send you the practical information you need to
+              access it, such as an invitation or an access code.
+            </p>
+
+            <p>
+              On the same basis, we may send you a limited number of messages about
+              the progress of the beta.
+            </p>
+
+            <p>
+              We do not use your address for advertising, and we do not use it to
+              profile you.
+            </p>
+
+            <p>
+              The technical form data is used solely for security and to fight
+              spam.
+            </p>
+
+            <h3>Legal basis</h3>
+
+            <p>
+              The processing of your email address is based on your consent, within
+              the meaning of Article 6.1.a of the General Data Protection Regulation
+              (GDPR). This consent is given freely when you enter your address and
+              submit the form.
+            </p>
+
+            <p>
+              You may withdraw your consent at any time, without having to give a
+              reason. Withdrawal does not affect the lawfulness of processing carried
+              out before it.
+            </p>
+
+            <p>
+              The processing of anti-spam technical data is based on our legitimate
+              interest in protecting the form against automated submissions, within
+              the meaning of Article 6.1.f of the GDPR.
+            </p>
+
+            <h3>How long we keep them</h3>
+
+            <p>
+              Your email address is kept until the beta opens and for as long as
+              needed to support you as a beta tester, and for no more than three
+              years from our last contact with you, in line with the practice
+              recommended by the CNIL (the French data protection authority) for
+              prospecting.
+            </p>
+
+            <p>
+              If you request deletion of your address or withdraw your consent,
+              your address is removed from our records as soon as possible, and no
+              later than thirty days.
+            </p>
+
+            <p>If the beta project were abandoned, the list would be deleted.</p>
+
+            <p>
+              Technical data associated with form submissions is kept by our hosting
+              provider for as long as needed for anti-spam filtering, then deleted
+              along with the corresponding submission.
+            </p>
+
+            <h2>Who has access to your data</h2>
+
+            <p>
+              On the Tribos side, only the publisher, SAHIN Ozan, accesses your
+              data, to run the service, manage the beta and handle reports. In the
+              app, members of your groups see what is described above.
+            </p>
+
+            <p>We use two processors:</p>
+
+            <p>
+              <strong>Appwrite Cloud</strong>, a data region located in Frankfurt
+              (Germany, European Union), which hosts the app's data (accounts,
+              profiles, activity, groups, messages, challenges, reports and photos)
+              as well as the website, and which runs the processing of the sign-up
+              form. As such, Appwrite also temporarily receives and stores the email
+              address entered in the form, along with the technical data associated
+              with the submission.
+            </p>
+
+            <p>
+              <strong>Resend</strong>, a company based in San Francisco, United
+              States, which stores the waiting list (your email address) and handles
+              the sending of beta messages, including the invitation and the access
+              code.
+            </p>
+
+            <p>
+              These processors act on our instructions, under data processing
+              agreements compliant with Article 28 of the GDPR.
+            </p>
+
+            <p>
+              The app also relies on two technical services, which receive no data
+              from your account:
+            </p>
+
+            <ul>
+              <li>
+                <strong>Google Fonts</strong>, a Google service: the app downloads
+                its font files the first time it needs them, which transmits your
+                phone's IP address to Google, as with any connection to a website.
+              </li>
+              <li>
+                <strong>Shorebird</strong>, a service of Code Town, Inc., a company
+                based in the United States, which lets us fix bugs without going
+                through an app update. At launch, the app asks Shorebird whether a
+                fix is available. This request transmits the app identifier, its
+                version, the platform (iOS or Android), the processor architecture
+                and an anonymous installation identifier, as well as the IP address
+                required for any connection.
+              </li>
+            </ul>
+
+            <p>
+              Apple and Google also process data related to downloading the app from
+              the App Store or Google Play, under their own privacy policies.
+            </p>
+
+            <p>
+              Outside these cases, your data may be disclosed to an administrative or
+              judicial authority if the law requires us to do so.
+            </p>
+
+            <h2>Transfers outside the European Union</h2>
+
+            <p>
+              App data is stored in the European Union, in Germany. Hosting of the
+              website and processing of the form also take place there.
+            </p>
+
+            <p>
+              Managing the waiting list and sending messages, however, involve a
+              transfer of your email address to the United States, where Resend is
+              based.
+            </p>
+
+            <p>
+              This transfer is governed by the standard contractual clauses adopted
+              by the European Commission, included in the processing agreement signed
+              with Resend, and supplemented where applicable by the additional
+              measures provided for in that same agreement.
+            </p>
+
+            <p>
+              Requests sent to Google Fonts and Shorebird may also be processed in
+              the United States, where these companies are based.
+            </p>
+
+            <p>
+              You can write to evey.run@gmail.com to obtain information about the
+              safeguards applicable to these transfers.
+            </p>
+
+            <h2>We do not sell your data</h2>
+
+            <p>
+              We do not sell, rent or exchange your data, whether it is your email
+              address or your use of the app.
+            </p>
+
+            <p>
+              We do not pass it on to any data broker, advertising network or
+              commercial partner.
+            </p>
+
+            <p>It is used solely for the purposes described above.</p>
+
+            <h2>Your rights</h2>
+
+            <p>
+              In accordance with the GDPR and the French Data Protection Act (Loi
+              Informatique et Libertés), you have the following rights over your
+              data:
+            </p>
+
+            <ul>
+              <li>
+                <strong>Right of access.</strong> To know whether we hold data about
+                you and to obtain a copy of it.
+              </li>
+              <li>
+                <strong>Right to rectification.</strong> To have inaccurate data
+                corrected, such as an email address or a username.
+              </li>
+              <li>
+                <strong>Right to erasure.</strong> To request deletion of your data,
+                or of your address from the waiting list. You can also delete your
+                account yourself from the app.
+              </li>
+              <li>
+                <strong>Right to object.</strong> To object to the processing of your
+                data based on our legitimate interest, as well as to messages related
+                to the beta.
+              </li>
+              <li>
+                <strong>Right to restriction of processing.</strong> To request the
+                temporary freezing of the use of your data.
+              </li>
+              <li>
+                <strong>Right to data portability.</strong> To receive the data you
+                provided to us in a structured, commonly used format.
+              </li>
+              <li>
+                <strong>Right to withdraw your consent.</strong> At any time, without
+                giving a reason, which means you are removed from the waiting list.
+              </li>
+            </ul>
+
+            <h2>How to exercise your rights</h2>
+
+            <p>
+              To delete your Tribos account and the associated data, the procedure to
+              follow is described on the
+              <a href="suppression-de-compte.html">Delete your account</a> page.
+            </p>
+
+            <p>
+              For any other request, write to evey.run@gmail.com, stating your
+              request and, if possible, sending it from the email address of your
+              Tribos account or the one used for the waiting list.
+            </p>
+
+            <p>
+              We reply within one month of receiving the request. This period may be
+              extended by two months if the request is complex, in which case we will
+              let you know.
+            </p>
+
+            <p>
+              We may ask you for proof of identity only in case of reasonable doubt
+              about the identity of the requester.
+            </p>
+
+            <p>
+              You may also write to us by post at SAHIN Ozan, Villeurbanne.
+            </p>
+
+            <h2>Complaint to the CNIL</h2>
+
+            <p>
+              If, after contacting us, you believe that your rights are not being
+              respected, you may lodge a complaint with the Commission nationale de
+              l'informatique et des libertés (CNIL, the French data protection
+              authority):
+            </p>
+
+            <p>CNIL, 3 place de Fontenoy, TSA 80715, 75334 Paris Cedex 07.</p>
+
+            <p>
+              Website:
+              <a href="https://www.cnil.fr" rel="noopener">https://www.cnil.fr</a>
+            </p>
+
+            <h2>Children</h2>
+
+            <p>
+              The Tribos app is not intended for people under 16, and we do not
+              knowingly collect their data.
+            </p>
+
+            <p>
+              If you believe a child under 16 has created an account, write to us at
+              evey.run@gmail.com: we will delete that account and its data.
+            </p>
+
+            <h2>Cookies and trackers</h2>
+
+            <p>
+              This site does not set any audience measurement cookie, advertising
+              cookie or tracker for profiling purposes.
+            </p>
+
+            <p>
+              Our hosting provider may use cookies that are strictly necessary for
+              the service to function properly, in particular for load balancing and
+              protection against abuse. These cookies are not used to track you from
+              one site to another and do not require your prior consent.
+            </p>
+
+            <p>
+              No consent banner is therefore displayed. If an audience analytics
+              tool, an advertising service or any other non-essential tracker were
+              added to the site, this section would be updated and your consent would
+              be requested before any cookie is set.
+            </p>
+
+            <p>
+              The app, for its part, uses no trackers: it does not access your phone's
+              advertising identifier and does not track you from one app to another.
+            </p>
+
+            <h2>Data protection officer</h2>
+
+            <p>
+              We have not appointed a data protection officer. Appointing one is not
+              mandatory in our situation, because we are not a public body, our core
+              activity does not consist of regular and systematic large-scale
+              monitoring of individuals, and we do not process sensitive data on a
+              large scale within the meaning of Article 9 of the GDPR.
+            </p>
+
+            <p>
+              Your requests concerning your data are handled directly at
+              evey.run@gmail.com.
+            </p>
+
+            <h2>Data security</h2>
+
+            <p>
+              Exchanges between the app, your browser and our servers are encrypted
+              using HTTPS. Your password is never stored in plain text.
+            </p>
+
+            <p>
+              We limit access to service administration and to form submissions to
+              the people who need it, and we protect the accounts concerned.
+            </p>
+
+            <h2>Changes to this policy</h2>
+
+            <p>
+              This policy may change along with the app and the website, in
+              particular when Tribos opens to the public or if our hosting provider
+              or tools change.
+            </p>
+
+            <p>
+              The version in force is the one published on this page, with its
+              update date. If a material change concerns your data, we will inform
+              you.
+            </p>
+            <!--
+              Note interne, à ne pas publier telle quelle :
+              Document type à faire relire avant publication ; il ne constitue pas un conseil juridique.
+            -->
+          </article>
+
+          <div class="doc-actions reveal" style="--i: 2">
+            <a class="btn btn-ghost" href="index.html">Back to home</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <a class="brand" href="./">
+              <img src="../assets/brand/tribos-icon-64.png" width="30" height="30" loading="lazy" decoding="async" alt="" aria-hidden="true" />
+              <span class="brand-name">Tribos</span>
+            </a>
+            <p>
+              Tribos, the app for training as a group: a shared program, one session
+              a day.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="footer-heading">Product</h2>
+            <ul class="footer-links">
+              <li><a href="index.html#fonctionnement">How it works</a></li>
+              <li><a href="index.html#groupe">The group</a></li>
+              <li><a href="index.html#faq">FAQ</a></li>
+              <li><a href="index.html#beta">Join the beta</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="footer-heading">Teams</h2>
+            <ul class="footer-links">
+              <li><a href="entreprises.html">Tribos for teams</a></li>
+              <li><a href="entreprises.html#contact">Contact us</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="footer-heading">Legal</h2>
+            <ul class="footer-links">
+              <li><a href="confidentialite.html" aria-current="page">Privacy policy</a></li>
+              <li><a href="../confidentialite.html" hreflang="fr" lang="fr">Français</a></li>
+              <li><a href="conditions.html">Terms of use</a></li>
+              <li><a href="mentions-legales.html">Legal notice</a></li>
+              <li><a href="suppression-de-compte.html">Delete your account</a></li>
+              <li><a href="support.html">Support</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© 2026 Tribos. All rights reserved.</p>
+          <p>Private beta</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../assets/js/site.js" defer></script>
+  </body>
+</html>

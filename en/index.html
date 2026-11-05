@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tribos - Sport, but with your friends</title>
+    <meta
+      name="description"
+      content="Every week, your group sets a number of sessions to hit, and every session anyone does counts for everyone. Leave your email to join the private beta."
+    />
+    <link rel="canonical" href="https://tribos.evey.run/en/" />
+    <link rel="alternate" hreflang="fr" href="https://tribos.evey.run/" />
+    <link rel="alternate" hreflang="en" href="https://tribos.evey.run/en/" />
+    <link rel="alternate" hreflang="x-default" href="https://tribos.evey.run/" />
+
+    <!-- Split by scheme: an unconditional orange bar sat on a near-black page
+         for every dark-mode visitor. -->
+    <meta name="theme-color" content="#0d0b09" />
+
+    <meta property="og:url" content="https://tribos.evey.run/en/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Tribos" />
+    <meta property="og:title" content="Tribos - Sport, but with your friends" />
+    <meta
+      property="og:description"
+      content="One weekly session goal, hit together. Leave your email to join the private beta."
+    />
+    <meta property="og:image" content="https://tribos.evey.run/assets/brand/og-card.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Tribos card: the logo, the promise “Sport, but with your friends” and the app's home screen" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="../assets/brand/favicon-32.png" sizes="32x32" />
+    <link rel="icon" href="../assets/brand/favicon-16.png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="../assets/brand/apple-touch-icon.png" />
+
+    <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/bricolage-grotesque-latin.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/geist-latin.woff2" crossorigin />
+    <link rel="stylesheet" href="../assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="../assets/css/tribos.css" />
+
+    <script>
+      // Runs before first paint. Three jobs:
+      //  1. apply the stored theme so the other mode never flashes;
+      //  2. mark the document as script-enabled, which is what gates the
+      //     scroll-reveal styles;
+      //  3. arm a dead-man switch. The reveal blocks start at opacity 0 and are
+      //     only shown by site.js. If that file is blocked, 404s, or fails to
+      //     parse, nothing would ever reveal them and the page would render
+      //     blank. site.js clears this timer as soon as it runs; if it never
+      //     does, the class is dropped and every block returns to full opacity.
+      document.documentElement.classList.add("js");
+      window.__tribosRevealFallback = setTimeout(function () {
+        document.documentElement.classList.remove("js");
+      }, 2500);
+      try {
+        var t = localStorage.getItem("tribos-theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://tribos.evey.run/#org",
+            "name": "Tribos",
+            "url": "https://tribos.evey.run/en/",
+            "logo": "https://tribos.evey.run/assets/brand/tribos-icon.png"
+          },
+          {
+            "@type": "MobileApplication",
+            "name": "Tribos",
+            "applicationCategory": "HealthApplication",
+            "operatingSystem": "Android",
+            "inLanguage": "en-US",
+            "publisher": { "@id": "https://tribos.evey.run/#org" },
+            "description": "Group training app: every week the group sets a number of sessions to hit, and every session anyone does counts for everyone. Currently in private beta.",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "EUR",
+              "availability": "https://schema.org/PreOrder"
+            }
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Is Tribos free?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, the beta is free and no credit card is required. We want to see first whether the product holds up with real groups. Any paid offer would be announced in advance."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "iOS or Android?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Both. On Android, we let people in wave by wave. On iPhone, the beta runs through TestFlight, Apple's app for betas: pick iPhone when you sign up, and the install link shows up right after."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do I need equipment?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Not to get started. Calisthenics, running, mobility and HIIT are done with bodyweight, at home. Others, like basic strength, need a barbell or a gym."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do my friends need the app?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes: their sessions count toward the week's goal, so they need the app. A six-character code is enough to get them in. You don't need to have convinced them before signing up: we give you what you need to invite them right after."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What happens when I finish a session?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "You earn 50 points, or double if the consistency bonus is active. Your session counts toward the whole group's weekly goal, and your leaderboard on the home screen updates."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "When is it available?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Tribos is in private beta and access opens in waves. We don't announce a public date: we'd rather open when it's ready."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What happens to my data?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Your email address is only used to tell you when the beta opens. It is not sold. You can ask for it to be deleted at any time."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#contenu">Skip to content</a>
+    <div class="grain" aria-hidden="true"></div>
+    <span data-nav-sentinel aria-hidden="true"></span>
+
+    <header class="nav" data-nav>
+      <div class="wrap nav-inner">
+        <a class="brand" href="./" aria-label="Tribos, home">
+          <img src="../assets/brand/tribos-icon-64.png" width="30" height="30" alt="" />
+          <span class="brand-name">Tribos</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="#fonctionnement">How it works</a>
+          <a href="#groupe">The group</a>
+          <a href="entreprises.html">Teams</a>
+        </nav>
+
+        <div class="nav-actions">
+          <a class="btn btn-light btn-sm" href="#beta" data-focus-signup>Join the beta</a>
+
+          <button
+            class="menu-toggle"
+            type="button"
+            data-menu-toggle
+            aria-expanded="false"
+            aria-controls="menu-mobile"
+            aria-label="Open menu"
+          >
+            <svg class="icon icon-open" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-list" /></svg>
+            <svg class="icon icon-close" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-x" /></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="menu-panel" id="menu-mobile" data-menu hidden>
+      <a href="#fonctionnement">How it works</a>
+      <a href="#groupe">The group</a>
+      <a href="#progression">Points</a>
+      <a href="entreprises.html">Teams</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn btn-primary" href="#beta" data-focus-signup>Join the beta</a>
+    </div>
+
+    <main id="contenu">
+      <!-- ================= HERO ================= -->
+      <!-- A poster, not a split: the blaze gradient carries a duotone motion
+           shot of runners (CC0, same source as the Play listing) and the type
+           sits in its darkest zone so white clears AA. The phone gets its own
+           poster later; here the product is the energy. -->
+      <section class="hero">
+        <div class="hero-poster blaze">
+          <div
+            class="blaze-field"
+            style="background-image: url('../assets/photo/hero-run.webp')"
+            aria-hidden="true"
+          ></div>
+          <p class="ghost" aria-hidden="true">TRIBOS</p>
+
+          <div class="wrap hero-grid">
+            <div class="hero-copy reveal">
+              <p class="eyebrow eyebrow-live">
+                <span class="pulse" aria-hidden="true"></span>
+                Private beta&#8239;· access opens in waves
+              </p>
+
+              <h1 data-split>
+                <span class="l">Sport,</span>
+                <span class="l">but with <em>your friends.</em></span>
+              </h1>
+
+              <p class="lede">
+                Every week, your group sets a number of sessions to hit.
+                Every session you do counts for everyone.
+              </p>
+
+              <!-- Entry point 1 of 3. All three post to the same Netlify form
+                   (name="beta-signup"), told apart by the hidden `source`
+                   field. The canonical declaration with the full field set is
+                   the one in #beta; this posts a strict subset. -->
+              <form
+                class="form form-inline form-blaze hero-form"
+                data-cta-anchor="hero"
+                name="beta-signup"
+                method="post"
+                action="./merci.html"
+                data-waitlist
+                data-success="./merci.html"
+              >
+                <input type="hidden" name="form-name" value="beta-signup" />
+                <input type="hidden" name="source" value="hero" />
+                <input type="hidden" name="telephone" value="" />
+
+                <p class="honeypot" aria-hidden="true">
+                  <label for="bot-hero">Leave this field empty</label>
+                  <input id="bot-hero" name="bot-field" type="text" tabindex="-1" autocomplete="off" />
+                </p>
+
+                <div class="field" data-field-email>
+                  <label class="sr-only" for="email-hero">Email address</label>
+                  <input
+                    id="email-hero"
+                    name="email"
+                    type="email"
+                    inputmode="email"
+                    autocomplete="email"
+                    autocapitalize="off"
+                    autocorrect="off"
+                    spellcheck="false"
+                    enterkeyhint="go"
+                    placeholder="firstname@email.com"
+                    required
+                    aria-describedby="help-hero"
+                  />
+                  <p class="error" id="err-hero" data-error></p>
+                </div>
+
+                <button class="btn btn-light btn-lg" type="submit" data-burst data-magnetic="0.22">
+                  I'm joining the beta
+                </button>
+
+                <p class="form-status" role="status" aria-live="polite" data-status></p>
+
+                <p class="help" id="help-hero" data-help>
+                  Free for the whole beta&#8239;· no credit card&#8239;· just one email,
+                  when your access is ready.
+                </p>
+              </form>
+
+              <p class="hero-secondary">
+                <a class="link-arrow" href="#fonctionnement">
+                  See how it works
+                  <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-arrow-right" /></svg>
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TICKER ================= -->
+      <!-- The one marquee on the page. It carries the product's real vocabulary
+           (programme names and filters lifted from the app) so a visitor grasps
+           the breadth without a list of twelve bullet points. -->
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+          <div class="marquee-group">
+            <span>Basic strength</span><i class="dot"></i>
+            <span>HIIT</span><i class="dot"></i>
+            <span>Calisthenics</span><i class="dot"></i>
+            <span>Explosiveness</span><i class="dot"></i>
+            <span>Vertical jump</span><i class="dot"></i>
+            <span>MMA</span><i class="dot"></i>
+            <span>Running</span><i class="dot"></i>
+            <span>Mobility</span><i class="dot"></i>
+          </div>
+          <div class="marquee-group">
+            <span>Basic strength</span><i class="dot"></i>
+            <span>HIIT</span><i class="dot"></i>
+            <span>Calisthenics</span><i class="dot"></i>
+            <span>Explosiveness</span><i class="dot"></i>
+            <span>Vertical jump</span><i class="dot"></i>
+            <span>MMA</span><i class="dot"></i>
+            <span>Running</span><i class="dot"></i>
+            <span>Mobility</span><i class="dot"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= GALERIE ================= -->
+      <!-- Four tilted cards: the sport in real photography (CC0, processed into
+           the site's mono/duotone) beside the app mid-session. The captions the
+           cards would need are the section caption instead: one line, centred. -->
+      <section class="gallery">
+        <div class="wrap">
+          <div class="gallery-row reveal">
+            <figure class="gallery-card" style="--i: 0">
+              <picture>
+                <source srcset="../assets/photo/gal-run-bw.webp" type="image/webp" />
+                <img
+                  src="../assets/photo/gal-run-bw.jpg"
+                  width="660"
+                  height="880"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Runners in a park, black and white photo"
+                />
+              </picture>
+            </figure>
+            <figure class="gallery-card" style="--i: 1">
+              <picture>
+                <source
+                  type="image/webp"
+                  srcset="../assets/app/programme-sm.webp 450w, assets/app/programme.webp 900w"
+                  sizes="(max-width: 760px) 44vw, 280px"
+                />
+                <img
+                  srcset="../assets/app/programme-sm.jpg 450w, assets/app/programme.jpg 900w"
+                  sizes="(max-width: 760px) 44vw, 280px"
+                  src="../assets/app/programme.jpg"
+                  width="900"
+                  height="1890"
+                  loading="lazy"
+                  decoding="async"
+                  alt="The Calisthenics Skills program in Tribos: the program photo, the weeks and the three sessions of week 1"
+                />
+              </picture>
+            </figure>
+            <figure class="gallery-card" style="--i: 2">
+              <picture>
+                <source srcset="../assets/photo/gal-ride-duo.webp" type="image/webp" />
+                <img
+                  src="../assets/photo/gal-ride-duo.jpg"
+                  width="660"
+                  height="880"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Cyclists at sunrise, orange treatment"
+                />
+              </picture>
+            </figure>
+            <figure class="gallery-card" style="--i: 3">
+              <picture>
+                <source
+                  type="image/webp"
+                  srcset="../assets/app/repos-sm.webp 450w, assets/app/repos.webp 900w"
+                  sizes="(max-width: 760px) 44vw, 280px"
+                />
+                <img
+                  srcset="../assets/app/repos-sm.jpg 450w, assets/app/repos.jpg 900w"
+                  sizes="(max-width: 760px) 44vw, 280px"
+                  src="../assets/app/repos.jpg"
+                  width="900"
+                  height="1890"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Timed rest in Tribos: an orange ring counts down 59 seconds before the next set"
+                />
+              </picture>
+            </figure>
+          </div>
+
+          <p class="gallery-caption reveal" style="--i: 1">
+            The session for real, with the app keeping up.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================= STATEMENT ================= -->
+      <section class="section-tight statement">
+        <div class="wrap statement-inner">
+          <blockquote class="reveal" data-anim="clip" data-split>
+            You're not short on motivation. You just train alone.
+          </blockquote>
+          <div class="statement-support reveal" style="--i: 1">
+            <p>
+              One more fitness app changes nothing if nobody notices you skipped
+              your session. A group does notice. And that's often enough to get
+              you back.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= COMMENT CA MARCHE ================= -->
+      <!-- Pinned sequence: the phone stays put while the three steps scroll past
+           it and the screen cross-fades to match. Three product screens in the
+           space of one section, and the steps read as a list without JS. -->
+      <section class="section" id="fonctionnement">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <h2 class="h2" data-split>How it works</h2>
+            <p class="lede">
+              Three things to do once, then the app takes care of the pace.
+            </p>
+          </div>
+
+          <div class="sequence" data-sequence>
+            <ol class="sequence-steps">
+              <li class="sequence-step reveal" data-step data-anim="slide">
+                <p class="step-index num">01</p>
+                <h3>Pick your program</h3>
+                <p>
+                  Ten programs, from beginner to advanced: basic strength,
+                  HIIT, calisthenics, explosiveness, MMA, running, mobility. You
+                  pick yours and follow it, week by week.
+                </p>
+              </li>
+
+              <li class="sequence-step reveal" data-step data-anim="slide">
+                <p class="step-index num">02</p>
+                <h3>Create or join a group</h3>
+                <p>
+                  A six-character code, that's all it takes. Every week, the group
+                  sets a number of sessions: two per person.
+                </p>
+              </li>
+
+              <li class="sequence-step reveal" data-step data-anim="slide">
+                <p class="step-index num">03</p>
+                <h3>Do your first session</h3>
+                <p>
+                  One exercise at a time, full-screen photo, countdown sets and
+                  timed rest. You finish, you earn 50&nbsp;points, and your session
+                  counts for the whole group.
+                </p>
+              </li>
+            </ol>
+
+            <div class="sequence-media reveal" style="--i: 1">
+              <div class="sequence-screens">
+                <div class="sequence-screen" data-screen>
+                  <div class="phone phone-bleed">
+                    <div class="phone-status" aria-hidden="true">
+                      <span>9:41</span>
+                      <span class="phone-status-icons">
+                        <svg class="icon" viewBox="0 0 256 256" fill="currentColor"><use href="../assets/icons/sprite.svg#i-flame" /></svg>
+                      </span>
+                    </div>
+<picture>
+                      <source
+                        type="image/webp"
+                        srcset="../assets/app/picker-sm.webp 450w, assets/app/picker.webp 900w"
+                        sizes="(max-width: 900px) 80vw, 360px"
+                      />
+                      <img
+                        srcset="../assets/app/picker-sm.jpg 450w, assets/app/picker.jpg 900w"
+                        sizes="(max-width: 900px) 80vw, 360px"
+                        src="../assets/app/picker.jpg"
+                        width="900"
+                        height="1890"
+                        loading="lazy"
+                        decoding="async"
+                        alt="Tribos 'Pick your program' screen: search, discipline filters and the Calisthenics, Running and Vertical jump programs"
+                      />
+                    </picture>
+                  </div>
+                </div>
+
+                <div class="sequence-screen" data-screen>
+                  <div class="phone phone-bleed">
+                    <div class="phone-status" aria-hidden="true">
+                      <span>9:41</span>
+                      <span class="phone-status-icons">
+                        <svg class="icon" viewBox="0 0 256 256" fill="currentColor"><use href="../assets/icons/sprite.svg#i-users-three" /></svg>
+                      </span>
+                    </div>
+                    <picture>
+                      <source
+                        type="image/webp"
+                        srcset="../assets/app/groupe-sm.webp 450w, assets/app/groupe.webp 800w"
+                        sizes="(max-width: 900px) 80vw, 360px"
+                      />
+                      <img
+                        srcset="../assets/app/groupe-sm.jpg 450w, assets/app/groupe.jpg 800w"
+                        sizes="(max-width: 900px) 80vw, 360px"
+                        src="../assets/app/groupe.jpg"
+                        width="800"
+                        height="1356"
+                        loading="lazy"
+                        decoding="async"
+                        alt="Tribos group screen: the group 'Les Loups' and its goal for the week"
+                      />
+                    </picture>
+                  </div>
+                </div>
+
+                <div class="sequence-screen" data-screen>
+                  <div class="phone phone-bleed">
+                    <div class="phone-status" aria-hidden="true">
+                      <span>9:41</span>
+                      <span class="phone-status-icons">
+                        <svg class="icon" viewBox="0 0 256 256" fill="currentColor"><use href="../assets/icons/sprite.svg#i-barbell" /></svg>
+                      </span>
+                    </div>
+                    <picture>
+                      <source
+                        type="image/webp"
+                        srcset="../assets/app/player-sm.webp 450w, assets/app/player.webp 900w"
+                        sizes="(max-width: 900px) 80vw, 360px"
+                      />
+                      <img
+                        srcset="../assets/app/player-sm.jpg 450w, assets/app/player.jpg 900w"
+                        sizes="(max-width: 900px) 80vw, 360px"
+                        src="../assets/app/player.jpg"
+                        width="900"
+                        height="1890"
+                        loading="lazy"
+                        decoding="async"
+                        alt="Tribos guided session: the exercise full-screen, the current set and the upcoming exercises"
+                      />
+                    </picture>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= BENTO ================= -->
+      <section class="section" id="app">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <h2 class="h2" data-split>What's in the app</h2>
+          </div>
+
+          <div class="bento">
+            <article class="tile tile-shot reveal" data-anim="pop">
+              <div class="tile-text">
+                <h3>Every exercise, pictured</h3>
+                <p>
+                  More than 110 illustrated exercises. Before you start, you see
+                  the whole session&#8239;: the movements, sets, reps and rest
+                  times.
+                </p>
+              </div>
+              <div class="shot-crop">
+                <picture>
+                  <source
+                    type="image/webp"
+                    srcset="../assets/app/seance-sm.webp 450w, assets/app/seance.webp 800w"
+                    sizes="(max-width: 640px) 80vw, 360px"
+                  />
+                  <img
+                    srcset="../assets/app/seance-sm.jpg 450w, assets/app/seance.jpg 800w"
+                    sizes="(max-width: 640px) 80vw, 360px"
+                    src="../assets/app/seance.jpg"
+                    width="800"
+                    height="1356"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Tribos session screen with the exercises Australian pull-ups, Pull-ups, Bench dips and Plank, each with its sets and rest time"
+                  />
+                </picture>
+              </div>
+            </article>
+
+            <article class="tile tile-accent reveal" data-anim="pop">
+              <div class="tile-text">
+                <h3>The leaderboard, just you and your crew</h3>
+                <p>
+                  On your home screen, your group's leaderboard and nothing else.
+                  No global ranking&#8239;: the only one that counts is your
+                  friends'.
+                </p>
+              </div>
+
+              <!-- The real component rather than a 104px decorative trophy: the
+                   tile that has to prove the ranking moves now shows it move. -->
+              <ol class="board board-flat" data-leaderboard>
+                <li class="board-row" data-row data-points="390" style="--r: 0">
+                  <span class="rank">
+                    <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-crown" /></svg>
+                    <span class="num" data-rank>1</span>
+                  </span>
+                  <span class="who">Momo</span>
+                  <span class="pts num" data-points-label>390 pts</span>
+                  <span class="bar" data-bar aria-hidden="true"></span>
+                </li>
+                <li class="board-row" data-row data-points="290" style="--r: 1">
+                  <span class="rank">
+                    <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-crown" /></svg>
+                    <span class="num" data-rank>2</span>
+                  </span>
+                  <span class="who">Mandine</span>
+                  <span class="pts num" data-points-label>290 pts</span>
+                  <span class="bar" data-bar aria-hidden="true"></span>
+                </li>
+                <li class="board-row is-me" data-row data-points="200" style="--r: 2">
+                  <span class="rank">
+                    <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-crown" /></svg>
+                    <span class="num" data-rank>3</span>
+                  </span>
+                  <span class="who">You</span>
+                  <span class="pts num" data-points-label>200 pts</span>
+                  <span class="bar" data-bar aria-hidden="true"></span>
+                </li>
+              </ol>
+            </article>
+
+            <!-- Série et points: the app's own streak card, rebuilt, instead of
+                 a decorative 104px flame glyph describing one in prose. -->
+            <article class="tile tile-appui reveal" data-anim="pop">
+              <div class="tile-text">
+                <h3>50 points per session</h3>
+                <p>
+                  And everything counts double for seven days if you kept your
+                  rhythm the week before. Consistency pays off more than a one-off
+                  feat.
+                </p>
+              </div>
+              <div class="appui streak">
+                <div>
+                  <p class="streak-title">
+                    <span class="num" data-count="14">14</span> days in a row
+                  </p>
+                  <p class="sub">Nice work!</p>
+                </div>
+                <svg class="streak-flame" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-flame" /></svg>
+                <ol class="streak-week">
+                  <li class="day is-done" style="--d: 0">M</li>
+                  <li class="day is-done" style="--d: 1">T</li>
+                  <li class="day is-done" style="--d: 2">W</li>
+                  <li class="day is-done" style="--d: 3">T</li>
+                  <li class="day is-today" style="--d: 4" aria-current="date">F</li>
+                  <li class="day" style="--d: 5">S</li>
+                  <li class="day" style="--d: 6">S</li>
+                </ol>
+              </div>
+            </article>
+
+            <article class="tile reveal" data-anim="pop">
+              <div class="tile-text">
+                <h3>Challenge a friend</h3>
+                <p>
+                  Got a friend slacking? Challenge them for the week: two to five
+                  sessions. It shows up on their home screen until Sunday.
+                </p>
+              </div>
+              <div class="appduo">
+                <div class="weekcard">
+                  <p class="cap">
+                    Lena's challenge
+                    <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-target" /></svg>
+                  </p>
+                  <ol class="weekbars" aria-hidden="true">
+                    <li class="is-done" style="--h: 60%; --i: 0"></li>
+                    <li style="--h: 22%; --i: 1"></li>
+                    <li class="is-done" style="--h: 80%; --i: 2"></li>
+                    <li style="--h: 22%; --i: 3"></li>
+                    <li style="--h: 22%; --i: 4"></li>
+                  </ol>
+                  <p class="foot"><b class="num">2/4</b> <span>Sessions</span></p>
+                </div>
+                <div class="card card-points">
+                  <p class="cap cap-points">
+                    Points x2
+                    <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-lightning" /></svg>
+                  </p>
+                  <svg class="spark" viewBox="0 0 120 40" preserveAspectRatio="none" aria-hidden="true">
+                    <path class="spark-fill" d="M0,24 L24,16 L48,20 L72,12 L96,14 L120,8 L120,40 L0,40 Z" />
+                    <path class="spark-line" d="M0,24 L24,16 L48,20 L72,12 L96,14 L120,8" />
+                  </svg>
+                  <p class="foot"><b class="num" data-count="100">100</b> <span>points / session</span></p>
+                </div>
+              </div>
+            </article>
+
+            <article class="tile tile-ink reveal" data-anim="pop">
+              <div class="tile-text">
+                <h3>The group chat</h3>
+                <p>
+                  One thread per group, covering the last 24&nbsp;hours. Just enough
+                  to get you motivated in the morning, not one more social network.
+                </p>
+              </div>
+
+              <!-- A real message from the app rather than a decorative speech
+                   bubble: the tone is the argument here. -->
+              <div class="bubble">
+                <p>
+                  Session done for me! I left you behind, but I'm sure you'll catch
+                  up… well, I hope so!
+                </p>
+                <span class="ava" aria-hidden="true">M</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= POSTER TELEPHONE ================= -->
+      <!-- The Nebula beat: the app alive, centre stage on a blaze panel with
+           the wordmark as texture. The screen is live DOM (French, current
+           mechanics), not a capture, so everything in it still animates. -->
+      <section class="section poster-wrap">
+        <div class="wrap">
+          <div class="poster blaze reveal">
+            <p class="ghost" aria-hidden="true">TRIBOS</p>
+
+            <div class="poster-head">
+              <h2 data-split>The home screen, on a Thursday</h2>
+              <p>The streak holding, the session ready, and the group watching.</p>
+            </div>
+
+            <!-- The home screen is the team's own Figma export (the same file
+                 the Play listing uses as its cover), with its English strings
+                 re-set in French by tools/build-assets.py. It replaces the DOM
+                 recreation that used to live here: this is the screen the team
+                 publishes, with a full week and a real leaderboard. -->
+            <div class="phone phone-app" data-tilt="7">
+              <div class="phone-status" aria-hidden="true">
+                <span>9:41</span>
+                <span class="phone-status-icons">
+                  <svg class="icon" viewBox="0 0 256 256" fill="currentColor"><use href="../assets/icons/sprite.svg#i-flame" /></svg>
+                  <svg class="icon" viewBox="0 0 256 256" fill="currentColor"><use href="../assets/icons/sprite.svg#i-lightning" /></svg>
+                </span>
+              </div>
+              <picture>
+                <source
+                  type="image/webp"
+                  srcset="../assets/app/home-sm.webp 450w, assets/app/home.webp 604w"
+                  sizes="(max-width: 900px) 78vw, 340px"
+                />
+                <img
+                  srcset="../assets/app/home-sm.jpg 450w, assets/app/home.jpg 604w"
+                  sizes="(max-width: 900px) 78vw, 340px"
+                  src="../assets/app/home.jpg"
+                  width="604"
+                  height="1302"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Tribos home screen: fourteen days in a row, the day's Leg Day session at 75 points, doubled points and the group leaderboard"
+                />
+              </picture>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= LE GROUPE ================= -->
+      <!-- The wedge, and the thing the first version of this page got wrong: it
+           showed a points ranking here. The shipped group screen is a SHARED
+           WEEKLY OBJECTIVE, and the app's own source is explicit that members
+           are never sorted by contribution. -->
+      <section class="section" id="groupe">
+        <div class="wrap split">
+          <div class="split-media reveal">
+            <div class="phone phone-bleed">
+              <div class="phone-status" aria-hidden="true">
+                <span>9:41</span>
+                <span class="phone-status-icons">
+                  <svg class="icon" viewBox="0 0 256 256" fill="currentColor"><use href="../assets/icons/sprite.svg#i-users-three" /></svg>
+                </span>
+              </div>
+              <picture>
+                <source
+                  type="image/webp"
+                  srcset="../assets/app/groupe-sm.webp 450w, assets/app/groupe.webp 800w"
+                  sizes="(max-width: 900px) 80vw, 360px"
+                />
+                <img
+                  srcset="../assets/app/groupe-sm.jpg 450w, assets/app/groupe.jpg 800w"
+                  sizes="(max-width: 900px) 80vw, 360px"
+                  src="../assets/app/groupe.jpg"
+                  width="800"
+                  height="1356"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Tribos group screen: the group 'Les Loups', the week's goal at one session in four, the members and the chat thread"
+                />
+              </picture>
+            </div>
+          </div>
+
+          <div class="split-body reveal" style="--i: 1">
+            <p class="eyebrow">The group</p>
+            <h2 class="h2" data-split>One goal, the whole group.</h2>
+            <p>
+              Each week, the group sets a number of sessions to hit: two per
+              person. Every session you do counts for everyone. You can see where
+              everyone stands, and how many days are left.
+            </p>
+            <p>
+              It's not a competition between you. Nobody is ranked by their
+              contribution: either the group makes it, or it doesn't.
+            </p>
+
+            <!-- The loop, shown rather than described: sessions land one by one
+                 and the bar fills. Members are listed in a fixed order, never
+                 re-sorted, exactly as the app does it. -->
+            <div class="appui goal reveal" style="--i: 2" data-goal data-target="4">
+              <p class="goal-count">
+                <b class="num" data-goal-done>1</b>
+                <span>/ 4 sessions</span>
+              </p>
+              <div class="goal-bar" data-goal-bar style="--fill: 0.25" aria-hidden="true"></div>
+              <ul class="goal-members">
+                <li data-goal-member><span class="ava">Y</span>You <b data-goal-count>1</b></li>
+                <li data-goal-member><span class="ava">L</span>Lena <b data-goal-count></b></li>
+                <li data-goal-member><span class="ava">A</span>Alex <b data-goal-count></b></li>
+              </ul>
+              <p class="sr-only" role="status" aria-live="polite" data-goal-status></p>
+            </div>
+
+            <!-- Entry point 2 of 3, placed at the emotional peak rather than
+                 four sections later. Subset of the canonical field set. -->
+            <form
+              class="form form-inline form-paper reveal"
+              style="--i: 3"
+              name="beta-signup"
+              method="post"
+              action="./merci.html"
+              data-waitlist
+              data-success="./merci.html"
+            >
+              <input type="hidden" name="form-name" value="beta-signup" />
+              <input type="hidden" name="source" value="mi-page" />
+              <input type="hidden" name="telephone" value="" />
+
+              <p class="honeypot" aria-hidden="true">
+                <label for="bot-mid">Leave this field empty</label>
+                <input id="bot-mid" name="bot-field" type="text" tabindex="-1" autocomplete="off" />
+              </p>
+
+              <div class="field" data-field-email>
+                <label class="sr-only" for="email-mid">Email address</label>
+                <input
+                  id="email-mid"
+                  name="email"
+                  type="email"
+                  inputmode="email"
+                  autocomplete="email"
+                  autocapitalize="off"
+                  autocorrect="off"
+                  spellcheck="false"
+                  enterkeyhint="go"
+                  placeholder="firstname@email.com"
+                  required
+                  aria-describedby="help-mid"
+                />
+                <p class="error" id="err-mid" data-error></p>
+              </div>
+
+              <button class="btn btn-primary" type="submit" data-burst>I'm joining the beta</button>
+
+              <p class="form-status" role="status" aria-live="polite" data-status></p>
+
+              <p class="help" id="help-mid" data-help>
+                Your group already exists. It just isn't training together yet.
+              </p>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= LES POINTS ================= -->
+      <section class="section" id="progression">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <h2 class="h2" data-split>Points that actually mean something</h2>
+            <p class="lede">
+              50 points per session completed. And if you kept your rhythm the
+              week before, everything counts double for seven days.
+            </p>
+          </div>
+
+          <div class="appui progress-card reveal" data-anim="pop">
+            <ul class="statgrid">
+              <li class="s-xp">
+                <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-star" /></svg>
+                <b class="num" data-count="50">50</b>
+                <span>points per session</span>
+              </li>
+              <li class="s-streak">
+                <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-lightning" /></svg>
+                <b class="num">×2</b>
+                <span>for 7 days</span>
+              </li>
+              <li class="s-podium">
+                <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-barbell" /></svg>
+                <b class="num" data-count="2">2</b>
+                <span>sessions / week</span>
+              </li>
+              <li class="s-defi">
+                <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-target" /></svg>
+                <b class="num">2 to 5</b>
+                <span>sessions per challenge</span>
+              </li>
+            </ul>
+            <p class="sub" style="margin-top: 14px">
+              Two sessions done this week, and next week's counts double.
+              Here, consistency pays off more than a one-off feat.
+            </p>
+          </div>
+
+          <!-- The clearest thing this product says about itself is what it
+               refuses to do. It is also the only section on the page that
+               cannot be copied by a competitor without changing their product. -->
+          <div class="reveal" data-anim="slide" style="--i: 1">
+            <h3 class="h3" style="margin-top: var(--s-8)">What Tribos doesn't do</h3>
+            <ul class="nots">
+              <li>
+                <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-x" /></svg>
+                <span><strong>No step counter</strong>, no calories.</span>
+              </li>
+              <li>
+                <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-x" /></svg>
+                <span><strong>No watch to connect</strong>, nothing to pair.</span>
+              </li>
+              <li>
+                <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-x" /></svg>
+                <span><strong>No global leaderboard</strong>: the only group that counts is your friends'.</span>
+              </li>
+              <li>
+                <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-check" /></svg>
+                <span><strong>Tribos counts the sessions you finish</strong>, and nothing else.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= ENTREPRISES ================= -->
+      <section class="section-tight">
+        <div class="wrap">
+          <div class="band blaze reveal">
+            <img
+              class="band-watermark"
+              loading="lazy"
+              src="../assets/brand/tribos-mark-white.png"
+              width="512"
+              height="512"
+              alt=""
+              aria-hidden="true"
+            />
+            <div class="band-inner">
+              <div>
+                <h2 class="h3">Together, we're stronger.</h2>
+                <p>
+                  A company group, a shared program and an internal leaderboard to
+                  get your colleagues moving together.
+                </p>
+              </div>
+              <a class="btn btn-ink" href="entreprises.html">
+                Tribos for teams
+                <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-arrow-right" /></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= FAQ ================= -->
+      <!-- Ordered by what actually blocks a signup: price first, platform
+           second. The rest follows. -->
+      <section class="section-tight" id="faq">
+        <div class="wrap">
+          <h2 class="h2 reveal" data-split>FAQ</h2>
+
+          <div class="faq reveal" style="--i: 1" data-faq>
+            <details>
+              <summary>
+                Is Tribos free?
+                <svg class="chev" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-plus" /></svg>
+              </summary>
+              <div class="answer">
+                <p>
+                  Yes, the beta is free and no credit card is required. We want to
+                  see first whether the product holds up with real groups. Any paid
+                  offer would be announced in advance.
+                </p>
+              </div>
+            </details>
+
+            <details>
+              <summary>
+                iOS or Android?
+                <svg class="chev" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-plus" /></svg>
+              </summary>
+              <div class="answer">
+                <p>
+                  Both. On Android, we let people in wave by wave. On iPhone, the
+                  beta runs through TestFlight, Apple's app for betas&#8239;:
+                  pick iPhone when you sign up, and the install link shows up
+                  right after.
+                </p>
+              </div>
+            </details>
+
+            <details>
+              <summary>
+                Do I need equipment?
+                <svg class="chev" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-plus" /></svg>
+              </summary>
+              <div class="answer">
+                <p>
+                  Not to get started. Calisthenics, running, mobility and HIIT are
+                  done with bodyweight, at home. Others, like basic strength, need a
+                  barbell or a gym.
+                </p>
+              </div>
+            </details>
+
+            <details>
+              <summary>
+                Do my friends need the app?
+                <svg class="chev" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-plus" /></svg>
+              </summary>
+              <div class="answer">
+                <p>
+                  Yes: their sessions count toward the week's goal, so they need the
+                  app. Give them your six-character code: they create an account,
+                  enter the code, and you're in.
+                </p>
+                <p>
+                  You don't need to have convinced them before signing up. We give
+                  you what you need to invite them right after.
+                </p>
+              </div>
+            </details>
+
+            <details>
+              <summary>
+                What happens when I finish a session?
+                <svg class="chev" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-plus" /></svg>
+              </summary>
+              <div class="answer">
+                <p>
+                  You earn 50&nbsp;points, or double if your consistency bonus is
+                  active. Most importantly, your session counts toward the whole
+                  group's weekly goal.
+                </p>
+              </div>
+            </details>
+
+            <details>
+              <summary>
+                When is it available?
+                <svg class="chev" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-plus" /></svg>
+              </summary>
+              <div class="answer">
+                <p>
+                  Tribos is in private beta and access opens in waves. We don't
+                  announce a public date&#8239;: we'd rather open when it's
+                  ready.
+                </p>
+              </div>
+            </details>
+
+            <details>
+              <summary>
+                What happens to my data?
+                <svg class="chev" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-plus" /></svg>
+              </summary>
+              <div class="answer">
+                <p>
+                  Your email address is only used to tell you when the beta
+                  opens. It is not sold. You can ask for it to be deleted at any
+                  time.
+                </p>
+                <p>
+                  The details are in the
+                  <a href="confidentialite.html">privacy policy</a>.
+                </p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= BETA ================= -->
+      <!-- Entry point 3 of 3, and the CANONICAL Netlify declaration: it carries
+           the superset of every field name the other two post. The full-bleed
+           panel makes this the page's loudest surface, which it was not. -->
+      <section class="section-beta" id="beta" data-cta-anchor="beta">
+        <div class="wrap">
+          <div class="beta-panel blaze reveal">
+            <div
+              class="blaze-field"
+              style="background-image: url('../assets/photo/cta-glow.webp')"
+              aria-hidden="true"
+            ></div>
+
+            <div class="signup">
+            <div class="signup-inner">
+              <div class="signup-head">
+                <h2 data-split>Take your spot in the current wave.</h2>
+                <p class="lede">
+                  Leave your email. We'll let you know as soon as a spot opens for
+                  your group, and help you set it up right after.
+                </p>
+
+              </div>
+
+              <div class="signup-support">
+                <ul class="assurances">
+                  <li>
+                    <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-check" /></svg>
+                    <span><strong>Free</strong> throughout the beta. No credit card, ever asked.</span>
+                  </li>
+                  <li>
+                    <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-check" /></svg>
+                    <span><strong>Android and iPhone.</strong> On iPhone, the install link shows up right after you sign up.</span>
+                  </li>
+                  <li>
+                    <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-check" /></svg>
+                    <span><strong>No equipment needed</strong> to start. Several programs are done with bodyweight.</span>
+                  </li>
+                  <li>
+                    <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-check" /></svg>
+                    <span><strong>One email only</strong>, for your access. No newsletter, one-click unsubscribe.</span>
+                  </li>
+                </ul>
+
+                <ul class="signup-next">
+                  <li>
+                    <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-calendar-check" /></svg>
+                    <span><strong>Sessions in your calendar.</strong> Sessions that drop into your calendars on their own.</span>
+                  </li>
+                  <li>
+                    <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-barbell" /></svg>
+                    <span><strong>Adjusted sessions.</strong> A shared program, with sessions adapted to each profile.</span>
+                  </li>
+                  <li>
+                    <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-sparkle" /></svg>
+                    <span><strong>More personalization</strong>, without breaking the group's momentum.</span>
+                  </li>
+                </ul>
+              </div>
+
+              <form
+                class="form form-blaze"
+                name="beta-signup"
+                method="post"
+                action="./merci.html"
+                data-waitlist
+                data-success="./merci.html"
+              >
+                <input type="hidden" name="form-name" value="beta-signup" />
+                <input type="hidden" name="source" value="page-beta" />
+
+                <p class="honeypot" aria-hidden="true">
+                  <label for="bot-beta">Leave this field empty</label>
+                  <input id="bot-beta" name="bot-field" type="text" tabindex="-1" autocomplete="off" />
+                </p>
+
+                <!-- Nothing is pre-checked. Pre-selecting Android would add
+                     friction to correct it and poison the one datum this field
+                     exists to collect. Not required either. -->
+                <fieldset class="chips" data-field-platform>
+                  <legend>Which phone will you use it on?</legend>
+                  <div class="chips-row">
+                    <label class="chip">
+                      <input type="radio" name="telephone" value="android" />
+                      <span>Android</span>
+                    </label>
+                    <label class="chip">
+                      <input type="radio" name="telephone" value="iphone" />
+                      <span>iPhone</span>
+                    </label>
+                  </div>
+                </fieldset>
+
+                <div class="field" data-field-email>
+                  <label for="email-beta">Email address</label>
+                  <input
+                    id="email-beta"
+                    name="email"
+                    type="email"
+                    inputmode="email"
+                    autocomplete="email"
+                    autocapitalize="off"
+                    autocorrect="off"
+                    spellcheck="false"
+                    enterkeyhint="go"
+                    placeholder="firstname@email.com"
+                    required
+                    aria-describedby="help-beta"
+                  />
+                  <p class="error" id="err-beta" data-error></p>
+                  <p class="help" id="help-beta" data-help data-platform-note>
+                    One email only: the one for your access. No newsletter,
+                    one-click unsubscribe.
+                  </p>
+                </div>
+
+                <p class="form-status" role="status" aria-live="polite" data-status></p>
+
+                <button class="btn btn-light" type="submit" data-burst data-magnetic="0.2">
+                  I'm joining the beta
+                </button>
+
+                <p class="consent-note">
+                  By leaving your email, you agree that we may contact you about
+                  the Tribos beta. Nothing else, and an unsubscribe link in every
+                  email.
+                  <a href="confidentialite.html">Privacy policy</a>.
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+          </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <div class="wrap">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <a class="brand" href="./">
+              <img src="../assets/brand/tribos-icon-64.png" width="30" height="30" alt="" />
+              <span class="brand-name">Tribos</span>
+            </a>
+            <p>
+              Tribos, the app for training in a group: a shared program, one
+              session a day.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="footer-heading">Product</h2>
+            <ul class="footer-links">
+              <li><a href="#fonctionnement">How it works</a></li>
+              <li><a href="#groupe">The group</a></li>
+              <li><a href="#progression">Points</a></li>
+              <li><a href="#faq">FAQ</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="footer-heading">Teams</h2>
+            <ul class="footer-links">
+              <li><a href="entreprises.html">Tribos for teams</a></li>
+              <li><a href="entreprises.html#contact">Contact us</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="footer-heading">Legal</h2>
+            <ul class="footer-links">
+              <li><a href="confidentialite.html">Privacy policy</a></li>
+              <li><a href="../" hreflang="fr" lang="fr">Français</a></li>
+              <li><a href="conditions.html">Terms of use</a></li>
+              <li><a href="mentions-legales.html">Legal notice</a></li>
+              <li><a href="suppression-de-compte.html">Delete your account</a></li>
+              <li><a href="support.html">Support</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© 2026 Tribos. All rights reserved.</p>
+          <p>Private beta</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- A link, never an input. A fixed input fights the iOS keyboard, which
+         detaches fixed elements and parks them mid-screen; the tap that opens
+         the keyboard should be the one that lands on the real field. -->
+    <div class="cta-dock" data-sticky-cta>
+      <p class="cta-dock-line">Free beta<br />Android and iPhone</p>
+      <a class="btn btn-primary" href="#beta" data-focus-signup>Join the beta</a>
+    </div>
+
+    <script src="../assets/js/site.js" defer></script>
+  </body>
+</html>

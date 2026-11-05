@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tribos for Teams - The sport that brings teams together</title>
+    <meta
+      name="description"
+      content="Start a sports group at your company: a weekly session goal you hit together and a discussion thread. Available on request during the beta."
+    />
+    <link rel="canonical" href="https://tribos.evey.run/en/entreprises.html" />
+    <link rel="alternate" hreflang="fr" href="https://tribos.evey.run/entreprises.html" />
+    <link rel="alternate" hreflang="en" href="https://tribos.evey.run/en/entreprises.html" />
+    <link rel="alternate" hreflang="x-default" href="https://tribos.evey.run/entreprises.html" />
+    <meta name="theme-color" content="#0d0b09" />
+
+    <meta property="og:url" content="https://tribos.evey.run/en/entreprises.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Tribos" />
+    <meta property="og:title" content="Tribos for teams" />
+    <meta
+      property="og:description"
+      content="One shared program, one shared goal and a discussion thread to get a team moving over the long run."
+    />
+    <meta property="og:image" content="https://tribos.evey.run/assets/brand/og-card.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Tribos card: the logo, the promise “Sport, but with your friends” and the app's home screen" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="../assets/brand/favicon-32.png" sizes="32x32" />
+    <link rel="icon" href="../assets/brand/favicon-16.png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="../assets/brand/apple-touch-icon.png" />
+
+    <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/bricolage-grotesque-latin.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/geist-latin.woff2" crossorigin />
+    <link rel="stylesheet" href="../assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="../assets/css/tribos.css" />
+
+    <script>
+      // Runs before first paint. Three jobs:
+      //  1. apply the stored theme so the other mode never flashes;
+      //  2. mark the document as script-enabled, which is what gates the
+      //     scroll-reveal styles;
+      //  3. arm a dead-man switch. The reveal blocks start at opacity 0 and are
+      //     only shown by site.js. If that file is blocked, 404s, or fails to
+      //     parse, nothing would ever reveal them and the page would render
+      //     blank. site.js clears this timer as soon as it runs; if it never
+      //     does, the class is dropped and every block returns to full opacity.
+      document.documentElement.classList.add("js");
+      window.__tribosRevealFallback = setTimeout(function () {
+        document.documentElement.classList.remove("js");
+      }, 2500);
+      try {
+        var t = localStorage.getItem("tribos-theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    </script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#contenu">Skip to content</a>
+    <div class="grain" aria-hidden="true"></div>
+    <span data-nav-sentinel aria-hidden="true"></span>
+
+    <header class="nav" data-nav>
+      <div class="wrap nav-inner">
+        <a class="brand" href="./" aria-label="Tribos, home">
+          <img src="../assets/brand/tribos-icon-64.png" width="30" height="30" decoding="async" alt="" />
+          <span class="brand-name">Tribos</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="index.html#fonctionnement">How it works</a>
+          <a href="index.html#groupe">The group</a>
+          <a href="entreprises.html" aria-current="page">Teams</a>
+        </nav>
+
+        <div class="nav-actions">
+
+          <a class="btn btn-primary btn-sm" href="index.html#beta">Join the beta</a>
+
+          <button
+            class="menu-toggle"
+            type="button"
+            data-menu-toggle
+            aria-expanded="false"
+            aria-controls="menu-mobile"
+            aria-label="Open menu"
+          >
+            <svg class="icon icon-open" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-list" /></svg>
+            <svg class="icon icon-close" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-x" /></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="menu-panel" id="menu-mobile" data-menu hidden>
+      <a href="index.html#fonctionnement">How it works</a>
+      <a href="index.html#groupe">The group</a>
+      <a href="entreprises.html">Teams</a>
+      <a href="index.html#faq">FAQ</a>
+      <a class="btn btn-primary" href="index.html#beta">Join the beta</a>
+    </div>
+
+    <main id="contenu">
+      <!-- ================= HERO ================= -->
+      <section class="hero">
+        <div class="hero-field" aria-hidden="true"></div>
+        <div class="wrap hero-grid">
+          <div class="hero-copy reveal">
+            <p class="eyebrow">Tribos for teams</p>
+            <h1>A sports group
+              <br />at your company.</h1>
+            <p class="lede">
+              A shared program, a shared goal and a discussion thread
+              to get a team moving over the long run.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary btn-lg" href="#contact">
+                Contact us
+                <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-arrow-right" /></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="hero-visual reveal" style="--i: 1">
+            <img
+              class="hero-watermark"
+              src="../assets/brand/tribos-mark-orange.png"
+              width="512"
+              height="512"
+              loading="lazy"
+              decoding="async"
+              alt=""
+              aria-hidden="true"
+            />
+            <div class="phone phone-bleed">
+              <div class="phone-status" aria-hidden="true">
+                <span>9:41</span>
+                <span class="phone-status-icons">
+                  <svg class="icon" viewBox="0 0 256 256" fill="currentColor"><use href="../assets/icons/sprite.svg#i-users-three" /></svg>
+                </span>
+              </div>
+              <picture>
+                <source
+                  type="image/webp"
+                  srcset="../assets/app/groupe-sm.webp 450w, ../assets/app/groupe.webp 800w"
+                  sizes="(max-width: 640px) 80vw, 340px"
+                />
+                <img
+                  srcset="../assets/app/groupe-sm.jpg 450w, ../assets/app/groupe.jpg 800w"
+                  sizes="(max-width: 640px) 80vw, 340px"
+                  src="../assets/app/groupe.jpg"
+                  width="800"
+                  height="1356"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Tribos group screen: a group and its session goal for the week"
+                />
+              </picture>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= POURQUOI CA MARCHE EN EQUIPE ================= -->
+      <section class="section">
+        <div class="wrap">
+          <h2 class="h2 reveal">Why it works in a team</h2>
+
+          <div class="roadmap">
+            <div class="roadmap-item reveal">
+              <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-users-three" /></svg>
+              <h3>Real connection, not a seminar</h3>
+              <p>
+                People who train together talk to each other differently. The group
+                builds connections across departments and across sites.
+              </p>
+            </div>
+            <div class="roadmap-item reveal" style="--i: 1">
+              <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-calendar-check" /></svg>
+              <h3>A simple framework</h3>
+              <p>
+                One program for the whole team: nothing to organize each week,
+                nothing to negotiate between levels.
+              </p>
+            </div>
+            <div class="roadmap-item reveal" style="--i: 2">
+              <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-trophy" /></svg>
+              <h3>Visible momentum</h3>
+              <p>
+                The shared goal and completed sessions make participation visible,
+                without turning sport into an obligation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= COMMENT CA SE MET EN PLACE ================= -->
+      <section class="section-tight">
+        <div class="wrap">
+          <h2 class="h2 reveal">How it gets set up</h2>
+
+          <ol class="steps">
+            <li class="step reveal">
+              <div class="step-figure">
+                <picture>
+                  <source srcset="../assets/illus/trio-warmup.webp" type="image/webp" />
+                  <img
+                    src="../assets/illus/trio-warmup.png"
+                    width="315"
+                    height="243"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Illustration of the Tribos mascots, a fox, a wolf and a monkey, warming up together"
+                  />
+                </picture>
+              </div>
+              <div class="step-body">
+                <p class="step-index">01</p>
+                <h3>Create the group</h3>
+                <p>
+                  You create your company’s group and invite teams with a code
+                  to share.
+                </p>
+              </div>
+            </li>
+
+            <li class="step reveal">
+              <div class="step-figure">
+                <picture>
+                  <source srcset="../assets/illus/fox-weights.webp" type="image/webp" />
+                  <img
+                    src="../assets/illus/fox-weights.png"
+                    width="244"
+                    height="250"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Illustration of the orange Tribos fox lifting a dumbbell"
+                  />
+                </picture>
+              </div>
+              <div class="step-body">
+                <p class="step-index">02</p>
+                <h3>Pick the program</h3>
+                <p>
+                  You pick a program suited to an average level, over a few
+                  weeks, and everyone starts on it.
+                </p>
+              </div>
+            </li>
+
+            <li class="step reveal">
+              <div class="step-figure">
+                <picture>
+                  <source srcset="../assets/illus/trio-calm.webp" type="image/webp" />
+                  <img
+                    src="../assets/illus/trio-calm.png"
+                    width="322"
+                    height="271"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Illustration of the Tribos mascots in a session, one doing yoga, one skipping rope, one running"
+                  />
+                </picture>
+              </div>
+              <div class="step-body">
+                <p class="step-index">03</p>
+                <h3>Let the group take over</h3>
+                <p>
+                  Everyone does their session whenever they like. The shared goal
+                  and the group messages do the rest.
+                </p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ================= CONTACT ================= -->
+      <section class="section-tight" id="contact">
+        <div class="wrap">
+          <div class="band blaze reveal">
+            <img
+              class="band-watermark"
+              loading="lazy"
+              src="../assets/brand/tribos-mark-white.png"
+              width="512"
+              height="512"
+              loading="lazy"
+              decoding="async"
+              alt=""
+              aria-hidden="true"
+            />
+            <div class="band-inner">
+              <div>
+                <h2 class="h3">Let’s talk about your team</h2>
+                <p>
+                  Tell us what you want to set up and we’ll tell you what Tribos
+                  can already do during the beta.
+                </p>
+                <p>
+                  Team access goes through the same list as the beta. Leave your
+                  email and we’ll get back to you.
+                </p>
+              </div>
+              <!--
+                Pas d’adresse ni de formulaire B2B dédié à ce jour : le bouton
+                renvoie donc vers la liste bêta de la landing, et son libellé dit
+                ce qu’il fait vraiment. À rebrancher quand l’équipe aura tranché.
+              -->
+              <a class="btn btn-ink" href="index.html#beta">
+                Join the beta
+                <svg class="icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-arrow-right" /></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <a class="brand" href="./">
+              <img src="../assets/brand/tribos-icon-64.png" width="30" height="30" loading="lazy" decoding="async" alt="" />
+              <span class="brand-name">Tribos</span>
+            </a>
+            <p>
+              Tribos, the app for training as a group: one shared program, one
+              session a day.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="footer-heading">Product</h2>
+            <ul class="footer-links">
+              <li><a href="index.html#fonctionnement">How it works</a></li>
+              <li><a href="index.html#groupe">The group</a></li>
+              <li><a href="index.html#faq">FAQ</a></li>
+              <li><a href="index.html#beta">Join the beta</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="footer-heading">Teams</h2>
+            <ul class="footer-links">
+              <li><a href="entreprises.html">Tribos for teams</a></li>
+              <li><a href="entreprises.html#contact">Contact us</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="footer-heading">Legal</h2>
+            <ul class="footer-links">
+              <li><a href="confidentialite.html">Privacy policy</a></li>
+              <li><a href="../entreprises.html" hreflang="fr" lang="fr">Français</a></li>
+              <li><a href="conditions.html">Terms of use</a></li>
+              <li><a href="mentions-legales.html">Legal notice</a></li>
+              <li><a href="suppression-de-compte.html">Delete your account</a></li>
+              <li><a href="support.html">Support</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© 2026 Tribos. All rights reserved.</p>
+          <p>Private beta</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../assets/js/site.js" defer></script>
+  </body>
+</html>

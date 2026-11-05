@@ -1,5 +1,12 @@
 {
   "rewrites": [
-    { "source": "/privacy", "destination": "/confidentialite.html" }
+    {
+      "source": "/privacy",
+      "destination": "/confidentialite.html"
+    },
+    {
+      "source": "/en/privacy",
+      "destination": "/en/confidentialite.html"
+    }
   ]
 }

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Terms of use - Tribos</title>
+    <meta
+      name="description"
+      content="Terms of use for the Tribos app: the service, your account, the rules of conduct, reporting, blocking and moderation."
+    />
+    <link rel="canonical" href="https://tribos.evey.run/en/conditions.html" />
+    <link rel="alternate" hreflang="fr" href="https://tribos.evey.run/conditions.html" />
+    <link rel="alternate" hreflang="en" href="https://tribos.evey.run/en/conditions.html" />
+    <link rel="alternate" hreflang="x-default" href="https://tribos.evey.run/conditions.html" />
+    <meta name="theme-color" content="#0d0b09" />
+
+    <meta property="og:url" content="https://tribos.evey.run/en/conditions.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Tribos" />
+    <meta property="og:title" content="Terms of use - Tribos" />
+    <meta
+      property="og:description"
+      content="The rules of the Tribos app: what we provide, what we expect from everyone and what happens in case of abuse."
+    />
+    <meta property="og:image" content="https://tribos.evey.run/assets/brand/og-card.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Tribos card: the logo, the promise “Sport, but with your friends” and the app’s home screen" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="../assets/brand/favicon-32.png" sizes="32x32" />
+    <link rel="icon" href="../assets/brand/favicon-16.png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="../assets/brand/apple-touch-icon.png" />
+
+    <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/bricolage-grotesque-latin.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/geist-latin.woff2" crossorigin />
+    <link rel="stylesheet" href="../assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="../assets/css/tribos.css" />
+
+    <script>
+      // Runs before first paint. Three jobs:
+      //  1. apply the stored theme so the other mode never flashes;
+      //  2. mark the document as script-enabled, which is what gates the
+      //     scroll-reveal styles;
+      //  3. arm a dead-man switch. The reveal blocks start at opacity 0 and are
+      //     only shown by site.js. If that file is blocked, 404s, or fails to
+      //     parse, nothing would ever reveal them and the page would render
+      //     blank. site.js clears this timer as soon as it runs; if it never
+      //     does, the class is dropped and every block returns to full opacity.
+      document.documentElement.classList.add("js");
+      window.__tribosRevealFallback = setTimeout(function () {
+        document.documentElement.classList.remove("js");
+      }, 2500);
+      try {
+        var t = localStorage.getItem("tribos-theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    </script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#contenu">Skip to content</a>
+    <div class="grain" aria-hidden="true"></div>
+    <span data-nav-sentinel aria-hidden="true"></span>
+
+    <header class="nav" data-nav>
+      <div class="wrap nav-inner">
+        <a class="brand" href="./" aria-label="Tribos, home">
+          <img src="../assets/brand/tribos-icon-64.png" width="30" height="30" decoding="async" alt="" aria-hidden="true" />
+          <span class="brand-name">Tribos</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="index.html#fonctionnement">How it works</a>
+          <a href="index.html#groupe">The group</a>
+          <a href="entreprises.html">Teams</a>
+        </nav>
+
+        <div class="nav-actions">
+
+          <a class="btn btn-primary btn-sm" href="index.html#beta">Join the beta</a>
+
+          <button
+            class="menu-toggle"
+            type="button"
+            data-menu-toggle
+            aria-expanded="false"
+            aria-controls="menu-mobile"
+            aria-label="Open menu"
+          >
+            <svg class="icon icon-open" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-list" /></svg>
+            <svg class="icon icon-close" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><use href="../assets/icons/sprite.svg#i-x" /></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="menu-panel" id="menu-mobile" data-menu hidden>
+      <a href="index.html#fonctionnement">How it works</a>
+      <a href="index.html#groupe">The group</a>
+      <a href="entreprises.html">Teams</a>
+      <a href="index.html#faq">FAQ</a>
+      <a class="btn btn-primary" href="index.html#beta">Join the beta</a>
+    </div>
+
+    <main id="contenu">
+      <!-- ================= EN-TETE ================= -->
+      <section class="section-tight">
+        <div class="wrap">
+          <div class="reveal">
+            <p class="eyebrow">Legal</p>
+            <h1 class="h1">Terms of use</h1>
+            <p class="lede">
+              The rules of the Tribos app: what we provide,
+              what we expect from everyone and what happens in case of abuse.
+            </p>
+            <p class="doc-meta">Last updated: October 12, 2026</p>
+          </div>
+
+          <!-- ================= CORPS LEGAL ================= -->
+          <article class="doc" style="--i: 1">
+            <!--
+              Éditeur : SAHIN Ozan, Villeurbanne, evey.run@gmail.com.
+              Mise à jour : 12 octobre 2026.
+            -->
+            <p>
+              These terms govern your use of the Tribos mobile app, published by
+              SAHIN Ozan, residing in Villeurbanne (France). By creating an
+              account or using the app, you accept them. If you do not accept
+              them, do not use Tribos.
+            </p>
+
+            <h2>The service</h2>
+
+            <p>
+              Tribos is a free app for training as a group. Among other things,
+              it lets you:
+            </p>
+
+            <ul>
+              <li>
+                follow a training program and complete your sessions, guided
+                set by set;
+              </li>
+              <li>
+                create a group with your friends or colleagues, or join one
+                using an invitation code;
+              </li>
+              <li>work together toward a shared session goal for the week;</li>
+              <li>chat in the group chat;</li>
+              <li>challenge other members and earn points.</li>
+            </ul>
+
+            <p>
+              Tribos is in beta: the app keeps evolving, and some features may
+              change, appear or disappear. For now, it offers no purchases and
+              no subscriptions.
+            </p>
+
+            <h2>Your account</h2>
+
+            <ul>
+              <li>
+                <strong>Minimum age.</strong> You must be at least 16&nbsp;years
+                old to create an account.
+              </li>
+              <li>
+                <strong>One account, one person.</strong> Your account is
+                personal. Choose a username that does not impersonate anyone and
+                that follows the rules of conduct below.
+              </li>
+              <li>
+                <strong>A valid email address.</strong> Use an address that
+                belongs to you: it is what lets you recover your account.
+              </li>
+              <li>
+                <strong>Security.</strong> Keep your password to yourself. If
+                you think someone else is using your account, write to us.
+              </li>
+            </ul>
+
+            <h2>Rules of conduct: zero tolerance</h2>
+
+            <p>
+              Tribos is made to keep you motivated among friends. We enforce a
+              zero-tolerance policy toward objectionable content and abusive
+              users. It is forbidden to post, in a message, a username, a group
+              name or a photo, or to address to another member:
+            </p>
+
+            <ul>
+              <li>harassment, intimidation or insults;</li>
+              <li>
+                hateful or discriminatory remarks, in particular based on
+                origin, religion, sex, sexual orientation, gender identity or
+                disability;
+              </li>
+              <li>sexual or pornographic content;</li>
+              <li>
+                threats, or incitement to violence or to self-harm;
+              </li>
+              <li>
+                spam, unsolicited advertising or scam attempts;
+              </li>
+              <li>
+                any illegal content, or content that infringes on others’
+                rights, such as a photo of a person published without their
+                consent.
+              </li>
+            </ul>
+
+            <p>
+              It is also forbidden to impersonate another person, to get around
+              a block or an exclusion, to try to access other users’ data, and
+              to disrupt the operation of the service.
+            </p>
+
+            <h2>Reporting and blocking</h2>
+
+            <p>In the app, you can:</p>
+
+            <ul>
+              <li>
+                <strong>report a message or a member</strong>: the report is
+                sent to us with the reason you choose and, for a message, a copy
+                of its text;
+              </li>
+              <li>
+                <strong>block a member</strong>: their messages are then hidden
+                for you.
+              </li>
+            </ul>
+
+            <p>
+              You can also report content or behavior to us by writing to
+              evey.run@gmail.com.
+            </p>
+
+            <h2>Our moderation commitment</h2>
+
+            <p>
+              We review every report within 24&nbsp;hours. When content breaks
+              these terms, we remove it and exclude the user who posted it, by
+              suspending or deleting their account.
+            </p>
+
+            <p>
+              Clearly illegal content may be reported to the competent
+              authorities.
+            </p>
+
+            <h2>Your content</h2>
+
+            <p>
+              The messages, photos and group names you post remain yours. You
+              only grant us a free, non-exclusive permission to store them and
+              display them to the members of your group, to the extent necessary
+              to operate Tribos and for as long as they are kept. We do not use
+              them for other purposes, and in particular not for advertising.
+            </p>
+
+            <p>
+              You warrant that you have the right to post what you post,
+              including photos showing other people.
+            </p>
+
+            <p>
+              A group’s photo and name are shared elements: they stay attached
+              to the group for as long as it exists, even if you leave it or
+              delete your account.
+            </p>
+
+            <h2>Health and safety</h2>
+
+            <p>
+              The programs and sessions offered by Tribos are general training
+              content. They do not constitute medical advice and do not replace
+              that of a health professional.
+            </p>
+
+            <p>
+              Adapt your effort to your fitness level, stop in case of pain or
+              discomfort, and ask a doctor for advice if in doubt, especially if
+              you have a health problem.
+            </p>
+
+            <h2>Deleting your account</h2>
+
+            <p>
+              You can stop using Tribos at any time and delete your account from
+              the app: Settings › Zone de danger › Supprimer le compte. To open
+              Settings, tap your profile picture on the home screen, then the
+              gear icon.
+            </p>
+
+            <p>
+              The details of the data erased are on the
+              <a href="suppression-de-compte.html">delete your account</a> page.
+            </p>
+
+            <h2>Suspension and exclusion</h2>
+
+            <p>
+              We may suspend or delete, without notice, the account of a user
+              who breaks these terms, in particular the rules of conduct.
+            </p>
+
+            <h2>Service availability</h2>
+
+            <p>
+              Tribos is provided “as is”, with no guarantee of continuous
+              availability or of error-free operation. During the beta in
+              particular, the app may have bugs or interruptions, and we may
+              change or remove features.
+            </p>
+
+            <p>
+              If we were to shut down the service, we would inform you in advance
+              where possible.
+            </p>
+
+            <h2>Liability</h2>
+
+            <p>
+              Tribos is free. To the extent permitted by law, we are not liable
+              for indirect damages related to the use of the app, nor for content
+              posted by other users, which we act on as soon as it is reported to
+              us. Each user remains responsible for what they post.
+            </p>
+
+            <p>
+              These limits do not apply in the event of gross negligence or
+              intentional misconduct on our part, nor to bodily injury, and they
+              do not deprive consumers of the rights the law grants them.
+            </p>
+
+            <h2>App stores</h2>
+
+            <p>
+              If you downloaded Tribos from the App Store or Google Play, the
+              terms of those stores also apply to that download. Apple and Google
+              are not parties to these terms and are not responsible for the
+              Tribos service.
+            </p>
+
+            <h2>Changes to these terms</h2>
+
+            <p>
+              These terms may change along with the app. The version in force is
+              the one published on this page, with its last-updated date. In the
+              event of a material change, we will inform you before it takes
+              effect.
+            </p>
+
+            <h2>Governing law</h2>
+
+            <p>
+              These terms are governed by French law. In case of disagreement,
+              write to us first: we will look for an amicable solution. Failing
+              that, the dispute will be brought before the competent French
+              courts, subject to the rules that protect consumers.
+            </p>
+
+            <h2>Contact</h2>
+
+            <p>
+              For any question about these terms, to report content or to ask for
+              help, write to evey.run@gmail.com or see the
+              <a href="support.html">support</a> page.
+            </p>
+
+            <p>
+              The processing of your data is described in the
+              <a href="confidentialite.html">privacy policy</a>.
+            </p>
+            <!--
+              Note interne, à ne pas publier telle quelle :
+              Document type à faire relire avant publication ; il ne constitue pas un conseil juridique.
+            -->
+          </article>
+
+          <div class="doc-actions reveal" style="--i: 2">
+            <a class="btn btn-ghost" href="index.html">Back to home</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <a class="brand" href="./">
+              <img src="../assets/brand/tribos-icon-64.png" width="30" height="30" loading="lazy" decoding="async" alt="" aria-hidden="true" />
+              <span class="brand-name">Tribos</span>
+            </a>
+            <p>
+              Tribos, the app for training as a group: a shared program, one
+              session a day.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="footer-heading">Product</h2>
+            <ul class="footer-links">
+              <li><a href="index.html#fonctionnement">How it works</a></li>
+              <li><a href="index.html#groupe">The group</a></li>
+              <li><a href="index.html#faq">FAQ</a></li>
+              <li><a href="index.html#beta">Join the beta</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="footer-heading">Teams</h2>
+            <ul class="footer-links">
+              <li><a href="entreprises.html">Tribos for teams</a></li>
+              <li><a href="entreprises.html#contact">Contact us</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="footer-heading">Legal</h2>
+            <ul class="footer-links">
+              <li><a href="confidentialite.html">Privacy policy</a></li>
+              <li><a href="../conditions.html" hreflang="fr" lang="fr">Français</a></li>
+              <li><a href="conditions.html" aria-current="page">Terms of use</a></li>
+              <li><a href="mentions-legales.html">Legal notice</a></li>
+              <li><a href="suppression-de-compte.html">Delete your account</a></li>
+              <li><a href="support.html">Support</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© 2026 Tribos. All rights reserved.</p>
+          <p>Private beta</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../assets/js/site.js" defer></script>
+  </body>
+</html>
